@@ -178,14 +178,51 @@ body {
     }
 }
 
+.splash.hide{
+    animation: fadeOut 0.8s ease forwards;
+    animation-delay: 1.5s;
+}
 
+.loading-bar{
+    width: 200px;
+    height: 6px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50px;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+.loading-progress{
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg,#6d28d9,#a78bfa);
+    border-radius: 50px;
+    transition: width 0.2s ease;
+}
+
+@keyframes fadeOut{
+    to{
+        opacity: 0;
+        visibility: hidden;
+    }
+}
 
 </style>
 </head>
 
 <body>
   
+<div class="splash">
+    <h1>SAMPxNot404 🜲</h1>
 
+    <div class="loading-bar">
+        <div class="loading-progress" id="loadingProgress"></div>
+    </div>
+
+    <div class="splash-loading">
+        Loading<span id="dots"></span>
+    </div>
+</div>
 
 <div id="home" class="container">
 
@@ -243,7 +280,116 @@ body {
 
 </div>
 
+<script>
 
+window.onerror = function(msg, url, line){
+    console.log("JS ERROR:", msg, line);
+    return false;
+};
+
+let apps = {};
+
+async function loadApps(){
+    try {
+        const res = await fetch("https://raw.githubusercontent.com/Not404-X/Client-X/main/apps.json");
+        apps = await res.json();
+        console.log("Apps loaded:", apps);
+    } catch (e) {
+        console.log("Gagal load JSON:", e);
+    }
+}
+
+async function showDownload(type){
+
+    document.getElementById("home").style.display = "none";
+    document.getElementById("download").style.display = "block";
+
+    if (!apps || !apps[type]) {
+        await loadApps();
+    }
+
+    if (!apps || !apps[type]) {
+        document.getElementById("downloadBox").innerHTML = `
+            <div class="box">
+                <div class="title">Error</div>
+                <div class="desc">Data tidak ditemukan / JSON gagal load</div>
+            </div>
+        `;
+        return;
+    }
+
+    let html = "";
+
+    apps[type].forEach(app => {
+        html += `
+        <div class="box">
+            <div class="title">${app.name}</div>
+            <div class="desc">${app.desc}</div>
+
+            <a href="${app.file}" class="btn">Download</a>
+
+            <div class="btn review-btn" onclick="window.open('${app.review}','_blank')">
+                Review
+            </div>
+        </div>
+        `;
+    });
+
+    document.getElementById("downloadBox").innerHTML = html;
+}
+
+function showHome(){
+    document.getElementById("download").style.display = "none";
+    document.getElementById("home").style.display = "block";
+}
+
+function openReview(link){
+    window.open(link, "_blank");
+}
+
+let progress = 0;
+
+const fakeAssets = [
+    "https://img.icons8.com/ios-filled/26/ffffff/discord-logo.png",
+    "https://img.icons8.com/ios-filled/26/ffffff/youtube-play.png",
+    "https://img.icons8.com/ios-filled/26/ffffff/tiktok--v1.png"
+];
+
+let loaded = 0;
+
+function updateBar(){
+    let percent = Math.floor((loaded / fakeAssets.length) * 100);
+    document.getElementById("loadingProgress").style.width = percent + "%";
+}
+
+function loadFake(src){
+    return new Promise(res => {
+        let img = new Image();
+        img.src = src;
+        img.onload = res;
+        img.onerror = res;
+    });
+}
+
+async function startSplash(){
+    for(let i = 0; i < fakeAssets.length; i++){
+        await loadFake(fakeAssets[i]);
+        loaded++;
+        updateBar();
+
+        await new Promise(r => setTimeout(r, 300)); // ⬅️ ini delay per step
+    }
+
+    setTimeout(() => {
+        document.querySelector(".splash")?.remove();
+    }, 800);
+}
+
+loadApps();
+
+startSplash();
+
+</script>
 
 </body>
-</html>
+            </html>
