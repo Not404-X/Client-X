@@ -1,327 +1,336 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SA-MP xNot404</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SA-MP xNot404</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&ampdisplay=swap" rel="stylesheet">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&ampdisplay=swap"
+            rel="stylesheet"
+        />
 
-<style>
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #121212, #1f1f2e, #262635);
-    color: white;
-}
+        <style>
+            body {
+                margin: 0;
+                font-family: "Poppins", sans-serif;
+                background: linear-gradient(135deg, #121212, #1f1f2e, #262635);
+                color: white;
+            }
 
-/* CONTAINER */
-.container {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-}
+            /* CONTAINER */
+            .container {
+                max-width: 400px;
+                margin: auto;
+                padding: 20px;
+            }
 
-/* HEADER */
-.header {
-    text-align: center;
-    margin-bottom: 30px;
-}
+            /* HEADER */
+            .header {
+                text-align: center;
+                margin-bottom: 30px;
+            }
 
-.header h1 {
-    font-size: 22px;
-    margin: 0;
-}
+            .header h1 {
+                font-size: 22px;
+                margin: 0;
+            }
 
-.header p {
-    color: #aaa;
-    margin: 5px 0;
-}
+            .header p {
+                color: #aaa;
+                margin: 5px 0;
+            }
 
-/* ICON */
-.social {
-    margin-top: 10px;
-}
+            /* ICON */
+            .social {
+                margin-top: 10px;
+            }
 
-.social img {
-    margin: 0 6px;
-}
+            .social img {
+                margin: 0 6px;
+            }
 
-/* BOX */
-.box {
-    background: rgba(40,40,60,0.4);
-    border-radius: 16px;
-    padding: 16px;
-    margin-bottom: 16px;
-    border: 1px solid rgba(255,255,255,0.08);
-}
+            /* BOX */
+            .box {
+                background: rgba(40, 40, 60, 0.4);
+                border-radius: 16px;
+                padding: 16px;
+                margin-bottom: 16px;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+            }
 
-/* TEXT */
-.title {
-    font-weight: 600;
-    margin-bottom: 6px;
-}
+            /* TEXT */
+            .title {
+                font-weight: 600;
+                margin-bottom: 6px;
+            }
 
-.desc {
-    font-size: 13px;
-    color: #ccc;
-}
+            .desc {
+                font-size: 13px;
+                color: #ccc;
+            }
 
-/* BUTTON */
-.btn {
-    margin-top: 10px;
-    display: inline-block;
-    background: #e5e5e5;
-    color: black;
-    padding: 8px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
-}
+            /* BUTTON */
+            .btn {
+                margin-top: 10px;
+                display: inline-block;
+                background: #e5e5e5;
+                color: black;
+                padding: 8px 14px;
+                border-radius: 20px;
+                font-size: 13px;
+                font-weight: 600;
+            }
 
-/* INFO */
-.info {
-    background: rgba(255,255,255,0.05);
-    padding: 14px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    font-size: 13px;
-}
+            /* INFO */
+            .info {
+                background: rgba(255, 255, 255, 0.05);
+                padding: 14px;
+                border-radius: 12px;
+                margin-bottom: 20px;
+                font-size: 13px;
+            }
 
-/* HIDDEN */
-.hidden {
-    display: none;
-}
+            /* HIDDEN */
+            .hidden {
+                display: none;
+            }
 
-.topbar {
-    position: sticky;
-    top: 0;
-    z-index: 999;
+            .topbar {
+                position: sticky;
+                top: 0;
+                z-index: 999;
 
-    padding: 12px 10px;
-}
+                padding: 12px 10px;
+            }
 
-.back-btn {
-    display: inline-block;
-    font-size: 14px;
-    color: #fff;
+            .back-btn {
+                display: inline-block;
+                font-size: 14px;
+                color: #fff;
 
-    background: rgba(255,255,255,0.08);
-    padding: 6px 12px;
-    border-radius: 10px;
+                background: rgba(255, 255, 255, 0.08);
+                padding: 6px 12px;
+                border-radius: 10px;
 
-    cursor: pointer;
-    transition: 0.2s;
-}
+                cursor: pointer;
+                transition: 0.2s;
+            }
 
-.back-btn:hover {
-    background: rgba(255,255,255,0.18);
-}
+            .back-btn:hover {
+                background: rgba(255, 255, 255, 0.18);
+            }
 
-.review-btn {
-    margin-top: 8px;
-    background: rgba(0, 200, 255, 0.15);
-    color: #00d9ff;
-}
+            .review-btn {
+                margin-top: 8px;
+                background: rgba(0, 200, 255, 0.15);
+                color: #00d9ff;
+            }
 
-.social {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1px; /* 🔥 ini jarak antar icon */
-    margin-top: 1px;
-}
+            .social {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1px; /* 🔥 ini jarak antar icon */
+                margin-top: 1px;
+            }
 
-.social a img {
-    width: 22px;
-    height: 22px;
-    margin: 0 3px;
-}
+            .social a img {
+                width: 22px;
+                height: 22px;
+                margin: 0 3px;
+            }
 
-.splash{
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(135deg, #121212, #1f1f2e, #262635);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; /* 🔥 penting */
-    z-index: 9999;
-    color: white;
-}
+            .splash {
+                position: fixed;
+                inset: 0;
+                background: linear-gradient(135deg, #121212, #1f1f2e, #262635);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column; /* 🔥 penting */
+                z-index: 9999;
+                color: white;
+            }
 
-.splash-box{
-    text-align: center;
-    animation: zoomIn 0.6s ease;
-}
+            .splash-box {
+                text-align: center;
+                animation: zoomIn 0.6s ease;
+            }
 
-.splash h1{
-    font-size: 20px;
-    margin-bottom: 8px;
-}
+            .splash h1 {
+                font-size: 20px;
+                margin-bottom: 8px;
+            }
 
-.splash-loading{
-    margin-top: 20px; /* 🔥 bikin turun ke bawah */
-    font-size: 12px;
-    color: #aaa;
-    letter-spacing: 1px;
-}
+            .splash-loading {
+                margin-top: 20px; /* 🔥 bikin turun ke bawah */
+                font-size: 12px;
+                color: #aaa;
+                letter-spacing: 1px;
+            }
 
-@keyframes zoomIn{
-    from{
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    to{
-        transform: scale(1);
-        opacity: 1;
-    }
-}
+            @keyframes zoomIn {
+                from {
+                    transform: scale(0.8);
+                    opacity: 0;
+                }
+                to {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
 
-.splash.hide{
-    animation: fadeOut 0.8s ease forwards;
-    animation-delay: 1.5s;
-}
+            .splash.hide {
+                animation: fadeOut 0.8s ease forwards;
+                animation-delay: 1.5s;
+            }
 
-.loading-bar{
-    width: 200px;
-    height: 6px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 50px;
-    margin-top: 15px;
-    overflow: hidden;
-}
+            .loading-bar {
+                width: 200px;
+                height: 6px;
+                background: rgba(255, 255, 255, 0.15);
+                border-radius: 50px;
+                margin-top: 15px;
+                overflow: hidden;
+            }
 
-.loading-progress{
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg,#6d28d9,#a78bfa);
-    border-radius: 50px;
-    transition: width 0.2s ease;
-}
+            .loading-progress {
+                height: 100%;
+                width: 0%;
+                background: linear-gradient(90deg, #6d28d9, #a78bfa);
+                border-radius: 50px;
+                transition: width 0.2s ease;
+            }
 
-@keyframes fadeOut{
-    to{
-        opacity: 0;
-        visibility: hidden;
-    }
-}
+            @keyframes fadeOut {
+                to {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+            }
+        </style>
+    </head>
 
-</style>
-</head>
+    <body>
+        <div class="splash">
+            <h1>SAMPxNot404 🜲</h1>
 
-<body>
-  
-<div class="splash">
-    <h1>SAMPxNot404 🜲</h1>
+            <div class="loading-bar">
+                <div class="loading-progress" id="loadingProgress"></div>
+            </div>
 
-    <div class="loading-bar">
-        <div class="loading-progress" id="loadingProgress"></div>
-    </div>
-
-    <div class="splash-loading">
-        Loading<span id="dots"></span>
-    </div>
-</div>
-
-<div id="home" class="container">
-
-    <div class="header">
-        <h1>Client xNot404 🜲</h1>
-        <p>About-x</p>
-
-        <div class="social">
-            <a href="https://discord.gg/c74ApQxxCd"><img src="https://img.icons8.com/ios-filled/26/ffffff/discord-logo.png"></a>
-            <a href="https://www.youtube.com/@xNot404"><img src="https://img.icons8.com/ios-filled/26/ffffff/youtube-play.png"></a>
-            <a href="https://www.tiktok.com/@.userfaka?_t=ZS-8xYkqhwim1q&_r=1"><img src="https://img.icons8.com/ios-filled/26/ffffff/tiktok--v1.png" alt="TikTok" /></a>
-        <a href="https://saweria.co/SupportxNot404"><img src="https://img.icons8.com/ios-filled/26/ffffff/money--v1.png" alt="Donasi" /></a>
-      
+            <div class="splash-loading">Loading<span id="dots"></span></div>
         </div>
-    </div>
 
-    <div class="info">
-        Selamat datang di <b>SAMPxNot404</b> — client SAMP yang sudah dimodifikasi agar lebih lancar dan optimal.<br><br>
-<span style="color:#22c55e;">
-⚡ Nggak perlu ragu atau takut — semua file di sini 100% aman, bebas virus, dan langsung siap kamu pakai tanpa ribet!
-</span>
-    </div>
+        <div id="home" class="container">
+            <div class="header">
+                <h1>Client xNot404 🜲</h1>
+                <p>About-x</p>
 
-    <div class="box">
-        <div class="title">APK X64</div>
-        <div class="desc">
-            Untuk Android 64-bit<br>
-            <b>SAMPxNot404 🜲</b>
+                <div class="social">
+                    <a href="https://discord.gg/c74ApQxxCd"
+                        ><img
+                            src="https://img.icons8.com/ios-filled/26/ffffff/discord-logo.png"
+                    /></a>
+                    <a href="https://www.youtube.com/@xNot404"
+                        ><img
+                            src="https://img.icons8.com/ios-filled/26/ffffff/youtube-play.png"
+                    /></a>
+                    <a
+                        href="https://www.tiktok.com/@.userfaka?_t=ZS-8xYkqhwim1q&_r=1"
+                        ><img
+                            src="https://img.icons8.com/ios-filled/26/ffffff/tiktok--v1.png"
+                            alt="TikTok"
+                    /></a>
+                    <a href="https://saweria.co/SupportxNot404"
+                        ><img
+                            src="https://img.icons8.com/ios-filled/26/ffffff/money--v1.png"
+                            alt="Donasi"
+                    /></a>
+                </div>
+            </div>
+
+            <div class="info">
+                Selamat datang di <b>SAMPxNot404</b> — client SAMP yang sudah
+                dimodifikasi agar lebih lancar dan optimal.<br /><br />
+                <span style="color: #22c55e">
+                    ⚡ Nggak perlu ragu atau takut — semua file di sini 100%
+                    aman, bebas virus, dan langsung siap kamu pakai tanpa ribet!
+                </span>
+            </div>
+
+            <div class="box">
+                <div class="title">APK X64</div>
+                <div class="desc">
+                    Untuk Android 64-bit<br />
+                    <b>SAMPxNot404 🜲</b>
+                </div>
+                <div class="btn" onclick="showDownload('x64')">Client-X 64</div>
+            </div>
+
+            <div class="box">
+                <div class="title">APK X32</div>
+                <div class="desc">
+                    Untuk Android 32-bit<br />
+                    <b>SAMPxNot404 🜲</b>
+                </div>
+                <div class="btn" onclick="showDownload('x32')">Client-X 32</div>
+            </div>
         </div>
-        <div class="btn" onclick="showDownload('x64')">Client-X 64</div>
-    </div>
 
-    <div class="box">
-        <div class="title">APK X32</div>
-        <div class="desc">
-            Untuk Android 32-bit<br>
-            <b>SAMPxNot404 🜲</b>
+        <!-- DOWNLOAD PAGE -->
+        <div id="download" class="container hidden">
+            <div class="topbar">
+                <div class="back-btn" onclick="showHome()">←</div>
+            </div>
+
+            <!-- INI SATU-SATUNYA CONTAINER -->
+            <div id="downloadBox"></div>
         </div>
-        <div class="btn" onclick="showDownload('x32')">Client-X 32</div>
-    </div>
 
-</div>
+        <script>
+            window.onerror = function (msg, url, line) {
+                console.log("JS ERROR:", msg, line);
+                return false;
+            };
 
-<!-- DOWNLOAD PAGE -->
-<div id="download" class="container hidden">
+            let apps = {};
 
-   <div class="topbar">
-    <div class="back-btn" onclick="showHome()">←</div>
+            async function loadApps() {
+                try {
+                    const res = await fetch(
+                        "https://raw.githubusercontent.com/Not404-X/Client-X/main/apps.json"
+                    );
+                    apps = await res.json();
+                    console.log("Apps loaded:", apps);
+                } catch (e) {
+                    console.log("Gagal load JSON:", e);
+                }
+            }
 
+            async function showDownload(type) {
+                document.getElementById("home").style.display = "none";
+                document.getElementById("download").style.display = "block";
 
-</div>
+                if (!apps || !apps[type]) {
+                    await loadApps();
+                }
 
-    <!-- INI SATU-SATUNYA CONTAINER -->
-    <div id="downloadBox"></div>
-
-</div>
-
-<script>
-
-window.onerror = function(msg, url, line){
-    console.log("JS ERROR:", msg, line);
-    return false;
-};
-
-let apps = {};
-
-async function loadApps(){
-    try {
-        const res = await fetch("https://raw.githubusercontent.com/Not404-X/Client-X/main/apps.json");
-        apps = await res.json();
-        console.log("Apps loaded:", apps);
-    } catch (e) {
-        console.log("Gagal load JSON:", e);
-    }
-}
-
-async function showDownload(type){
-
-    document.getElementById("home").style.display = "none";
-    document.getElementById("download").style.display = "block";
-
-    if (!apps || !apps[type]) {
-        await loadApps();
-    }
-
-    if (!apps || !apps[type]) {
-        document.getElementById("downloadBox").innerHTML = `
+                if (!apps || !apps[type]) {
+                    document.getElementById("downloadBox").innerHTML = `
             <div class="box">
                 <div class="title">Error</div>
                 <div class="desc">Data tidak ditemukan / JSON gagal load</div>
             </div>
         `;
-        return;
-    }
+                    return;
+                }
 
-    let html = "";
+                let html = "";
 
-    apps[type].forEach(app => {
-        html += `
+                apps[type].forEach(app => {
+                    html += `
         <div class="box">
             <div class="title">${app.name}</div>
             <div class="desc">${app.desc}</div>
@@ -333,63 +342,62 @@ async function showDownload(type){
             </div>
         </div>
         `;
-    });
+                });
 
-    document.getElementById("downloadBox").innerHTML = html;
-}
+                document.getElementById("downloadBox").innerHTML = html;
+            }
 
-function showHome(){
-    document.getElementById("download").style.display = "none";
-    document.getElementById("home").style.display = "block";
-}
+            function showHome() {
+                document.getElementById("download").style.display = "none";
+                document.getElementById("home").style.display = "block";
+            }
 
-function openReview(link){
-    window.open(link, "_blank");
-}
+            function openReview(link) {
+                window.open(link, "_blank");
+            }
 
-let progress = 0;
+            let progress = 0;
 
-const fakeAssets = [
-    "https://img.icons8.com/ios-filled/26/ffffff/discord-logo.png",
-    "https://img.icons8.com/ios-filled/26/ffffff/youtube-play.png",
-    "https://img.icons8.com/ios-filled/26/ffffff/tiktok--v1.png"
-];
+            const fakeAssets = [
+                "https://img.icons8.com/ios-filled/26/ffffff/discord-logo.png",
+                "https://img.icons8.com/ios-filled/26/ffffff/youtube-play.png",
+                "https://img.icons8.com/ios-filled/26/ffffff/tiktok--v1.png"
+            ];
 
-let loaded = 0;
+            let loaded = 0;
 
-function updateBar(){
-    let percent = Math.floor((loaded / fakeAssets.length) * 100);
-    document.getElementById("loadingProgress").style.width = percent + "%";
-}
+            function updateBar() {
+                let percent = Math.floor((loaded / fakeAssets.length) * 100);
+                document.getElementById("loadingProgress").style.width =
+                    percent + "%";
+            }
 
-function loadFake(src){
-    return new Promise(res => {
-        let img = new Image();
-        img.src = src;
-        img.onload = res;
-        img.onerror = res;
-    });
-}
+            function loadFake(src) {
+                return new Promise(res => {
+                    let img = new Image();
+                    img.src = src;
+                    img.onload = res;
+                    img.onerror = res;
+                });
+            }
 
-async function startSplash(){
-    for(let i = 0; i < fakeAssets.length; i++){
-        await loadFake(fakeAssets[i]);
-        loaded++;
-        updateBar();
+            async function startSplash() {
+                for (let i = 0; i < fakeAssets.length; i++) {
+                    await loadFake(fakeAssets[i]);
+                    loaded++;
+                    updateBar();
 
-        await new Promise(r => setTimeout(r, 300)); // ⬅️ ini delay per step
-    }
+                    await new Promise(r => setTimeout(r, 300)); // ⬅️ ini delay per step
+                }
 
-    setTimeout(() => {
-        document.querySelector(".splash")?.remove();
-    }, 800);
-}
+                setTimeout(() => {
+                    document.querySelector(".splash")?.remove();
+                }, 800);
+            }
 
-loadApps();
+            loadApps();
 
-startSplash();
-
-</script>
-
-</body>
+            startSplash();
+        </script>
+    </body>
 </html>
