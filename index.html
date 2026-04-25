@@ -209,6 +209,11 @@
                     visibility: hidden;
                 }
             }
+            .password-btn {
+    margin-top: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
         </style>
     </head>
 
@@ -330,19 +335,23 @@
                 let html = "";
 
                 apps[type].forEach(app => {
-                    html += `
+    html += `
         <div class="box">
             <div class="title">${app.name}</div>
             <div class="desc">${app.desc}</div>
 
             <a href="${app.file}" class="btn">Download</a>
 
+            <div class="btn password-btn" onclick="window.open('${app.password}','_blank')">
+    Password
+</div>
+
             <div class="btn review-btn" onclick="window.open('${app.review}','_blank')">
                 Review
             </div>
         </div>
-        `;
-                });
+    `;
+});
 
                 document.getElementById("downloadBox").innerHTML = html;
             }
@@ -371,6 +380,7 @@
                 document.getElementById("loadingProgress").style.width =
                     percent + "%";
             }
+          
 
             function loadFake(src) {
                 return new Promise(res => {
