@@ -388,14 +388,14 @@
                 document.getElementById("download").style.display = "block";
 
                 if (!apps || !apps[type]) {
-    document.getElementById("downloadBox").innerHTML = `
+                    document.getElementById("downloadBox").innerHTML = `
         <div class="box">
             <div class="title">Error</div>
             <div class="desc">Data tidak ditemukan / JSON gagal load</div>
         </div>
     `;
-    return;
-}
+                    return;
+                }
 
                 let html = "";
 
