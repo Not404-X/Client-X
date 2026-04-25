@@ -1,18 +1,18 @@
 {
- "x64": [
-  {
-    "name": "Alyn V20.3",
-    "desc": "fix texture putih\nfix someone crash\nfix download crash\nfix handling\nremove iklan\nhud style pc",
-    "file": "https://sfl.gl/6seY3C",
-    "review": "https://youtu.be/0QA63Eeg_ss?si=8xmlZNYmharZU32z"
-  }
-],
-  "x32": [
-    {
-      "name": "Client X32 v1",
-      "desc": "Versi ringan",
-      "file": "x32-v1.apk",
-      "review": "https://link-review-x32.com"
-    }
-  ]
+    "x64": [
+        {
+            "name": "Alyn V20.3",
+            "desc": "fix texture putih\nfix someone crash\nfix download crash\nfix handling\nremove iklan\nhud style pc",
+            "file": "https://sfl.gl/6seY3C",
+            "review": "https://youtu.be/0QA63Eeg_ss?si=8xmlZNYmharZU32z"
+        }
+    ],
+    "x32": [
+        {
+            "name": "Client X32 v1",
+            "desc": "Versi ringan",
+            "file": "x32-v1.apk",
+            "review": "https://link-review-x32.com"
+        }
+    ]
 }
