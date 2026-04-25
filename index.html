@@ -281,6 +281,12 @@ body {
 </div>
 
 <script>
+
+window.onerror = function(msg, url, line){
+    console.log("JS ERROR:", msg, line);
+    return false;
+};
+
 let apps = {};
 
 async function loadApps(){
@@ -298,17 +304,15 @@ async function showDownload(type){
     document.getElementById("home").style.display = "none";
     document.getElementById("download").style.display = "block";
 
-    // kalau data belum ada, paksa load dulu
     if (!apps || !apps[type]) {
         await loadApps();
     }
 
-    // kalau masih kosong juga
-    if (!apps[type]) {
+    if (!apps || !apps[type]) {
         document.getElementById("downloadBox").innerHTML = `
             <div class="box">
                 <div class="title">Error</div>
-                <div class="desc">Data APK tidak ditemukan</div>
+                <div class="desc">Data tidak ditemukan / JSON gagal load</div>
             </div>
         `;
         return;
@@ -322,9 +326,7 @@ async function showDownload(type){
             <div class="title">${app.name}</div>
             <div class="desc">${app.desc}</div>
 
-            <a href="${app.file}" class="btn">
-                Download
-            </a>
+            <a href="${app.file}" class="btn">Download</a>
 
             <div class="btn review-btn" onclick="window.open('${app.review}','_blank')">
                 Review
@@ -379,13 +381,15 @@ async function startSplash(){
     }
 
     setTimeout(() => {
-        document.querySelector(".splash").style.display = "none";
+        document.querySelector(".splash")?.remove();
     }, 800);
 }
+
+loadApps();
 
 startSplash();
 
 </script>
 
 </body>
-              </html>
+    </html>
