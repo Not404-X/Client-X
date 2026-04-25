@@ -207,6 +207,10 @@ body {
     }
 }
 
+.desc {
+    white-space: pre-line;
+}
+
 </style>
 </head>
 
@@ -265,7 +269,7 @@ body {
     </div>
 
 </div>
-
+<div id="appContainer"></div>
 <!-- DOWNLOAD PAGE -->
 <div id="download" class="container hidden">
 
@@ -293,7 +297,11 @@ async function loadApps(){
     try {
         const res = await fetch("https://raw.githubusercontent.com/Not404-X/Client-X/main/apps.json");
         apps = await res.json();
+
         console.log("Apps loaded:", apps);
+
+        renderApps(); // 👈 PENTING
+
     } catch (e) {
         console.log("Gagal load JSON:", e);
     }
@@ -341,6 +349,27 @@ async function showDownload(type){
 function showHome(){
     document.getElementById("download").style.display = "none";
     document.getElementById("home").style.display = "block";
+}
+
+function renderApps(){
+    const container = document.getElementById("appContainer");
+
+    container.innerHTML = "";
+
+    apps.forEach(app => {
+        let card = document.createElement("div");
+        card.className = "card";
+
+        let descElement = document.createElement("div");
+        descElement.className = "desc";
+
+        descElement.innerText = Array.isArray(app.desc)
+            ? app.desc.join("\n")
+            : app.desc;
+
+        card.appendChild(descElement);
+        container.appendChild(card);
+    });
 }
 
 function openReview(link){
