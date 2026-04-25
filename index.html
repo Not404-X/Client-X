@@ -1,229 +1,391 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SA-MP xNot404</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&ampdisplay=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SA-MP xNot404</title>
 
-  <style>
-    body {
-      background: linear-gradient(135deg, #121212, #1f1f2e, #262635);
-      background-attachment: fixed;
-      color: white;
-      font-family: 'Poppins', sans-serif;
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&ampdisplay=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #121212, #1f1f2e, #262635);
+    color: white;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 22px;
+    margin: 0;
+}
+
+.header p {
+    color: #aaa;
+    margin: 5px 0;
+}
+
+/* ICON */
+.social {
+    margin-top: 10px;
+}
+
+.social img {
+    margin: 0 6px;
+}
+
+/* BOX */
+.box {
+    background: rgba(40,40,60,0.4);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* TEXT */
+.title {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.desc {
+    font-size: 13px;
+    color: #ccc;
+}
+
+/* BUTTON */
+.btn {
+    margin-top: 10px;
+    display: inline-block;
+    background: #e5e5e5;
+    color: black;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* INFO */
+.info {
+    background: rgba(255,255,255,0.05);
+    padding: 14px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+
+/* HIDDEN */
+.hidden {
+    display: none;
+}
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+
+    padding: 12px 10px;
+}
+
+.back-btn {
+    display: inline-block;
+    font-size: 14px;
+    color: #fff;
+
+    background: rgba(255,255,255,0.08);
+    padding: 6px 12px;
+    border-radius: 10px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.back-btn:hover {
+    background: rgba(255,255,255,0.18);
+}
+
+.review-btn {
+    margin-top: 8px;
+    background: rgba(0, 200, 255, 0.15);
+    color: #00d9ff;
+}
+
+.social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1px; /* 🔥 ini jarak antar icon */
+    margin-top: 1px;
+}
+
+.social a img {
+    width: 22px;
+    height: 22px;
+    margin: 0 3px;
+}
+
+.splash{
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #121212, #1f1f2e, #262635);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* 🔥 penting */
+    z-index: 9999;
+    color: white;
+}
+
+.splash-box{
+    text-align: center;
+    animation: zoomIn 0.6s ease;
+}
+
+.splash h1{
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.splash-loading{
+    margin-top: 20px; /* 🔥 bikin turun ke bawah */
+    font-size: 12px;
+    color: #aaa;
+    letter-spacing: 1px;
+}
+
+@keyframes zoomIn{
+    from{
+        transform: scale(0.8);
+        opacity: 0;
     }
-
-    .frosted-box {
-      background: rgba(40, 40, 60, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-radius: 1.25rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 8px rgba(100, 100, 255, 0.2);
-      padding: 1.2rem 1.4rem;
-      margin-bottom: 1.5rem;
-      transition: all 0.3s ease;
-    }
-
-    .frosted-box:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5), 0 0 12px rgba(120, 120, 255, 0.25);
-    }
-
-    .custom-button {
-      display: inline-block;
-      background: linear-gradient(to right, #f0f0f0, #d9d9d9);
-      color: #111;
-      text-align: left;
-      padding: 0.5rem 1rem;
-      margin-top: 0.8rem;
-      border-radius: 9999px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      transition: all 0.3s ease;
-    }
-
-    .custom-button:hover {
-      background: #cacaca;
-      transform: scale(1.03);
-    }
-
-    .title-glow {
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
-    }
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeIn 0.8s forwards;
-    }
-
-    .fade-in.delay-1 { animation-delay: 0.2s; }
-    .fade-in.delay-2 { animation-delay: 0.4s; }
-    .fade-in.delay-3 { animation-delay: 0.6s; }
-
-    @keyframes fadeIn {
-      to {
+    to{
+        transform: scale(1);
         opacity: 1;
-        transform: translateY(0);
-      }
     }
+}
 
-    .elegant-text {
-      background: linear-gradient(135deg, #ffffff, #c0c0ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 1px 6px rgba(255, 255, 255, 0.08);
-    }
+.splash.hide{
+    animation: fadeOut 0.8s ease forwards;
+    animation-delay: 1.5s;
+}
 
-    .highlight {
-      color: #f472b6;
-      font-weight: 600;
-      font-style: italic;
-    }
+.loading-bar{
+    width: 200px;
+    height: 6px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50px;
+    margin-top: 15px;
+    overflow: hidden;
+}
 
-    .secure-note {
-      color: #4ade80;
-      font-style: italic;
+.loading-progress{
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg,#6d28d9,#a78bfa);
+    border-radius: 50px;
+    transition: width 0.2s ease;
+}
+
+@keyframes fadeOut{
+    to{
+        opacity: 0;
+        visibility: hidden;
     }
-  </style>
+}
+
+</style>
 </head>
 
-<body class="relative z-0">
+<body>
+  
+<div class="splash">
+    <h1>SAMPxNot404 🜲</h1>
 
-  <div class="min-h-screen flex flex-col items-center px-4 py-10 space-y-10 relative z-10">
+    <div class="loading-bar">
+        <div class="loading-progress" id="loadingProgress"></div>
+    </div>
 
-    <!-- Header -->
-    <div class="text-center fade-in">
-      <h1 class="text-2xl font-bold tracking-wider title-glow">SAMPxNot404</h1>
-      <hr class="border-t border-gray-600 w-48 mx-auto my-2" />
-      <p class="italic text-gray-400 text-base">SupportxNot404</p>
-      <div class="flex justify-center space-x-4 mt-3">
-        <a href="https://discord.gg/c74ApQxxCd"><img src="https://img.icons8.com/ios-filled/26/ffffff/discord-logo.png" alt="Discord" /></a>
-        <a href="https://www.youtube.com/@xNot404"><img src="https://img.icons8.com/ios-filled/26/ffffff/youtube-play.png" alt="YouTube" /></a>
-        <a href="https://www.tiktok.com/@.userfaka?_t=ZS-8xYkqhwim1q&_r=1"><img src="https://img.icons8.com/ios-filled/26/ffffff/tiktok--v1.png" alt="TikTok" /></a>
+    <div class="splash-loading">
+        Loading<span id="dots"></span>
+    </div>
+</div>
+
+<div id="home" class="container">
+
+    <div class="header">
+        <h1>Client xNot404 🜲</h1>
+        <p>About-x</p>
+
+        <div class="social">
+            <a href="https://discord.gg/c74ApQxxCd"><img src="https://img.icons8.com/ios-filled/26/ffffff/discord-logo.png"></a>
+            <a href="https://www.youtube.com/@xNot404"><img src="https://img.icons8.com/ios-filled/26/ffffff/youtube-play.png"></a>
+            <a href="https://www.tiktok.com/@.userfaka?_t=ZS-8xYkqhwim1q&_r=1"><img src="https://img.icons8.com/ios-filled/26/ffffff/tiktok--v1.png" alt="TikTok" /></a>
         <a href="https://saweria.co/SupportxNot404"><img src="https://img.icons8.com/ios-filled/26/ffffff/money--v1.png" alt="Donasi" /></a>
-      </div>
+      
+        </div>
     </div>
 
-    <!-- Konten -->
-    <div class="w-full max-w-sm text-left fade-in delay-1 space-y-6">
-      <div class="space-y-4 text-sm md:text-base leading-relaxed text-left bg-white/5 p-4 rounded-xl border border-white/10 shadow-inner shadow-black/20 backdrop-blur-sm">
-        <p class="elegant-text">
-          Selamat datang di — <span class="highlight">SAMPxNot404</span> — tempat <span class="italic">Client SAMP</span> yang sudah di modifikasi untuk pengalaman bermain yang lebih <span class="font-semibold text-indigo-300">lancar</span> dan <span class="font-semibold text-indigo-300">optimal</span>.
-        </p>
-        <p class="secure-note">
-          ⚡ Nggak perlu ragu atau takut — semua file di sini <span class="underline font-semibold">100% aman</span>, bebas virus, dan langsung siap kamu pakai tanpa ribet!
-        </p>
-      </div>
-
-      <div class="frosted-box">
-        <h2 class="text-base font-semibold mb-1">
-          <img src="https://img.icons8.com/ios-filled/20/ffffff/android-os.png" class="inline-block mr-1" alt="App Icon" />
-          APK X64
-        </h2>
-        <p class="text-sm text-gray-300">
-          Cocok untuk Android 64-bit.<br/>
-          Support handling, iklan & copyright (sudah dihapus).<br/>
-          Tidak support CLEO, AML, dan Monet.
-        </p>
-<a href="javascript:void(0)" onclick="showDownload('x64')" class="custom-button">
-  <i class="fas fa-cloud-download-alt"></i> Download APK X64
-</a>
-      </div>
-
-      <div class="frosted-box">
-        <h2 class="text-base font-semibold mb-1">
-          <img src="https://img.icons8.com/ios-filled/20/ffffff/android-os.png" class="inline-block mr-1" alt="App Icon" />
-          APK X32
-        </h2>
-        <p class="text-sm text-gray-300">
-          Cocok untuk Android 32-bit.<br/>
-          Support handling, iklan & copyright (sudah dihapus).<br/>
-          Support CLEO, AML, dan Monet.
-        </p>
-<a href="javascript:void(0)" onclick="showDownload('x32')" class="custom-button">
-  <i class="fas fa-cloud-download-alt"></i> Download APK X32
-</a>
-      </div>
-
-      <p class="text-sm text-gray-500 fade-in delay-3">
-        <img src="https://img.icons8.com/ios-filled/20/ffffff/android-os.png" class="inline-block mr-1" alt="App Icon" />
-        Segera Hadir
-      </p>
+    <div class="info">
+        Selamat datang di <b>SAMPxNot404</b> — client SAMP yang sudah dimodifikasi agar lebih lancar dan optimal.<br><br>
+<span style="color:#22c55e;">
+⚡ Nggak perlu ragu atau takut — semua file di sini 100% aman, bebas virus, dan langsung siap kamu pakai tanpa ribet!
+</span>
     </div>
-  </div>
+
+    <div class="box">
+        <div class="title">APK X64</div>
+        <div class="desc">
+            Untuk Android 64-bit<br>
+            <b>SAMPxNot404 🜲</b>
+        </div>
+        <div class="btn" onclick="showDownload('x64')">Client-X 64</div>
+    </div>
+
+    <div class="box">
+        <div class="title">APK X32</div>
+        <div class="desc">
+            Untuk Android 32-bit<br>
+            <b>SAMPxNot404 🜲</b>
+        </div>
+        <div class="btn" onclick="showDownload('x32')">Client-X 32</div>
+    </div>
+
+</div>
+
 <!-- DOWNLOAD PAGE -->
-<div id="downloadPage" class="hidden min-h-screen px-4 py-10">
+<div id="download" class="container hidden">
 
-  <h1 class="text-2xl font-bold text-center mb-6">Download Center</h1>
+   <div class="topbar">
+    <div class="back-btn" onclick="showHome()">←</div>
 
-  <div class="text-center mb-4">
-    <button onclick="showHome()" class="bg-gray-600 px-4 py-2 rounded">
-      Kembali
-    </button>
-  </div>
 
-  <div class="space-y-4 max-w-sm mx-auto">
+</div>
 
-    <!-- X64 -->
-    <div class="frosted-box x64">
-      <h2 class="font-semibold">APK X64</h2>
-      <p class="text-sm text-gray-300">Android 64-bit</p>
-      <a href="apk-x64.apk" class="custom-button">Download</a>
-    </div>
+    <!-- INI SATU-SATUNYA CONTAINER -->
+    <div id="downloadBox"></div>
 
-    <!-- X32 -->
-    <div class="frosted-box x32">
-      <h2 class="font-semibold">APK X32</h2>
-      <p class="text-sm text-gray-300">Android 32-bit</p>
-      <a href="apk-x32.apk" class="custom-button">Download</a>
-    </div>
-
-  </div>
 </div>
 
 <script>
-const home = document.querySelector('.min-h-screen');
-const download = document.getElementById('downloadPage');
+let apps = {};
 
-function showDownload(type) {
-  if (!home || !download) return;
-
-  home.classList.add('hidden');
-  download.classList.remove('hidden');
-
-  document.querySelectorAll('.x64, .x32').forEach(el => {
-    el.style.display = 'none';
-  });
-
-  if (type === 'x64') {
-    document.querySelectorAll('.x64').forEach(el => {
-      el.style.display = 'block';
-    });
-  }
-
-  if (type === 'x32') {
-    document.querySelectorAll('.x32').forEach(el => {
-      el.style.display = 'block';
-    });
-  }
+async function loadApps(){
+    try {
+        const res = await fetch("https://raw.githubusercontent.com/Not404-X/Client-X/main/apps.json");
+        apps = await res.json();
+        console.log("Apps loaded:", apps);
+    } catch (e) {
+        console.log("Gagal load JSON:", e);
+    }
 }
 
-function showHome() {
-  if (!home || !download) return;
+async function showDownload(type){
 
-  download.classList.add('hidden');
-  home.classList.remove('hidden');
+    document.getElementById("home").style.display = "none";
+    document.getElementById("download").style.display = "block";
 
-  // reset biar gak “nyangkut”
-  document.querySelectorAll('.x64, .x32').forEach(el => {
-    el.style.display = 'none';
-  });
+    // kalau data belum ada, paksa load dulu
+    if (!apps || !apps[type]) {
+        await loadApps();
+    }
+
+    // kalau masih kosong juga
+    if (!apps[type]) {
+        document.getElementById("downloadBox").innerHTML = `
+            <div class="box">
+                <div class="title">Error</div>
+                <div class="desc">Data APK tidak ditemukan</div>
+            </div>
+        `;
+        return;
+    }
+
+    let html = "";
+
+    apps[type].forEach(app => {
+        html += `
+        <div class="box">
+            <div class="title">${app.name}</div>
+            <div class="desc">${app.desc}</div>
+
+            <a href="${app.file}" class="btn">
+                Download
+            </a>
+
+            <div class="btn review-btn" onclick="window.open('${app.review}','_blank')">
+                Review
+            </div>
+        </div>
+        `;
+    });
+
+    document.getElementById("downloadBox").innerHTML = html;
 }
+
+function showHome(){
+    document.getElementById("download").style.display = "none";
+    document.getElementById("home").style.display = "block";
+}
+
+function openReview(link){
+    window.open(link, "_blank");
+}
+
+let progress = 0;
+
+const fakeAssets = [
+    "https://img.icons8.com/ios-filled/26/ffffff/discord-logo.png",
+    "https://img.icons8.com/ios-filled/26/ffffff/youtube-play.png",
+    "https://img.icons8.com/ios-filled/26/ffffff/tiktok--v1.png"
+];
+
+let loaded = 0;
+
+function updateBar(){
+    let percent = Math.floor((loaded / fakeAssets.length) * 100);
+    document.getElementById("loadingProgress").style.width = percent + "%";
+}
+
+function loadFake(src){
+    return new Promise(res => {
+        let img = new Image();
+        img.src = src;
+        img.onload = res;
+        img.onerror = res;
+    });
+}
+
+async function startSplash(){
+    for(let i = 0; i < fakeAssets.length; i++){
+        await loadFake(fakeAssets[i]);
+        loaded++;
+        updateBar();
+
+        await new Promise(r => setTimeout(r, 300)); // ⬅️ ini delay per step
+    }
+
+    setTimeout(() => {
+        document.querySelector(".splash").style.display = "none";
+    }, 800);
+}
+
+startSplash();
+
 </script>
+
 </body>
-</html>
+              </html>
