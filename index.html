@@ -495,7 +495,11 @@
                 }
 
                 setTimeout(() => {
-                    document.querySelector(".splash")?.remove();
+                    const splash = document.querySelector(".splash");
+                    if (splash) {
+                        splash.style.display = "none";
+                        splash.style.pointerEvents = "none";
+                    }
                 }, 800);
             }
 
