@@ -250,32 +250,32 @@
                 align-items: center;
             }
             #search {
-    flex: 1;
+                flex: 1;
 
-    padding: 8px 12px;
-    border-radius: 10px;
+                padding: 8px 12px;
+                border-radius: 10px;
 
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    outline: none;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                outline: none;
 
-    background: rgba(255, 255, 255, 0.06);
-    color: #fff;
+                background: rgba(255, 255, 255, 0.06);
+                color: #fff;
 
-    font-size: 13px;
+                font-size: 13px;
 
-    transition: 0.2s;
-}
+                transition: 0.2s;
+            }
 
-/* placeholder */
-#search::placeholder {
-    color: rgba(255, 255, 255, 0.4);
-}
+            /* placeholder */
+            #search::placeholder {
+                color: rgba(255, 255, 255, 0.4);
+            }
 
-/* saat fokus */
-#search:focus {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(168, 139, 250, 0.5);
-}
+            /* saat fokus */
+            #search:focus {
+                background: rgba(255, 255, 255, 0.12);
+                border-color: rgba(168, 139, 250, 0.5);
+            }
         </style>
     </head>
 
@@ -349,10 +349,9 @@
         <!-- DOWNLOAD PAGE -->
         <div id="download" class="container hidden">
             <div class="topbar">
-    <div class="back-btn" onclick="showHome()">←</div>
+                <div class="back-btn" onclick="showHome()">←</div>
 
-    <input type="text" id="search" placeholder="Cari aplikasi...">
-
+                <input type="text" id="search" placeholder="Cari aplikasi..." />
             </div>
 
             <!-- INI SATU-SATUNYA CONTAINER -->
@@ -418,18 +417,18 @@
     </div>
 `;
                 });
-                const search = document.getElementById('search');
+                const search = document.getElementById("search");
 
-search.addEventListener('input', () => {
-    let v = search.value.toLowerCase();
-    let cards = document.querySelectorAll('#downloadBox .box');
+                search.addEventListener("input", () => {
+                    let v = search.value.toLowerCase();
+                    let cards = document.querySelectorAll("#downloadBox .box");
 
-    cards.forEach(c => {
-        let name = c.dataset.name;
+                    cards.forEach(c => {
+                        let name = c.dataset.name;
 
-        c.style.display = name.includes(v) ? 'block' : 'none';
-    });
-});
+                        c.style.display = name.includes(v) ? "block" : "none";
+                    });
+                });
 
                 document.getElementById("downloadBox").innerHTML = html;
             }
@@ -458,7 +457,6 @@ search.addEventListener('input', () => {
                 document.getElementById("loadingProgress").style.width =
                     percent + "%";
             }
-            
 
             function loadFake(src) {
                 return new Promise(res => {
