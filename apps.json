@@ -5,7 +5,8 @@
             "desc": "fix texture putih, fix someone crash, fix download crash, fix handling, remove iklan, hud style pc",
             "file": "https://sfl.gl/6seY3C",
             "review": "https://youtu.be/0QA63Eeg_ss?si=8xmlZNYmharZU32z",
-            "password": "https://sfl.gl/DlgueV"
+            "password": "https://sfl.gl/DlgueV",
+            "status": "new"
         },
         {
             "name": "Eagle V 2.0.12-RC (No Ads)",
@@ -21,11 +22,11 @@
             "password": "https://sfl.gl/7Q1lGdo"
         },
         {
-          "name": "Alyn V 18.9 (no down)",
-          "desc": "Support 32Bit & 64Bit - support download data inApp - remove app update - remove ads/ikaln - Add grass pc - Add Download modpack in App - btn voice & speaker style pc - add skin & skin weapon - add bsor five star - add grass & desert - Fix Lag & Fc Open map - Fix handling folder data",
-          "file": "https://sfl.gl/FgEMBAt",
-          "review": "https://youtu.be/pP-pENhG34k?si=709_m5xxiOxh94Cb",
-          "password": "https://sfl.gl/kKK3"
+            "name": "Alyn V 18.9 (no down)",
+            "desc": "Support 32Bit & 64Bit - support download data inApp - remove app update - remove ads/ikaln - Add grass pc - Add Download modpack in App - btn voice & speaker style pc - add skin & skin weapon - add bsor five star - add grass & desert - Fix Lag & Fc Open map - Fix handling folder data",
+            "file": "https://sfl.gl/FgEMBAt",
+            "review": "https://youtu.be/pP-pENhG34k?si=709_m5xxiOxh94Cb",
+            "password": "https://sfl.gl/kKK3"
         }
     ],
     "x32": [
