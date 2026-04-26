@@ -609,7 +609,7 @@
             `
                     : ``
             }
-     <div class="emoji-bar" data-id="${app.name.replace(/\s+/g, "_")}">
+     <div class="emoji-bar" data-id="${app.name.toLowerCase().replace(/[^a-z0-9]/g,'_')}">
   <div class="emoji-list"></div>
 
   <button class="emoji-add" onclick="openEmoji(this)">＋</button>
