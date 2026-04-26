@@ -122,6 +122,8 @@
             }
 
             .review-btn {
+                position: relative;
+                z-index: 10;
                 margin-top: 8px;
                 background: rgba(0, 200, 255, 0.15);
                 color: #00d9ff;
@@ -231,6 +233,8 @@
             .download-btn,
             .password-btn,
             .icon-btn {
+                position: relative;
+                z-index: 10;
                 width: 40px;
                 height: 40px;
 
@@ -380,6 +384,82 @@
                     border-color: #facc15;
                 }
             }
+            .emoji-bar {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+
+                flex-wrap: wrap;
+                max-width: 100%;
+            }
+
+            /* 🔥 bikin emoji rapi 3 per baris */
+            .emoji-list {
+                display: grid;
+                grid-template-columns: repeat(3, auto);
+                gap: 3px;
+            }
+
+            /* emoji style */
+            .emoji-bar span {
+                background: rgba(255, 255, 255, 0.08);
+                padding: 4px 8px;
+                border-radius: 10px;
+                font-size: 12px;
+
+                cursor: pointer;
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+
+                white-space: nowrap;
+                transition: 0.15s;
+            }
+
+            .emoji-bar span:hover {
+                transform: scale(1.05);
+            }
+
+            /* tombol + tetap di kanan */
+            .emoji-add {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                border: none;
+
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+
+                cursor: pointer;
+                flex-shrink: 0;
+            }
+            .emoji-picker {
+                position: absolute;
+                background: #18181b;
+                padding: 8px;
+                border-radius: 10px;
+
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                gap: 6px;
+
+                z-index: 9999;
+                max-width: 220px;
+            }
+
+            .emoji-picker span {
+                font-size: 18px; /* 🔥 ini yang bikin tidak gede */
+                text-align: center;
+                cursor: pointer;
+                padding: 4px;
+                border-radius: 6px;
+                transition: 0.15s;
+            }
+
+            .emoji-picker span:hover {
+                background: rgba(255, 255, 255, 0.1);
+                transform: scale(1.2);
+            }
         </style>
     </head>
 
@@ -424,7 +504,7 @@
 
             <div class="info">
                 Selamat datang di <b>SAMPxNot404</b> — client SAMP yang sudah
-                dimodifikasi agar lebih lancar dan optimal.<br /><br />
+                dimodifikasi agar lebih lancar dan stabil.<br /><br />
                 <span style="color: #22c55e">
                     ⚡ Nggak perlu ragu atau takut — semua file di sini 100%
                     aman, bebas virus, dan langsung siap kamu pakai tanpa ribet!
@@ -469,6 +549,7 @@
             };
 
             let apps = {};
+            let emojiSet = [];
 
             async function loadApps() {
                 try {
@@ -485,6 +566,10 @@
             async function showDownload(type) {
                 document.getElementById("home").style.display = "none";
                 document.getElementById("download").style.display = "block";
+
+                if (!apps || !apps[type]) {
+                    await loadApps();
+                }
 
                 if (!apps || !apps[type]) {
                     document.getElementById("downloadBox").innerHTML = `
@@ -520,16 +605,21 @@
             ${
                 app.password
                     ? `
-            <div class="btn password-btn" onclick="window.open('${app.password}','_blank')">🔐</div>
+            <div class="btn password-btn" onclick="openLink('${app.password}')">🔐</div>
             `
                     : ``
             }
+     <div class="emoji-bar" data-id="${app.name.replace(/\s+/g, "_")}">
+  <div class="emoji-list"></div>
+
+  <button class="emoji-add" onclick="openEmoji(this)">＋</button>
+</div>
         </div>
 
         ${
             app.review
                 ? `
-        <div class="review-btn icon-btn" onclick="window.open('${app.review}','_blank')">
+        <div class="review-btn icon-btn" onclick="openLink('${app.review}')">
             >
         </div>
         `
@@ -553,6 +643,22 @@
                 });
 
                 document.getElementById("downloadBox").innerHTML = html;
+                setTimeout(initRealtime, 100);
+            }
+            async function loadEmoji() {
+                try {
+                    const res = await fetch(
+                        "https://raw.githubusercontent.com/Not404-X/Client-X/refs/heads/main/emoji.json"
+                    );
+
+                    const data = await res.json();
+
+                    emojiSet = data.emojiSet || [];
+
+                    console.log("Emoji loaded:", emojiSet);
+                } catch (e) {
+                    console.log("Emoji gagal load:", e);
+                }
             }
 
             function showHome() {
@@ -578,6 +684,132 @@
                 let percent = Math.floor((loaded / fakeAssets.length) * 100);
                 document.getElementById("loadingProgress").style.width =
                     percent + "%";
+            }
+
+            window.openLink = function (url) {
+                if (!url) return;
+
+                // fallback aman untuk WebView + browser
+                try {
+                    if (window.Android && Android.openUrl) {
+                        Android.openUrl(url);
+                    } else {
+                        location.href = url;
+                    }
+                } catch (e) {
+                    location.href = url;
+                }
+            };
+
+            window.openEmoji = function (btn) {
+                let bar = btn.parentElement;
+
+                // hapus picker lama
+                let old = document.querySelector(".emoji-picker");
+                if (old) old.remove();
+
+                let picker = document.createElement("div");
+                picker.className = "emoji-picker";
+
+                // ======================
+                // isi emoji
+                // ======================
+                emojiSet.forEach(e => {
+                    let el = document.createElement("span");
+                    if (e.url) {
+                        let img = document.createElement("img");
+                        img.src = e.url;
+                        img.style.width = "20px";
+                        img.style.height = "20px";
+
+                        el.appendChild(img);
+                    } else {
+                        el.textContent = e.icon;
+                    }
+                    el.style.cursor = "pointer";
+
+                    el.onclick = () => {
+                        addEmoji(bar, e);
+                        picker.remove();
+                        removeOutsideListener();
+                    };
+
+                    picker.appendChild(el);
+                });
+
+                document.body.appendChild(picker);
+
+                // ======================
+                // POSITION SAFE
+                // ======================
+                let rect = btn.getBoundingClientRect();
+
+                let pickerWidth = 220;
+                let pickerHeight = 180;
+
+                let top = rect.bottom;
+                let left = rect.left;
+
+                if (left + pickerWidth > window.innerWidth) {
+                    left = window.innerWidth - pickerWidth - 10;
+                }
+
+                if (top + pickerHeight > window.innerHeight) {
+                    top = rect.top - pickerHeight;
+                }
+
+                picker.style.top = top + "px";
+                picker.style.left = left + "px";
+
+                // ======================
+                // AUTO CLOSE OUTSIDE CLICK
+                // ======================
+                function handleOutside(e) {
+                    if (!picker.contains(e.target) && e.target !== btn) {
+                        picker.remove();
+                        removeOutsideListener();
+                    }
+                }
+
+                function removeOutsideListener() {
+                    document.removeEventListener("click", handleOutside);
+                }
+
+                setTimeout(() => {
+                    document.addEventListener("click", handleOutside);
+                }, 10);
+            };
+
+            // ======================
+            // ADD EMOJI (FIX SAFE)
+            // ======================
+            function addEmoji(bar, emojiObj) {
+                let id = bar.dataset.id;
+
+                let span = bar.querySelector(`[data-type="${emojiObj.key}"]`);
+
+                if (!span) {
+                    span = document.createElement("span");
+                    span.dataset.type = emojiObj.key;
+                    if (emojiObj.url) {
+                        span.innerHTML = `<img src="${emojiObj.url}" style="width:16px;height:16px;"> <b>0</b>`;
+                    } else {
+                        span.innerHTML = `${emojiObj.icon} <b>0</b>`;
+                    }
+
+                    span.onclick = function () {
+                        react(this, emojiObj.key);
+                    };
+
+                    bar.querySelector(".emoji-list").appendChild(span);
+                }
+
+                react(span, emojiObj.key);
+
+                // optional: auto scroll ke emoji baru
+                setTimeout(() => {
+                    bar.scrollLeft = bar.scrollWidth;
+                }, 50);
             }
 
             function loadFake(src) {
@@ -611,8 +843,100 @@
             }
 
             loadApps();
-
+            loadEmoji();
             startSplash();
+        </script>
+
+        <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+        <script>
+            const firebaseConfig = {
+                apiKey: "AIzaSyAxl9TLl8uNb5c463aTz_JPtOAKJpgJ5kE",
+                authDomain: "database-x-64b77.firebaseapp.com",
+                databaseURL:
+                    "https://database-x-64b77-default-rtdb.asia-southeast1.firebasedatabase.app",
+                projectId: "database-x-64b77",
+                storageBucket: "database-x-64b77.firebasestorage.app",
+                messagingSenderId: "1028544639743",
+                appId: "1:1028544639743:web:6e75bf0d63be58491192ca"
+            };
+
+            // =====================
+            // INIT (COMPAT FIX)
+            // =====================
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.database();
+
+            window.react = function (el, type) {
+                let box = el.closest(".emoji-bar");
+                let id = box.dataset.id;
+
+                let key = "react_" + id + "_" + type;
+                let already = localStorage.getItem(key);
+
+                let r = db.ref("reactions/" + id + "/" + type);
+
+                if (already) {
+                    r.transaction(current =>
+                        Math.max((current || 0) - 1, 0)
+                    ).then(() => {
+                        localStorage.removeItem(key);
+                        el.style.opacity = "1";
+                    });
+                } else {
+                    r.transaction(current => (current || 0) + 1).then(() => {
+                        localStorage.setItem(key, "1");
+                        el.style.opacity = "0.5";
+                    });
+                }
+            };
+
+            // =====================
+            // REALTIME UPDATE FIX
+            // =====================
+            window.initRealtime = function () {
+                document.querySelectorAll(".emoji-bar").forEach(bar => {
+                    let id = bar.dataset.id;
+                    let list = bar.querySelector(".emoji-list");
+
+                    let r = db.ref("reactions/" + id);
+
+                    r.on("value", snap => {
+                        let data = snap.val() || {};
+                        list.innerHTML = "";
+
+                        Object.keys(data).forEach(key => {
+                            let val = data[key];
+                            if (!val || val <= 0) return;
+
+                            let emoji = emojiSet.find(e => e.key === key);
+                            if (!emoji) return;
+
+                            let span = document.createElement("span");
+                            span.dataset.type = key;
+
+                            if (emoji.type === "image") {
+                                span.innerHTML = `
+                        <img src="${emoji.url}" style="width:16px;height:16px;">
+                        <b>${val}</b>
+                    `;
+                            } else {
+                                span.innerHTML = `
+                        ${emoji.icon}
+                        <b>${val}</b>
+                    `;
+                            }
+
+                            span.onclick = function () {
+                                react(this, key);
+                            };
+
+                            list.appendChild(span);
+                        });
+                    });
+                });
+            };
         </script>
     </body>
 </html>
