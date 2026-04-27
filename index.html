@@ -869,28 +869,35 @@
             const db = firebase.database();
 
             window.react = function (el, type) {
-                let box = el.closest(".emoji-bar");
-                let id = box.dataset.id;
+    if (!navigator.onLine) return;
 
-                let key = "react_" + id + "_" + type;
-                let already = localStorage.getItem(key);
+    let box = el.closest(".emoji-bar");
+    let id = box.dataset.id;
 
-                let r = db.ref("reactions/" + id + "/" + type);
+    let lockKey = "react_lock_" + id;
+    let current = localStorage.getItem(lockKey);
 
-                if (already) {
-                    r.transaction(current =>
-                        Math.max((current || 0) - 1, 0)
-                    ).then(() => {
-                        localStorage.removeItem(key);
-                        el.style.opacity = "1";
-                    });
-                } else {
-                    r.transaction(current => (current || 0) + 1).then(() => {
-                        localStorage.setItem(key, "1");
-                        el.style.opacity = "0.5";
-                    });
-                }
-            };
+    let refReact = db.ref("reactions/" + id + "/" + type);
+
+    // kalau sudah pernah react
+    if (current) {
+        if (current === type) {
+            // unreact (toggle off)
+            refReact.transaction(v => Math.max((v || 0) - 1, 0)).then(() => {
+                localStorage.removeItem(lockKey);
+                el.style.opacity = "1";
+            });
+        }
+        // ❌ kalau beda emoji: DIAM SAJA (tidak ada alert)
+        return;
+    }
+
+    // first time react
+    refReact.transaction(v => (v || 0) + 1).then(() => {
+        localStorage.setItem(lockKey, type);
+        el.style.opacity = "0.5";
+    });
+};
 
             // =====================
             // REALTIME UPDATE FIX
