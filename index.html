@@ -609,7 +609,7 @@
             `
                     : ``
             }
-     <div class="emoji-bar" data-id="${app.name.toLowerCase().replace(/[^a-z0-9]/g,'_')}">
+     <div class="emoji-bar" data-id="${app.name.toLowerCase().replace(/[^a-z0-9]/g, "_")}">
   <div class="emoji-list"></div>
 
   <button class="emoji-add" onclick="openEmoji(this)">＋</button>
@@ -869,87 +869,94 @@
             const db = firebase.database();
 
             window.react = function (el, emojiKey) {
-    let box = el.closest(".emoji-bar");
-    let cardId = box.dataset.id;
+                let box = el.closest(".emoji-bar");
+                let cardId = box.dataset.id;
 
-    // pakai ID sederhana (kalau belum login, fallback device)
-    let userId = localStorage.getItem("uid");
-    if (!userId) {
-        userId = "u_" + Math.random().toString(36).substr(2, 9);
-        localStorage.setItem("uid", userId);
-    }
+                // pakai ID sederhana (kalau belum login, fallback device)
+                let userId = localStorage.getItem("uid");
+                if (!userId) {
+                    userId = "u_" + Math.random().toString(36).substr(2, 9);
+                    localStorage.setItem("uid", userId);
+                }
 
-    let ref = db.ref(`reactions/${cardId}`);
+                let ref = db.ref(`reactions/${cardId}`);
 
-    ref.once("value").then(snap => {
-        let data = snap.val() || {};
+                ref.once("value").then(snap => {
+                    let data = snap.val() || {};
 
-        let currentEmoji = null;
+                    let currentEmoji = null;
 
-        // cari emoji yang sudah dipakai user ini
-        Object.keys(data).forEach(e => {
-            if (data[e] && data[e][userId]) {
-                currentEmoji = e;
-            }
-        });
+                    // cari emoji yang sudah dipakai user ini
+                    Object.keys(data).forEach(e => {
+                        if (data[e] && data[e][userId]) {
+                            currentEmoji = e;
+                        }
+                    });
 
-        // kalau klik emoji yang sama → REMOVE (toggle off)
-        if (currentEmoji === emojiKey) {
-            db.ref(`reactions/${cardId}/${emojiKey}/${userId}`).remove();
-            return;
-        }
+                    // kalau klik emoji yang sama → REMOVE (toggle off)
+                    if (currentEmoji === emojiKey) {
+                        db.ref(
+                            `reactions/${cardId}/${emojiKey}/${userId}`
+                        ).remove();
+                        return;
+                    }
 
-        // kalau sudah ada reaction → pindahkan (Discord behavior)
-        if (currentEmoji) {
-            db.ref(`reactions/${cardId}/${currentEmoji}/${userId}`).remove();
-        }
+                    // kalau sudah ada reaction → pindahkan (Discord behavior)
+                    if (currentEmoji) {
+                        db.ref(
+                            `reactions/${cardId}/${currentEmoji}/${userId}`
+                        ).remove();
+                    }
 
-        // set reaction baru
-        db.ref(`reactions/${cardId}/${emojiKey}/${userId}`).set(true);
-    });
-};
+                    // set reaction baru
+                    db.ref(`reactions/${cardId}/${emojiKey}/${userId}`).set(
+                        true
+                    );
+                });
+            };
 
             // =====================
             // REALTIME UPDATE FIX
             // =====================
             window.initRealtime = function () {
-    document.querySelectorAll(".emoji-bar").forEach(bar => {
-        let id = bar.dataset.id;
-        let list = bar.querySelector(".emoji-list");
+                document.querySelectorAll(".emoji-bar").forEach(bar => {
+                    let id = bar.dataset.id;
+                    let list = bar.querySelector(".emoji-list");
 
-        db.ref(`reactions/${id}`).on("value", snap => {
-            let data = snap.val() || {};
-            list.innerHTML = "";
+                    db.ref(`reactions/${id}`).on("value", snap => {
+                        let data = snap.val() || {};
+                        list.innerHTML = "";
 
-            Object.keys(data).forEach(key => {
-                let users = data[key] || {};
-                let count = Object.keys(users).length;
+                        Object.keys(data).forEach(key => {
+                            let users = data[key] || {};
+                            let count = Object.keys(users).length;
 
-                if (count <= 0) return;
+                            if (count <= 0) return;
 
-                let emoji = emojiSet.find(e => e.key === key);
-                if (!emoji) return;
+                            let emoji = emojiSet.find(e => e.key === key);
+                            if (!emoji) return;
 
-                let span = document.createElement("span");
-                span.dataset.type = key;
+                            let span = document.createElement("span");
+                            span.dataset.type = key;
 
-                span.innerHTML = `
-                    ${emoji.url 
-                        ? `<img src="${emoji.url}" style="width:16px;height:16px;">`
-                        : emoji.icon
+                            span.innerHTML = `
+                    ${
+                        emoji.url
+                            ? `<img src="${emoji.url}" style="width:16px;height:16px;">`
+                            : emoji.icon
                     }
                     <b>${count}</b>
                 `;
 
-                span.onclick = function () {
-                    react(this, key);
-                };
+                            span.onclick = function () {
+                                react(this, key);
+                            };
 
-                list.appendChild(span);
-            });
-        });
-    });
-};
+                            list.appendChild(span);
+                        });
+                    });
+                });
+            };
         </script>
     </body>
 </html>
