@@ -460,6 +460,288 @@
                 background: rgba(255, 255, 255, 0.1);
                 transform: scale(1.2);
             }
+            /* =========================
+   ICON BUTTON (GLASS MODERN)
+========================= */
+            .icon-btn {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                cursor: pointer;
+
+                /* glass effect */
+                background: rgba(255, 255, 255, 0.08);
+                backdrop-filter: blur(8px);
+
+                border: 1px solid rgba(255, 255, 255, 0.12);
+
+                box-shadow:
+                    0 4px 12px rgba(0, 0, 0, 0.35),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+                transition: all 0.2s ease;
+            }
+
+            /* hover smooth */
+            .icon-btn:hover {
+                transform: translateY(-2px) scale(1.05);
+                background: rgba(255, 255, 255, 0.12);
+            }
+
+            /* klik feel */
+            .icon-btn:active {
+                transform: scale(0.95);
+            }
+
+            /* =========================
+   COMMENT MODAL (MODERN SHEET)
+========================= */
+            .comment-modal {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 65%;
+
+                background: rgba(20, 20, 30, 0.85);
+                backdrop-filter: blur(14px);
+
+                border-top-left-radius: 18px;
+                border-top-right-radius: 18px;
+
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+                z-index: 9999;
+
+                display: flex;
+                flex-direction: column;
+
+                box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6);
+            }
+
+            /* =========================
+   PANEL
+========================= */
+            .comment-panel {
+                padding: 12px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* =========================
+   HEADER
+========================= */
+            .comment-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                color: #fff;
+                font-weight: 600;
+
+                margin-bottom: 10px;
+            }
+
+            /* tombol close modern */
+            .comment-header button {
+                background: rgba(255, 255, 255, 0.08);
+                border: none;
+                color: #fff;
+
+                width: 28px;
+                height: 28px;
+
+                border-radius: 50%;
+                cursor: pointer;
+            }
+
+            /* =========================
+   LIST
+========================= */
+            .comment-list-box {
+                flex: 1;
+                overflow-y: auto;
+
+                padding: 6px;
+
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            /* tiap komentar */
+            .comment-list-box div {
+                background: rgba(255, 255, 255, 0.06);
+                border-radius: 10px;
+
+                padding: 8px;
+
+                font-size: 13px;
+
+                border: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            /* =========================
+   INPUT
+========================= */
+            .comment-input-box{
+position:sticky;
+bottom:0;
+display:flex;
+align-items:center;
+gap:10px;
+padding:10px 12px;
+z-index:50;
+}
+
+.comment-input-box input{
+flex:1;
+height:36px;
+padding:0 12px;
+border:none;
+outline:none;
+border-radius:18px;
+background:#272727;
+color:#fff;
+font-size:13px;
+}
+
+.comment-input-box button{
+height:36px;
+padding:0 12px;
+border:none;
+border-radius:18px;
+background:#272727;
+color:#facc15;
+font-size:12px;
+font-weight:600;
+white-space:nowrap;
+cursor:pointer;
+}
+
+            .comment-input-box button:hover {
+                transform: scale(1.05);
+            }
+
+            /* khusus tombol komentar */
+            .comment-btn {
+                background: none !important;
+                border: none;
+                box-shadow: none;
+
+                width: auto;
+                height: auto;
+
+                padding: 0;
+                border-radius: 0;
+
+                font-size: 16px;
+            }
+
+            /* hover biar tetap ada efek */
+            .comment-btn:hover {
+                transform: scale(1.1);
+            }
+
+            /* =========================
+   UTIL
+========================= */
+            .hidden {
+                display: none;
+            }
+            .delete-menu {
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.35);
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                z-index: 99999;
+            }
+
+            .delete-box {
+                width: 100%;
+                background: #1a1a1a;
+                border-top-left-radius: 16px;
+                border-top-right-radius: 16px;
+                padding: 12px;
+
+                animation: slideUp 0.2s ease;
+            }
+
+            @keyframes slideUp {
+                from {
+                    transform: translateY(100%);
+                }
+                to {
+                    transform: translateY(0);
+                }
+            }
+
+            .delete-btn {
+                width: 100%;
+                padding: 10px;
+                background: red;
+                color: white;
+                border: none;
+                border-radius: 10px;
+                margin-bottom: 6px;
+            }
+
+            .cancel-btn {
+                width: 100%;
+                padding: 10px;
+                background: rgba(255, 255, 255, 0.08);
+                color: white;
+                border: none;
+                border-radius: 10px;
+            }
+            /* ====== TAMBAHAN UNTUK COMMENT FLOAT ====== */
+
+            .card {
+                position: relative;
+                overflow: visible; /* biar tombol bisa keluar dikit */
+            }
+
+            .icon
+/* tombol kanan (💬 di atas, > di bawah) */
+.right-btns {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                align-items: center;
+            }
+
+            /* biar spacing kiri-kanan seimbang */
+            .btn-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            #usernameInput {
+                width: 90px; /* kecil & pas */
+                padding: 6px 8px;
+                border-radius: 8px;
+                border: none;
+                outline: none;
+
+                background: rgba(255, 255, 255, 0.08);
+                color: white;
+
+                font-size: 12px;
+            }
+
+            .comment-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
         </style>
     </head>
 
@@ -542,19 +824,47 @@
             <div id="downloadBox"></div>
         </div>
 
+        <div id="commentModal" class="comment-modal hidden">
+            <div class="comment-panel">
+                <div class="comment-header">
+                    <span>Komentar</span>
+
+                    <div style="display: flex; align-items: center; gap: 6px">
+                        <input id="usernameInput" placeholder="Nama..." />
+                        <button onclick="closeComments()">✕</button>
+                    </div>
+                </div>
+
+                <div id="commentList" class="comment-list-box"></div>
+
+                <div class="comment-input-box" style="flex-direction: column">
+                    <div style="display: flex; gap: 6px">
+                        <input
+                            id="commentInput"
+                            placeholder="Tulis komentar..."
+                        />
+                        <button onclick="sendModalComment()">Kirim</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script>
             window.onerror = function (msg, url, line) {
                 console.log("JS ERROR:", msg, line);
                 return false;
             };
-
+            let replyTo = null;
+            let deleteTarget = null;
+            let pressTimer = null;
+            let currentView = null;
             let apps = {};
             let emojiSet = [];
 
             async function loadApps() {
                 try {
                     const res = await fetch(
-                        "https://raw.githubusercontent.com/Not404-X/Client-X/main/apps.json"
+                        "https://raw.githubusercontent.com/Not404-X/Client-X/refs/heads/main/apps.json"
                     );
                     apps = await res.json();
                     console.log("Apps loaded:", apps);
@@ -585,7 +895,7 @@
 
                 apps[type].forEach(app => {
                     html += `
-<div class="box" data-name="${app.name.toLowerCase()}">
+<div class="box card" data-name="${app.name.toLowerCase()}">
     <div class="title">
     ${app.name}
     ${
@@ -599,6 +909,7 @@
     <div class="desc">${app.desc}</div>
 
     <div class="btn-row">
+    
         <div class="left-btns">
             ${app.file ? `<a href="${app.file}" class="btn download-btn">⬇</a>` : ``}
 
@@ -615,6 +926,12 @@
   <button class="emoji-add" onclick="openEmoji(this)">＋</button>
 </div>
         </div>
+         <!-- 🔥 KANAN -->
+    <div class="right-btns">
+
+        <div class="icon-btn comment-btn" onclick="openComments('${app.name.toLowerCase().replace(/[^a-z0-9]/g, "_")}')">  
+            💬  
+        </div>  
 
         ${
             app.review
@@ -625,7 +942,8 @@
         `
                 : ``
         }
-    </div>
+</div>
+</div>
 </div>
 `;
                 });
@@ -851,6 +1169,36 @@
         <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 
         <script>
+            const badWords = [
+                "anjing",
+                "anj",
+                "babi",
+                "kontol",
+                "kntl",
+                "memek",
+                "mmk",
+                "bangsat",
+                "bngst",
+                "tolol",
+                "tll",
+                "goblok",
+                "gblk",
+                "ngentot",
+                "ngntt",
+                "asu"
+            ];
+
+            function filterBadWords(text) {
+                let result = text;
+
+                badWords.forEach(word => {
+                    let regex = new RegExp(word, "gi");
+                    result = result.replace(regex, "*".repeat(word.length));
+                });
+
+                return result;
+            }
+
             const firebaseConfig = {
                 apiKey: "AIzaSyAxl9TLl8uNb5c463aTz_JPtOAKJpgJ5kE",
                 authDomain: "database-x-64b77.firebaseapp.com",
@@ -867,6 +1215,7 @@
             // =====================
             firebase.initializeApp(firebaseConfig);
             const db = firebase.database();
+            
 
             window.react = function (el, emojiKey) {
                 let box = el.closest(".emoji-bar");
@@ -914,49 +1263,417 @@
                     );
                 });
             };
+            let currentCardId = null;
 
-            // =====================
-            // REALTIME UPDATE FIX
-            // =====================
-            window.initRealtime = function () {
-                document.querySelectorAll(".emoji-bar").forEach(bar => {
-                    let id = bar.dataset.id;
-                    let list = bar.querySelector(".emoji-list");
+            window.openComments = function (id) {
+                currentCardId = id;
 
-                    db.ref(`reactions/${id}`).on("value", snap => {
-                        let data = snap.val() || {};
-                        list.innerHTML = "";
+                document
+                    .getElementById("commentModal")
+                    .classList.remove("hidden");
 
-                        Object.keys(data).forEach(key => {
-                            let users = data[key] || {};
-                            let count = Object.keys(users).length;
+                // 🔥 LOAD NAMA DI SINI (bukan cuma DOMContentLoaded)
+                let savedName = localStorage.getItem("username");
+                let input = document.getElementById("usernameInput");
 
-                            if (count <= 0) return;
+                if (savedName && input) {
+                    input.value = savedName;
+                }
 
-                            let emoji = emojiSet.find(e => e.key === key);
-                            if (!emoji) return;
-
-                            let span = document.createElement("span");
-                            span.dataset.type = key;
-
-                            span.innerHTML = `
-                    ${
-                        emoji.url
-                            ? `<img src="${emoji.url}" style="width:16px;height:16px;">`
-                            : emoji.icon
-                    }
-                    <b>${count}</b>
-                `;
-
-                            span.onclick = function () {
-                                react(this, key);
-                            };
-
-                            list.appendChild(span);
-                        });
-                    });
-                });
+                loadComments(id);
             };
+
+            window.closeComments = function () {
+                document.getElementById("commentModal").classList.add("hidden");
+            };
+
+            
+
+// =======================
+// LOAD COMMENTS
+// =======================
+function loadComments(cardId){
+    const list = document.getElementById("commentList");
+    const myId = localStorage.getItem("uid");
+
+    db.ref(`comments/${cardId}`).off();
+
+    db.ref(`comments/${cardId}`).on("value",(snap)=>{
+        const data = snap.val() || {};
+        list.innerHTML="";
+
+        const comments = [];
+        const replies = {};
+
+        // pisah parent & reply (lebih hemat)
+        Object.entries(data).forEach(([id,c])=>{
+            if(c.parentId){
+                if(!replies[c.parentId]) replies[c.parentId]=[];
+                replies[c.parentId].push({id,...c});
+            }else{
+                comments.push({id,...c});
+            }
+        });
+        
+
+        comments.forEach(c=>{    
+          
+        if (currentView && c.id !== currentView) {
+    return;
+}
+
+            const div=document.createElement("div");
+
+            div.style.cssText=`
+                padding:10px;
+                border-radius:10px;
+                background:rgba(255,255,255,.06);
+                font-size:13px;
+                color:#fff;
+                word-break:break-word;
+                display:flex;
+                flex-direction:column;
+                gap:4px;
+            `;
+
+            div.innerHTML=`
+<span style="color:#aaa;font-size:12px;font-weight:500;">
+@${c.name}
+</span>
+
+<span>${c.text}</span>
+
+<button class="reply-btn"
+style="
+background:none;
+border:none;
+color:#00d9ff;
+font-size:11px;
+cursor:pointer;
+text-align:left;
+padding:0;
+">
+Balas
+</button>
+`;
+
+// tombol balas fix
+const replyBtn = div.querySelector(".reply-btn");
+
+replyBtn.onclick=(e)=>{
+e.stopPropagation();
+setReply(c.id,c.name);
+};
+
+replyBtn.ontouchstart=(e)=>{
+e.stopPropagation();
+};
+
+
+// render replies
+const commentList = document.getElementById("commentList");
+
+const childReplies = replies[c.id] || [];
+
+if (childReplies.length) {
+
+let opened = false;
+
+const toggle = document.createElement("span");
+toggle.innerHTML = `Lihat balasan (${childReplies.length})`;
+
+toggle.style.cssText = `
+display:block;
+margin-top:6px;
+color:#00d9ff;
+font-size:11px;
+cursor:pointer;
+`;
+
+const replyWrap = document.createElement("div");
+replyWrap.style.cssText = `
+display:none;
+margin-top:10px;
+padding-left:10px;
+border-left:2px solid rgba(255,255,255,.1);
+`;
+
+childReplies.forEach(r => {
+
+const rep = document.createElement("div");
+
+rep.style.cssText = `
+margin-top:10px;
+padding:8px;
+border-radius:8px;
+background:rgba(255,255,255,.04);
+display:flex;
+flex-direction:column;
+gap:4px;
+`;
+
+rep.innerHTML = `
+<span style="color:#aaa;font-size:12px;font-weight:500;">
+@${r.name}
+</span>
+
+<span style="color:#ddd;font-size:13px;">
+${r.text}
+</span>
+
+<button class="reply-child-btn"
+style="
+background:none;
+border:none;
+color:#00d9ff;
+font-size:11px;
+cursor:pointer;
+padding:0;
+text-align:left;
+width:max-content;
+">
+Balas
+</button>
+`;
+
+rep.querySelector(".reply-child-btn").onclick = (e) => {
+    e.stopPropagation();
+    setReply(c.id, r.name); // 🔥 balik ke parent utama
+};
+
+replyWrap.appendChild(rep);
+
+});
+
+toggle.onclick = function (e) {
+    e.stopPropagation();
+    
+
+    if(currentView === c.id){
+        currentView = null; // balik ke semua
+    }else{
+        currentView = c.id; // masuk reply mode
+    }
+
+    loadComments(currentCardId); // 🔥 render ulang sesuai state
+};
+
+if(currentView === c.id){
+    replyWrap.style.display = "block";
+    toggle.innerHTML = "← Kembali";
+}else{
+    replyWrap.style.display = "none";
+    toggle.innerHTML = `Lihat balasan (${childReplies.length})`;
+}
+
+div.appendChild(toggle);
+div.appendChild(replyWrap);
+
+}
+
+
+            // ==================
+            // LONG PRESS DELETE
+            // ==================
+            let pressTimer;
+
+            const startPress=(e)=>{
+
+if(
+e.target.classList.contains("reply-btn") ||
+e.target.innerText.includes("balasan")
+){
+return;
+}
+
+pressTimer=setTimeout(()=>{
+handleDelete(c,cardId,c.id,myId);
+},600);
+
+};
+
+            const cancelPress=()=>{
+                clearTimeout(pressTimer);
+            };
+
+            [
+                "touchstart",
+                "mousedown"
+            ].forEach(ev=>{
+                div.addEventListener("touchstart", startPress);
+            });
+
+            [
+                "touchend",
+                "touchmove",
+                "mouseup",
+                "mouseleave"
+            ].forEach(ev=>{
+                div.addEventListener(ev,cancelPress);
+            });
+
+            list.appendChild(div);
+        });
+
+    });
+}
+
+
+// =======================
+// DELETE
+// =======================
+function handleDelete(comment,cardId,commentId,myId){
+    if(comment.userId!==myId) return;
+
+    deleteTarget={cardId,commentId};
+
+    document.getElementById("deleteMenu").style.display="flex";
+}
+
+function confirmDelete(){
+    if(!deleteTarget) return;
+
+    db.ref(
+      `comments/${deleteTarget.cardId}/${deleteTarget.commentId}`
+    ).remove();
+
+    closeDeleteMenu();
+}
+
+function closeDeleteMenu(){
+    deleteTarget=null;
+    document.getElementById("deleteMenu").style.display="none";
+}
+
+
+// =======================
+// SEND COMMENT
+// =======================
+window.sendModalComment=function(){
+
+    const input=document.getElementById("commentInput");
+    const nameInput=document.getElementById("usernameInput");
+
+    const text=input.value.trim();
+    const userName=nameInput.value.trim();
+
+    if(!userName){
+        nameInput.style.border="1px solid red";
+        nameInput.placeholder="Nama wajib diisi!";
+        nameInput.focus();
+        return;
+    }
+
+    if(!text || !currentCardId) return;
+
+    let userId=localStorage.getItem("uid");
+
+    if(!userId){
+        userId="u_"+Math.random().toString(36).slice(2,9);
+        localStorage.setItem("uid",userId);
+    }
+
+    localStorage.setItem("username",userName);
+
+    db.ref(`comments/${currentCardId}`).push({
+        text:filterBadWords(text),
+        userId,
+        name:filterBadWords(userName),
+        parentId:replyTo || null,
+        time:Date.now()
+    });
+
+    // 🔥 RESET UI (INI FIX UTAMA)
+    resetCommentView();
+
+    input.value="";
+    replyTo=null;
+    input.placeholder="Tulis komentar...";
+    
+    setTimeout(()=>{
+    const list = document.getElementById("commentList");
+    list.scrollTop = list.scrollHeight;
+},100);
+};
+
+
+// =======================
+// REPLY
+// =======================
+window.setReply=function(id,name){
+    replyTo=id;
+
+    const input=document.getElementById("commentInput");
+    input.placeholder=`Balas ke @${name}`;
+    input.focus();
+};
+
+function resetCommentView(){
+    const commentList = document.getElementById("commentList");
+
+    Array.from(commentList.children).forEach(el => {
+        el.style.display = "";
+    });
+}
+
+
+// =======================
+// REALTIME REACTION
+// =======================
+window.initRealtime=function(){
+
+ document.querySelectorAll(".emoji-bar").forEach(bar=>{
+
+   const id=bar.dataset.id;
+   const list=bar.querySelector(".emoji-list");
+
+   db.ref(`reactions/${id}`).on("value",(snap)=>{
+
+      const data=snap.val() || {};
+      list.innerHTML="";
+
+      Object.keys(data).forEach(type=>{
+
+         const count=Object.keys(data[type]||{}).length;
+         if(!count) return;
+
+         const emoji=emojiSet.find(e=>e.key===type);
+         if(!emoji) return;
+
+         const span=document.createElement("span");
+
+         span.dataset.type=type;
+
+         span.innerHTML=`
+            ${
+             emoji.url
+             ? `<img src="${emoji.url}" style="width:16px;height:16px">`
+             : emoji.icon
+            }
+            <b>${count}</b>
+         `;
+
+         span.onclick=()=>react(span,type);
+
+         list.appendChild(span);
+
+      });
+
+   });
+
+ });
+
+};
         </script>
+        <div id="deleteMenu" class="delete-menu" style="display: none">
+            <div class="delete-box">
+                <button onclick="confirmDelete()" class="delete-btn">
+                    Hapus
+                </button>
+                <button onclick="closeDeleteMenu()" class="cancel-btn">
+                    Batal
+                </button>
+            </div>
+        </div>
     </body>
 </html>
