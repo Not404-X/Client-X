@@ -1365,7 +1365,7 @@ Balas
 </button>
 
 ${myId === "u_cmvewop" ? `
-<button onclick="pinComment('${c.id}', ${c.pinned})"
+<button onclick="pinComment('${c.id}', ${c.pinned || false})"
 style="background:none;border:none;color:#facc15;font-size:11px;">
 📌 Pin
 </button>
