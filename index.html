@@ -1296,6 +1296,17 @@ cursor:pointer;
 function loadComments(cardId){
     const list = document.getElementById("commentList");
     const myId = localStorage.getItem("uid");
+    const inputBox = document.querySelector(".comment-input-box");
+
+// 🔥 kondisi:
+// - kalau lagi lihat balasan DAN belum klik tombol balas → hide
+// - kalau lagi reply → tetap tampil
+
+if(currentView && !replyTo){
+    inputBox.style.display = "none";
+}else{
+    inputBox.style.display = "flex";
+}
 
     db.ref(`comments/${cardId}`).off();
 
@@ -1654,7 +1665,7 @@ window.sendModalComment=function(){
     input.value="";
     replyTo=null;
     input.placeholder="Tulis komentar...";
-    
+    loadComments(currentCardId); // 🔥 refresh ulang UI
     setTimeout(()=>{
     const list = document.getElementById("commentList");
     list.scrollTop = list.scrollHeight;
@@ -1669,6 +1680,10 @@ window.setReply=function(id,name){
     replyTo=id;
 
     const input=document.getElementById("commentInput");
+    const inputBox = document.querySelector(".comment-input-box");
+
+    inputBox.style.display = "flex"; // 🔥 paksa muncul
+
     input.placeholder=`Balas ke @${name}`;
     input.focus();
 };
