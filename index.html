@@ -1489,7 +1489,7 @@ childReplies.forEach(r => {
     let isLongPress = false;
 
     const startPressReply = (e) => {
-
+e.stopPropagation();
         if (e.target.classList.contains("reply-child-btn")) return;
 
         isLongPress = false;
@@ -1499,7 +1499,7 @@ childReplies.forEach(r => {
         pressTimerReply = setTimeout(() => {
             isLongPress = true;
 
-            handleDelete(r, cardId, r.id, myId);
+            handleDelete(     {         id: r.id,         parentId: r.parentId,         userId: r.userId,         text: r.text     },     cardId,     r.id,     myId );
 
         }, 600);
     };
@@ -1508,9 +1508,12 @@ childReplies.forEach(r => {
         clearTimeout(pressTimerReply);
     };
 
-    ["touchstart", "mousedown"].forEach(ev => {
-        rep.addEventListener(ev, startPressReply);
+["touchstart", "mousedown"].forEach(ev => {
+    rep.addEventListener(ev, e => {
+        e.stopPropagation(); // 🔥 cegah naik ke parent
+        startPressReply(e);
     });
+});
 
     ["touchend", "touchmove", "mouseup", "mouseleave"].forEach(ev => {
         rep.addEventListener(ev, cancelPressReply);
