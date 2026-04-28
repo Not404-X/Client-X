@@ -827,7 +827,11 @@ cursor:pointer;
         <div id="commentModal" class="comment-modal hidden">
             <div class="comment-panel">
                 <div class="comment-header">
-                    <span>Komentar</span>
+    <span id="commentTitle">Komentar</span>
+
+    <button id="backReplyBtn" onclick="exitReplyView()" style="display:none;">
+        ← 
+    </button>
 
                     <div style="display: flex; align-items: center; gap: 6px">
                         <input id="usernameInput" placeholder="Nama..." />
@@ -1316,6 +1320,14 @@ if(currentView && !replyTo){
 
         const comments = [];
         const replies = {};
+        const backBtn = document.getElementById("backReplyBtn");
+
+// tampilkan tombol kalau lagi di mode reply
+if (currentView) {
+    backBtn.style.display = "inline-block";
+} else {
+    backBtn.style.display = "none";
+}
 
         // pisah parent & reply (lebih hemat)
         Object.entries(data).forEach(([id,c])=>{
@@ -1509,22 +1521,19 @@ childReplies.forEach(r => {
 
 toggle.onclick = function (e) {
     e.stopPropagation();
-    
 
-    if(currentView === c.id){
-        currentView = null; // balik ke semua
-    }else{
-        currentView = c.id; // masuk reply mode
-    }
-
-    loadComments(currentCardId); // 🔥 render ulang sesuai state
+    currentView = c.id;
+    loadComments(currentCardId);
 };
 
-if(currentView === c.id){
+if (currentView === c.id) {
+    // 🔥 mode lihat balasan
     replyWrap.style.display = "block";
-    toggle.innerHTML = "← Kembali";
-}else{
+    toggle.style.display = "none"; // sembunyikan tombol
+} else {
+    // 🔥 mode normal
     replyWrap.style.display = "none";
+    toggle.style.display = "block";
     toggle.innerHTML = `Lihat balasan (${childReplies.length})`;
 }
 
@@ -1753,6 +1762,15 @@ window.initRealtime=function(){
     db.ref(`comments/${currentCardId}/${commentId}`).update({
         pinned: !isPinned
     });
+};
+
+window.exitReplyView = function () {
+    currentView = null;
+    replyTo = null;
+
+    document.getElementById("backReplyBtn").style.display = "none";
+
+    loadComments(currentCardId);
 };
 </script>
         
