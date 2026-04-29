@@ -742,6 +742,12 @@ cursor:pointer;
                 justify-content: space-between;
                 align-items: center;
             }
+            .comment-count{
+    font-size:9px;       /* 🔥 kecil banget */
+    color:#aaa;
+    margin-top:2px;
+    pointer-events:none; /* biar klik tetap ke tombol */
+}
         </style>
     </head>
 
@@ -933,9 +939,16 @@ cursor:pointer;
          <!-- 🔥 KANAN -->
     <div class="right-btns">
 
-        <div class="icon-btn comment-btn" onclick="openComments('${app.name.toLowerCase().replace(/[^a-z0-9]/g, "_")}')">  
-            💬  
-        </div>  
+<div class="icon-btn comment-btn" 
+     data-id="${app.name.toLowerCase().replace(/[^a-z0-9]/g, "_")}"
+     onclick="openComments(this.dataset.id)">  
+
+    <div class="comment-wrap">
+        <span>💬</span>
+        <span class="comment-count">0</span>
+    </div>
+
+</div>
 
         ${
             app.review
@@ -1712,48 +1725,69 @@ function resetCommentView(){
 // =======================
 // REALTIME REACTION
 // =======================
-window.initRealtime=function(){
+window.initRealtime = function(){
 
- document.querySelectorAll(".emoji-bar").forEach(bar=>{
+    // =======================
+    // REALTIME REACTIONS
+    // =======================
+    document.querySelectorAll(".emoji-bar").forEach(bar=>{
 
-   const id=bar.dataset.id;
-   const list=bar.querySelector(".emoji-list");
+        const id = bar.dataset.id;
+        const list = bar.querySelector(".emoji-list");
 
-   db.ref(`reactions/${id}`).on("value",(snap)=>{
+        db.ref(`reactions/${id}`).on("value",(snap)=>{
 
-      const data=snap.val() || {};
-      list.innerHTML="";
+            const data = snap.val() || {};
+            list.innerHTML="";
 
-      Object.keys(data).forEach(type=>{
+            Object.keys(data).forEach(type=>{
 
-         const count=Object.keys(data[type]||{}).length;
-         if(!count) return;
+                const count = Object.keys(data[type]||{}).length;
+                if(!count) return;
 
-         const emoji=emojiSet.find(e=>e.key===type);
-         if(!emoji) return;
+                const emoji = emojiSet.find(e=>e.key===type);
+                if(!emoji) return;
 
-         const span=document.createElement("span");
+                const span = document.createElement("span");
+                span.dataset.type = type;
 
-         span.dataset.type=type;
+                span.innerHTML = `
+                    ${
+                        emoji.url
+                        ? `<img src="${emoji.url}" style="width:16px;height:16px">`
+                        : emoji.icon
+                    }
+                    <b>${count}</b>
+                `;
 
-         span.innerHTML=`
-            ${
-             emoji.url
-             ? `<img src="${emoji.url}" style="width:16px;height:16px">`
-             : emoji.icon
-            }
-            <b>${count}</b>
-         `;
+                span.onclick = ()=>react(span,type);
 
-         span.onclick=()=>react(span,type);
+                list.appendChild(span);
+            });
 
-         list.appendChild(span);
+        });
 
-      });
+    });
 
-   });
 
- });
+    // =======================
+    // 🔥 REALTIME COMMENT COUNT
+    // =======================
+    document.querySelectorAll(".comment-btn").forEach(btn => {
+
+        const id = btn.dataset.id;
+        const countEl = btn.querySelector(".comment-count");
+
+        db.ref(`comments/${id}`).on("value",(snap)=>{
+
+            const data = snap.val() || {};
+            const total = Object.keys(data).length;
+
+            countEl.textContent = total;
+
+        });
+
+    });
 
 };
         </script>
