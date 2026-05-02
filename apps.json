@@ -1,11 +1,12 @@
 {
     "x64": [
-        {
+              {
             "name": "Alyn V 20.4 (No Ads)",
             "desc": "Add grass pc, Remove ads, Hud stayle, Support modpack, monetloader, aml, & cleo, Fix crash, add performance code for rendering",
             "file": "https://sfl.gl/QrJU8vw",
             "review": "https://youtu.be/VhhWBPJkgkY?si=ZNXbuUaoh5McvCxy",
-            "password": "hhttps://sfl.gl/XHoIOD5"
+            "password": "hhttps://sfl.gl/XHoIOD5",
+            "status": "new"
         },
         {
             "name": "Eagle V 2.0.12-RC (No Ads)",
