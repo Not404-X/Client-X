@@ -1,5 +1,13 @@
 {
     "x64": [
+              {
+            "name": "Alyn V20.5(NoAds)",
+            "desc": "Remove ads, Fix fps drop, Support modpack, monetloader, aml, & cleo, Fix crash, add performance code for rendering",
+            "file": "https://sfl.gl/afHPQdB",
+            "review": "https://youtu.be/b1_iBcJgtnM?si=ND6sLGKFGqYHoDSq",
+            "password": "https://sfl.gl/X9lTXvmT",
+            "status": "new"
+        },
         {
             "name": "Alyn V20.4(NoAds)",
             "desc": "Fix Stuck LoadingAd, Remove ads, Hud stayle, Support modpack, monetloader, aml, & cleo, Fix crash, add performance code for rendering",
