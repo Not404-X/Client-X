@@ -326,10 +326,148 @@ body{
 .pw-cancel{background:rgba(255,255,255,.08);color:#fff}
 .pw-submit{background:linear-gradient(90deg,#5B6DBF,#8FA8FF);color:#fff}
 
+/* ============ FAB ADMIN ============ */
+.fab{
+  position:fixed;bottom:24px;right:20px;
+  width:52px;height:52px;border-radius:50%;
+  background:linear-gradient(135deg,#5B6DBF,#8FA8FF);
+  border:1px solid #AEBFFF;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;cursor:pointer;z-index:9998;
+  box-shadow:0 6px 20px rgba(143,168,255,.5);
+  transition:.15s;
+}
+.fab:active{transform:scale(.9)}
+
+/* ============ ADMIN PANEL ============ */
+.admin-overlay{
+  position:fixed;inset:0;z-index:99998;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(8px);
+  display:flex;justify-content:center;
+}
+.admin-panel{
+  width:100%;max-width:440px;height:100%;
+  background:linear-gradient(160deg,var(--bg1),var(--bg2) 55%,var(--bg3));
+  display:flex;flex-direction:column;
+  animation:slideUp .25s ease;
+  overflow:hidden;
+}
+.admin-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 18px;border-bottom:1px solid var(--border);
+}
+.admin-header h2{margin:0;font-size:15px}
+.admin-header button{
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,.08);border:none;color:#fff;
+  font-size:14px;cursor:pointer;
+}
+.admin-body{flex:1;overflow-y:auto;padding:16px 18px 30px}
+
+/* token box */
+.token-box{
+  background:rgba(250,204,21,.06);
+  border:1px solid rgba(250,204,21,.3);
+  border-radius:14px;padding:14px;margin-bottom:16px;
+}
+.token-box p{margin:0 0 10px;font-size:11.5px;color:#fde68a;line-height:1.6}
+.token-box input{
+  width:100%;height:38px;padding:0 12px;
+  border-radius:10px;border:1px solid var(--border);
+  background:rgba(255,255,255,.07);color:#fff;
+  font-size:11px;outline:none;font-family:monospace;
+}
+.token-box button{
+  margin-top:10px;width:100%;height:38px;
+  border:none;border-radius:19px;
+  background:linear-gradient(90deg,#5B6DBF,#8FA8FF);
+  color:#fff;font-size:12px;font-weight:600;cursor:pointer;
+  font-family:'Poppins',sans-serif;
+}
+.token-ok{
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(34,197,94,.08);
+  border:1px solid rgba(34,197,94,.3);
+  border-radius:14px;padding:12px 14px;margin-bottom:16px;
+  font-size:11.5px;color:var(--green);
+}
+.token-ok button{
+  background:none;border:none;color:#ef4444;
+  font-size:11px;cursor:pointer;font-family:'Poppins',sans-serif;
+}
+
+/* tabs */
+.admin-tabs{
+  display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;
+}
+.tab-btn{
+  padding:8px 14px;border-radius:20px;
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--border);
+  color:var(--muted);font-size:11px;font-weight:600;
+  cursor:pointer;font-family:'Poppins',sans-serif;
+}
+.tab-btn.active{
+  background:rgba(143,168,255,.18);
+  border-color:rgba(143,168,255,.5);
+  color:#fff;
+}
+
+/* form tambah */
+.admin-form{
+  background:linear-gradient(180deg,var(--card1),var(--card2));
+  border:1px solid var(--border);
+  border-radius:16px;padding:14px;margin-bottom:18px;
+}
+.admin-form h4{margin:0 0 10px;font-size:12px;color:var(--accent)}
+.admin-form input,.admin-form select{
+  width:100%;height:38px;padding:0 12px;margin-bottom:8px;
+  border-radius:10px;border:1px solid var(--border);
+  background:rgba(255,255,255,.06);color:#fff;
+  font-size:12px;outline:none;font-family:'Poppins',sans-serif;
+}
+.admin-form textarea{
+  width:100%;padding:10px 12px;margin-bottom:8px;
+  border-radius:10px;border:1px solid var(--border);
+  background:rgba(255,255,255,.06);color:#fff;
+  font-size:12px;outline:none;resize:none;
+  font-family:'Poppins',sans-serif;min-height:54px;
+}
+.admin-form button{
+  width:100%;height:40px;margin-top:4px;
+  border:none;border-radius:20px;
+  background:linear-gradient(90deg,#5B6DBF,#8FA8FF);
+  color:#fff;font-size:12.5px;font-weight:700;cursor:pointer;
+  font-family:'Poppins',sans-serif;
+}
+
+/* list item admin */
+.admin-item{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border);
+  border-radius:12px;padding:10px 12px;margin-bottom:8px;
+}
+.admin-item .info{flex:1;background:none;border:none;padding:0;border-radius:0}
+.admin-item .nm{font-size:12px;font-weight:600;color:#fff}
+.admin-item .sub{font-size:10px;color:var(--muted);margin-top:2px;word-break:break-all}
+.admin-item .acts{display:flex;gap:6px}
+.mini-btn{
+  width:30px;height:30px;border-radius:9px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.07);
+  color:#fff;font-size:12px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.mini-btn.del{border-color:rgba(239,68,68,.4);color:#ef4444}
+.mini-btn:active{transform:scale(.9)}
+.admin-empty{text-align:center;color:var(--muted);font-size:12px;padding:20px 0}
+
 /* ============ DELETE MENU ============ */
 .delete-menu{
   position:fixed;inset:0;background:rgba(0,0,0,.5);
-  display:flex;align-items:flex-end;justify-content:center;z-index:99999;
+  display:flex;align-items:flex-end;justify-content:center;z-index:999999;
 }
 .delete-box{
   width:100%;background:#1a1f33;
@@ -431,7 +569,7 @@ body{
   </div>
 </div>
 
-<!-- ============ PASSWORD MODAL (ADMIN) — TANPA URL ============ -->
+<!-- ============ PASSWORD MODAL (ADMIN) ============ -->
 <div id="pwModal" class="pw-overlay hidden">
   <div class="pw-box">
     <div class="pw-icon">🔒</div>
@@ -446,12 +584,59 @@ body{
   </div>
 </div>
 
+<!-- ============ FAB ADMIN ============ -->
+<div id="adminFab" class="fab hidden" onclick="openAdmin()">⚙️</div>
+
+<!-- ============ ADMIN PANEL ============ -->
+<div id="adminModal" class="admin-overlay hidden">
+  <div class="admin-panel">
+    <div class="admin-header">
+      <h2>⚙️ Panel Admin</h2>
+      <button onclick="closeAdmin()">✕</button>
+    </div>
+    <div class="admin-body">
+
+      <!-- token github -->
+      <div id="tokenBox" class="token-box">
+        <p>🔑 Masukkan <b>GitHub Token</b> (sekali saja).<br>
+        Buat di: GitHub → Settings → Developer settings →<br>
+        Personal access tokens (fine-grained) →<br>
+        pilih repo <b>Not404-X/Client-X</b> → Contents: <b>Read and write</b></p>
+        <input type="password" id="ghTokenInput" placeholder="ghp_... / github_pat_..."/>
+        <button onclick="saveGhToken()">Simpan Token</button>
+      </div>
+
+      <div id="tokenOk" class="token-ok hidden">
+        <span>✓ Token GitHub aktif</span>
+        <button onclick="removeGhToken()">Hapus</button>
+      </div>
+
+      <!-- tabs -->
+      <div class="admin-tabs" id="adminTabs"></div>
+
+      <!-- form tambah/edit -->
+      <div id="adminFormArea"></div>
+
+      <!-- list -->
+      <div id="adminList"></div>
+
+    </div>
+  </div>
+</div>
+
 <script>
 /* =====================================================
    CONFIG
 ===================================================== */
 const ADMIN_UID = "u_cmvewop";
-const ADMIN_PASSWORD = "xfakesiadmin404"; // ← GANTI password rahasia lu!
+const ADMIN_PASSWORD = "xfakesiadmin404"; // ← password admin
+
+const GITHUB_OWNER = "Not404-X";
+const GITHUB_REPO = "Client-X";
+const GITHUB_BRANCH = "main";
+const FILE_CLIENT = "client.json";
+const FILE_MONET = "monet.json";
+const FILE_EMOJI = "emoji.json";
 
 const CATEGORIES = [
   { key:"x64",   icon:"🌐", name:"Client 64-Bit",  desc:"Untuk Android 64-bit",  wide:false },
@@ -466,6 +651,10 @@ let apps = {}, emojiSet = [];
 let currentCat = null, currentCardId = null;
 let replyTo = null, currentView = null;
 let db = null;
+
+/* admin panel state */
+let adminTab = "x64";
+let editIndex = null;
 
 /* =====================================================
    FIREBASE (AMAN — try/catch)
@@ -488,19 +677,19 @@ try{
 }
 
 /* =====================================================
-   DATA — client.json + monet.json TERPISAH
+   DATA — client.json + monet.json (dengan anti-cache)
 ===================================================== */
 async function loadApps(){
   apps = {};
 
   try{
-    const res = await fetch(URL_CLIENT_JSON);
+    const res = await fetch(URL_CLIENT_JSON + "?t=" + Date.now());
     const data = await res.json();
     apps = Object.assign(apps, data);
   }catch(e){ console.log("client.json gagal:", e); }
 
   try{
-    const res = await fetch(URL_MONET_JSON);
+    const res = await fetch(URL_MONET_JSON + "?t=" + Date.now());
     const data = await res.json();
     apps = Object.assign(apps, data);
   }catch(e){ console.log("monet.json gagal:", e); }
@@ -510,16 +699,63 @@ async function loadApps(){
 
 async function loadEmoji(){
   try{
-    const res = await fetch("https://raw.githubusercontent.com/Not404-X/Client-X/refs/heads/main/emoji.json");
+    const res = await fetch("https://raw.githubusercontent.com/Not404-X/Client-X/refs/heads/main/emoji.json?t=" + Date.now());
     const data = await res.json();
     emojiSet = data.emojiSet || [];
   }catch(e){ console.log("emoji.json gagal:", e); }
 }
 
 /* =====================================================
+   GITHUB API (baca & tulis file JSON)
+===================================================== */
+function ghHeaders(){
+  return {
+    "Authorization": "token " + localStorage.getItem("gh_token"),
+    "Accept": "application/vnd.github.v3+json",
+    "Content-Type": "application/json"
+  };
+}
+
+/* baca file → { sha, content } */
+async function ghGetFile(path){
+  const res = await fetch(
+    "https://api.github.com/repos/"+GITHUB_OWNER+"/"+GITHUB_REPO+"/contents/"+path+"?ref="+GITHUB_BRANCH,
+    { headers: ghHeaders() }
+  );
+  if(res.status === 404) return { sha: null, content: null };
+  if(!res.ok) throw new Error("GitHub error: " + res.status);
+  const data = await res.json();
+  let content = {};
+  try{
+    content = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\s/g,"")))));
+  }catch(e){ content = {}; }
+  return { sha: data.sha, content: content };
+}
+
+/* tulis file */
+async function ghSaveFile(path, obj, sha, message){
+  const body = {
+    message: message,
+    content: btoa(unescape(encodeURIComponent(JSON.stringify(obj, null, 2)))),
+    branch: GITHUB_BRANCH
+  };
+  if(sha) body.sha = sha;
+
+  const res = await fetch(
+    "https://api.github.com/repos/"+GITHUB_OWNER+"/"+GITHUB_REPO+"/contents/"+path,
+    { method: "PUT", headers: ghHeaders(), body: JSON.stringify(body) }
+  );
+  if(!res.ok){
+    const err = await res.json().catch(()=>({}));
+    throw new Error(err.message || ("GitHub error: " + res.status));
+  }
+}
+
+/* =====================================================
    HOME
 ===================================================== */
 function renderHome(){
+  updateAdminUI();
   const grid = document.getElementById("catGrid");
   grid.innerHTML = "";
   CATEGORIES.forEach(cat=>{
@@ -720,11 +956,16 @@ function getUid(){
 }
 
 /* =====================================================
-   ADMIN — TAP LOGO 5x + MODAL PASSWORD (TANPA URL)
+   ADMIN — LOGIN + PANEL
 ===================================================== */
 window.isAdmin = function(){
   return localStorage.getItem("uid") === ADMIN_UID;
 };
+
+function updateAdminUI(){
+  const fab = document.getElementById("adminFab");
+  if(fab) fab.classList.toggle("hidden", !isAdmin());
+}
 
 window.adminLogin = function(){
   const modal = document.getElementById("pwModal");
@@ -774,6 +1015,320 @@ document.addEventListener("DOMContentLoaded", function(){
     }
   });
 });
+
+/* ============ PANEL ============ */
+window.openAdmin = function(){
+  if(!isAdmin()){ toast("Login admin dulu"); return; }
+  document.getElementById("adminModal").classList.remove("hidden");
+  refreshTokenUI();
+  renderAdminTabs();
+  renderAdminForm();
+  renderAdminList();
+};
+
+window.closeAdmin = function(){
+  document.getElementById("adminModal").classList.add("hidden");
+  editIndex = null;
+};
+
+function refreshTokenUI(){
+  const has = !!localStorage.getItem("gh_token");
+  document.getElementById("tokenBox").classList.toggle("hidden", has);
+  document.getElementById("tokenOk").classList.toggle("hidden", !has);
+}
+
+window.saveGhToken = function(){
+  const val = document.getElementById("ghTokenInput").value.trim();
+  if(!val){ toast("Token kosong"); return; }
+  // tes token dengan request kecil
+  fetch("https://api.github.com/repos/"+GITHUB_OWNER+"/"+GITHUB_REPO, { headers: ghHeaders() })
+    .then(r=>{
+      if(r.ok){
+        localStorage.setItem("gh_token", val);
+        toast("✓ Token tersimpan");
+        refreshTokenUI();
+      }else{
+        toast("Token invalid / tidak akses repo");
+      }
+    })
+    .catch(()=> toast("Gagal cek token (offline?)"));
+};
+
+window.removeGhToken = function(){
+  localStorage.removeItem("gh_token");
+  refreshTokenUI();
+  toast("Token dihapus");
+};
+
+function renderAdminTabs(){
+  const tabs = document.getElementById("adminTabs");
+  const items = [
+    { key:"x64", label:"🌐 64-Bit" },
+    { key:"x32", label:"🌐 32-Bit" },
+    { key:"monet", label:"🌐 Monet" },
+    { key:"emoji", label:"😀 Emoji" }
+  ];
+  tabs.innerHTML = "";
+  items.forEach(t=>{
+    const b = document.createElement("div");
+    b.className = "tab-btn" + (adminTab===t.key ? " active" : "");
+    b.textContent = t.label;
+    b.onclick = ()=>{ adminTab = t.key; editIndex = null; renderAdminTabs(); renderAdminForm(); renderAdminList(); };
+    tabs.appendChild(b);
+  });
+}
+
+function renderAdminForm(){
+  const area = document.getElementById("adminFormArea");
+  if(editIndex !== null){
+    area.innerHTML = `<div class="admin-form" id="itemForm"></div>`;
+    return; // form diisi oleh fillEditForm
+  }
+
+  if(adminTab === "emoji"){
+    area.innerHTML = `
+    <div class="admin-form">
+      <h4>➕ Tambah Emoji</h4>
+      <input id="emKey" placeholder="Key unik (cth: flag_id)"/>
+      <input id="emIcon" placeholder="Emoji (cth: 🇮🇩)"/>
+      <input id="emUrl" placeholder="URL gambar (kosongkan jika pakai emoji)"/>
+      <button onclick="saveEmojiItem()">Simpan Emoji</button>
+    </div>`;
+  }else{
+    area.innerHTML = `
+    <div class="admin-form">
+      <h4>➕ Tambah Item — ${adminTab.toUpperCase()}</h4>
+      <input id="itName" placeholder="Nama (cth: Alyn V20.6)"/>
+      <textarea id="itDesc" placeholder="Deskripsi..."></textarea>
+      <input id="itFile" placeholder="Link download (APK/script)"/>
+      <input id="itPassword" placeholder="Link password (opsional)"/>
+      <input id="itReview" placeholder="Link review (opsional)"/>
+      <select id="itStatus">
+        <option value="">- status -</option>
+        <option value="new">NEW</option>
+        <option value="update">UPDATE</option>
+      </select>
+      <button onclick="saveItem()">Simpan ke GitHub</button>
+    </div>`;
+  }
+}
+
+function fillEditForm(item, isEmoji){
+  const area = document.getElementById("itemForm");
+  if(isEmoji){
+    area.innerHTML = `
+      <h4>✏️ Edit Emoji</h4>
+      <input id="emKey" value="${escAttr(item.key||"")}" placeholder="Key"/>
+      <input id="emIcon" value="${escAttr(item.icon||"")}" placeholder="Emoji"/>
+      <input id="emUrl" value="${escAttr(item.url||"")}" placeholder="URL gambar"/>
+      <button onclick="saveEmojiItem()">Update Emoji</button>`;
+  }else{
+    area.innerHTML = `
+      <h4>✏️ Edit Item</h4>
+      <input id="itName" value="${escAttr(item.name||"")}" placeholder="Nama"/>
+      <textarea id="itDesc" placeholder="Deskripsi...">${escHtml(item.desc||"")}</textarea>
+      <input id="itFile" value="${escAttr(item.file||"")}" placeholder="Link download"/>
+      <input id="itPassword" value="${escAttr(item.password||"")}" placeholder="Link password"/>
+      <input id="itReview" value="${escAttr(item.review||"")}" placeholder="Link review"/>
+      <select id="itStatus">
+        <option value="">- status -</option>
+        <option value="new" ${item.status==="new"?"selected":""}>NEW</option>
+        <option value="update" ${item.status==="update"?"selected":""}>UPDATE</option>
+      </select>
+      <button onclick="saveItem()">Update ke GitHub</button>`;
+  }
+}
+
+function escHtml(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function escAttr(s){ return escHtml(s).replace(/"/g,"&quot;"); }
+
+/* ============ SAVE / DELETE ITEM ============ */
+window.saveItem = function(){
+  const name = document.getElementById("itName").value.trim();
+  const desc = document.getElementById("itDesc").value.trim();
+  const file = document.getElementById("itFile").value.trim();
+  const password = document.getElementById("itPassword").value.trim();
+  const review = document.getElementById("itReview").value.trim();
+  const status = document.getElementById("itStatus").value;
+
+  if(!name){ toast("Nama wajib diisi"); return; }
+
+  const item = { name, desc, file, status };
+  if(password) item.password = password;
+  if(review) item.review = review;
+
+  const filePath = (adminTab === "monet") ? FILE_MONET : FILE_CLIENT;
+  const btnLabel = "Menyimpan...";
+
+  ghGetFile(filePath).then(({sha, content})=>{
+    const data = content || {};
+    if(!Array.isArray(data[adminTab])) data[adminTab] = [];
+
+    if(editIndex !== null){
+      data[adminTab][editIndex] = item;
+    }else{
+      data[adminTab].push(item);
+    }
+
+    return ghSaveFile(filePath, data, sha,
+      (editIndex!==null?"Update ":"Tambah ")+name+" ("+adminTab+")");
+  }).then(()=>{
+    toast("✅ Tersimpan ke GitHub!");
+    editIndex = null;
+    renderAdminForm();
+    renderAdminList();
+    loadApps(); // refresh tampilan
+  }).catch(e=>{
+    toast("❌ "+e.message);
+  });
+};
+
+window.editItem = function(idx){
+  const list = apps[adminTab] || [];
+  const item = list[idx];
+  if(!item) return;
+  editIndex = idx;
+  renderAdminTabs();
+  renderAdminForm();
+  fillEditForm(item, false);
+  document.getElementById("adminFormArea").scrollIntoView({behavior:"smooth"});
+};
+
+window.deleteItem = function(idx){
+  const list = apps[adminTab] || [];
+  const item = list[idx];
+  if(!item) return;
+
+  showDeleteMenu(()=>{
+    const filePath = (adminTab === "monet") ? FILE_MONET : FILE_CLIENT;
+    ghGetFile(filePath).then(({sha, content})=>{
+      const data = content || {};
+      if(Array.isArray(data[adminTab])){
+        data[adminTab].splice(idx, 1);
+      }
+      return ghSaveFile(filePath, data, sha, "Hapus "+item.name+" ("+adminTab+")");
+    }).then(()=>{
+      toast("🗑️ Item dihapus");
+      renderAdminList();
+      loadApps();
+    }).catch(e=> toast("❌ "+e.message));
+  });
+};
+
+/* ============ EMOJI ============ */
+window.saveEmojiItem = function(){
+  const key = document.getElementById("emKey").value.trim();
+  const icon = document.getElementById("emIcon").value.trim();
+  const url = document.getElementById("emUrl").value.trim();
+
+  if(!key){ toast("Key wajib diisi"); return; }
+  if(!icon && !url){ toast("Isi emoji atau URL gambar"); return; }
+
+  const item = { key, icon: icon || "" };
+  if(url) item.url = url;
+
+  ghGetFile(FILE_EMOJI).then(({sha, content})=>{
+    const data = content || { emojiSet: [] };
+    if(!Array.isArray(data.emojiSet)) data.emojiSet = [];
+
+    if(editIndex !== null){
+      data.emojiSet[editIndex] = item;
+    }else{
+      // cek key duplikat
+      if(data.emojiSet.find(x=>x.key===key)){
+        toast("Key sudah dipakai!");
+        return;
+      }
+      data.emojiSet.push(item);
+    }
+
+    return ghSaveFile(FILE_EMOJI, data, sha,
+      (editIndex!==null?"Update ":"Tambah ")+"emoji "+key);
+  }).then(()=>{
+    toast("✅ Emoji tersimpan!");
+    editIndex = null;
+    renderAdminForm();
+    renderAdminList();
+    loadEmoji();
+  }).catch(e=>{
+    toast("❌ "+e.message);
+  });
+};
+
+window.editEmoji = function(idx){
+  const item = emojiSet[idx];
+  if(!item) return;
+  editIndex = idx;
+  renderAdminTabs();
+  renderAdminForm();
+  fillEditForm(item, true);
+};
+
+window.deleteEmoji = function(idx){
+  const item = emojiSet[idx];
+  if(!item) return;
+
+  showDeleteMenu(()=>{
+    ghGetFile(FILE_EMOJI).then(({sha, content})=>{
+      const data = content || { emojiSet: [] };
+      if(Array.isArray(data.emojiSet)){
+        data.emojiSet.splice(idx, 1);
+      }
+      return ghSaveFile(FILE_EMOJI, data, sha, "Hapus emoji "+item.key);
+    }).then(()=>{
+      toast("🗑️ Emoji dihapus");
+      renderAdminList();
+      loadEmoji();
+    }).catch(e=> toast("❌ "+e.message));
+  });
+};
+
+/* ============ RENDER LIST ADMIN ============ */
+function renderAdminList(){
+  const box = document.getElementById("adminList");
+  box.innerHTML = "";
+
+  if(adminTab === "emoji"){
+    if(!emojiSet.length){
+      box.innerHTML = `<div class="admin-empty">Belum ada emoji</div>`;
+      return;
+    }
+    emojiSet.forEach((e,idx)=>{
+      const row = document.createElement("div");
+      row.className = "admin-item";
+      row.innerHTML = `
+        <div class="info">
+          <div class="nm">${e.url ? `<img src="${e.url}" style="width:16px;height:16px;vertical-align:middle;">` : e.icon} ${e.key}</div>
+          <div class="sub">${e.url ? e.url : "emoji biasa"}</div>
+        </div>
+        <div class="acts">
+          <button class="mini-btn" onclick="editEmoji(${idx})">✏️</button>
+          <button class="mini-btn del" onclick="deleteEmoji(${idx})">🗑️</button>
+        </div>`;
+      box.appendChild(row);
+    });
+  }else{
+    const list = apps[adminTab] || [];
+    if(!list.length){
+      box.innerHTML = `<div class="admin-empty">Belum ada item</div>`;
+      return;
+    }
+    list.forEach((it,idx)=>{
+      const row = document.createElement("div");
+      row.className = "admin-item";
+      row.innerHTML = `
+        <div class="info">
+          <div class="nm">${escHtml(it.name || "-")}${it.status==="new"?' <span class="badge new">NEW</span>':it.status==="update"?' <span class="badge update">UPD</span>':''}</div>
+          <div class="sub">${it.file ? escHtml(it.file) : "tanpa link"}</div>
+        </div>
+        <div class="acts">
+          <button class="mini-btn" onclick="editItem(${idx})">✏️</button>
+          <button class="mini-btn del" onclick="deleteItem(${idx})">🗑️</button>
+        </div>`;
+      box.appendChild(row);
+    });
+  }
+}
 
 /* =====================================================
    COMMENTS
@@ -971,7 +1526,7 @@ function showDeleteMenu(onYes){
   menu.className = "delete-menu";
   menu.innerHTML = `
     <div class="delete-box">
-      <p>Hapus komentar ini?</p>
+      <p>Hapus?</p>
       <button class="delete-btn">Hapus</button>
       <button class="cancel-btn">Batal</button>
     </div>`;
@@ -987,7 +1542,7 @@ function toast(msg){
   const t = document.createElement("div");
   t.className = "toast"; t.textContent = msg;
   document.body.appendChild(t);
-  setTimeout(()=> t.remove(), 2000);
+  setTimeout(()=> t.remove(), 2200);
 }
 
 /* =====================================================
@@ -1022,7 +1577,6 @@ async function startSplash(){
   }
   setTimeout(hideSplash, 300);
 }
-/* JAMUR: splash hilang maksimal 5 detik apapun yang terjadi */
 setTimeout(hideSplash, 5000);
 
 /* INIT */
