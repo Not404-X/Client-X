@@ -1,0 +1,63 @@
+{
+    "x64": [
+              {
+            "name": "Alyn V20.5(NoAds)",
+            "desc": "Remove ads, Fix fps drop, Support modpack, monetloader, aml, & cleo, Fix crash, add performance code for rendering",
+            "file": "https://sfl.gl/afHPQdB",
+            "review": "https://youtu.be/b1_iBcJgtnM?si=ND6sLGKFGqYHoDSq",
+            "password": "https://sfl.gl/X9lTXvmT",
+            "status": "new"
+        },
+        {
+            "name": "Alyn V20.4(NoAds)",
+            "desc": "Fix Stuck LoadingAd, Remove ads, Hud stayle, Support modpack, monetloader, aml, & cleo, Fix crash, add performance code for rendering",
+            "file": "https://sfl.gl/JQ5U3",
+            "review": "https://youtu.be/VhZRVNYTuh4?si=f2x1Shl_2toclQ3c",
+            "password": "https://www.mediafire.com/view/4uammtx32cbtnqg/password_alynV20.4%2528FixLoadingAd%2529.jpg/file"
+        },
+        {
+            "name": "Alyn V 20.4 (No Ads)",
+            "desc": "Add grass pc, Remove ads, Hud stayle, Support modpack, monetloader, aml, & cleo, Fix crash, add performance code for rendering",
+            "file": "https://sfl.gl/QrJU8vw",
+            "review": "https://youtu.be/VhhWBPJkgkY?si=ZNXbuUaoh5McvCxy",
+            "password": "https://sfl.gl/XHoIOD5"
+        },
+        {
+            "name": "Eagle V 2.0.12-RC (No Ads)",
+            "desc": "SUPPORT 32BIT DAN 64BIT, support semua modpack, support edit handling, support edit toys pc, bisa hilangin chat log, no bug sound kendaraan, bhs Indonesia, sound kill",
+            "file": "https://sfl.gl/Mi1lv",
+            "review": "https://youtu.be/94uDMP5ALrY?si=Cx_6I9XXWZJx2N0J"
+        },
+        {
+            "name": "Alyn V 17.0 (no dowm & no ads)",
+            "desc": "Support 32Bit & 64Bit - remove app server down - remove ads/ikaln - Add grass pc - Add bhs Indonesia - Add Download data in App - btn voice & speaker style pc - add skin & skin weapon - add bsor five star - add grass & desert - Fix Lag & Fc Open map - Fix handling folder data",
+            "file": "https://sfl.gl/NgD1",
+            "review": "https://youtu.be/ZSa_Ex2Q09U?si=vJ7BjXGtJRvTDmKP",
+            "password": "https://sfl.gl/7Q1lGdo"
+        },
+        {
+            "name": "Alyn V 18.9 (no down)",
+            "desc": "Support 32Bit & 64Bit - support download data inApp - remove app update - remove ads/ikaln - Add grass pc - Add Download modpack in App - btn voice & speaker style pc - add skin & skin weapon - add bsor five star - add grass & desert - Fix Lag & Fc Open map - Fix handling folder data",
+            "file": "https://sfl.gl/FgEMBAt",
+            "review": "https://youtu.be/pP-pENhG34k?si=709_m5xxiOxh94Cb",
+            "password": "https://sfl.gl/kKK3"
+        }
+    ],
+    "x32": [
+        {
+            "name": "James V 1.0.7 (beta0.3)",
+            "desc": "support modpack, support monetloader, support cleo, support handling, support aml, command /ccmds, Fake loading pc, Remove Copyright ingame, handling folder data, romove ads/iklan 100%",
+            "file": "https://sfl.gl/e4lxKu",
+            "review": "https://youtu.be/q42Quv3yIVo?si=E-UlnrT5It9dcruo",
+            "password": "https://sfl.gl/UyB8g",
+            "status": "new"
+        },
+        {
+            "name": "James V 1.0.5(e)",
+            "desc": "support modpack • support monetloader • support cleo • support handling • support aml • command /ccmds • handling folder samp • romove app server down • support di hp yg mendukung abi 32&64bit",
+            "file": "https://sfl.gl/8Y3JJ",
+            "review": "https://youtu.be/hkCR-LyzC8g?si=d1G8gFJMtoczDdNM",
+            "password": "https://sfl.gl/NmF6Eh"
+        }
+    ]
+}
