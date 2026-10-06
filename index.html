@@ -1,1829 +1,914 @@
 <!doctype html>
 <html lang="id">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>SA-MP xNot404</title>
-
-        <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&ampdisplay=swap"
-            rel="stylesheet"
-        />
-
-        <style>
-            body {
-                margin: 0;
-                font-family: "Poppins", sans-serif;
-                background: linear-gradient(135deg, #121212, #1f1f2e, #262635);
-                color: white;
-            }
-
-            /* CONTAINER */
-            .container {
-                max-width: 400px;
-                margin: auto;
-                padding: 20px;
-            }
-
-            /* HEADER */
-            .header {
-                text-align: center;
-                margin-bottom: 30px;
-            }
-
-            .header h1 {
-                font-size: 22px;
-                margin: 0;
-            }
-
-            .header p {
-                color: #aaa;
-                margin: 5px 0;
-            }
-
-            /* ICON */
-            .social {
-                margin-top: 10px;
-            }
-
-            .social img {
-                margin: 0 6px;
-            }
-
-            /* BOX */
-            .box {
-                background: rgba(40, 40, 60, 0.4);
-                border-radius: 16px;
-                padding: 16px;
-                overflow: visible;
-                margin-bottom: 16px;
-                border: 1px solid rgba(255, 255, 255, 0.08);
-            }
-
-            /* TEXT */
-            .title {
-                font-weight: 600;
-                margin-bottom: 6px;
-            }
-
-            .desc {
-                font-size: 13px;
-                color: #ccc;
-            }
-
-            /* BUTTON */
-            .btn {
-                margin-top: 10px;
-                display: inline-block;
-                background: #e5e5e5;
-                color: black;
-                padding: 8px 14px;
-                border-radius: 20px;
-                font-size: 13px;
-                font-weight: 600;
-            }
-
-            /* INFO */
-            .info {
-                background: rgba(255, 255, 255, 0.05);
-                padding: 14px;
-                border-radius: 12px;
-                margin-bottom: 20px;
-                font-size: 13px;
-            }
-
-            /* HIDDEN */
-            .hidden {
-                display: none;
-            }
-
-            .topbar {
-                position: sticky;
-                top: 0;
-                z-index: 999;
-
-                padding: 12px 10px;
-            }
-
-            .back-btn {
-                display: inline-block;
-                font-size: 14px;
-                color: #fff;
-
-                background: rgba(255, 255, 255, 0.08);
-                padding: 6px 12px;
-                border-radius: 10px;
-
-                cursor: pointer;
-                transition: 0.2s;
-            }
-
-            .back-btn:hover {
-                background: rgba(255, 255, 255, 0.18);
-            }
-
-            .review-btn {
-                position: relative;
-                z-index: 10;
-                margin-top: 8px;
-                background: rgba(0, 200, 255, 0.15);
-                color: #00d9ff;
-            }
-
-            .social {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 1px; /* 🔥 ini jarak antar icon */
-                margin-top: 1px;
-            }
-
-            .social a img {
-                width: 22px;
-                height: 22px;
-                margin: 0 3px;
-            }
-
-            html,
-            body {
-                margin: 0;
-                height: 100%;
-            }
-
-            .splash {
-                position: fixed;
-
-                /* ❌ hapus inset */
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                min-height: 100vh;
-
-                background: linear-gradient(135deg, #121212, #1f1f2e, #262635);
-
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-
-                z-index: 9999;
-                color: white;
-            }
-
-            .splash-box {
-                text-align: center;
-                animation: zoomIn 0.6s ease;
-            }
-
-            .splash h1 {
-                font-size: 20px;
-                margin-bottom: 8px;
-            }
-
-            .splash-loading {
-                margin-top: 20px;
-                font-size: 12px;
-                color: #aaa;
-                letter-spacing: 1px;
-            }
-
-            @keyframes zoomIn {
-                from {
-                    transform: scale(0.8);
-                    opacity: 0;
-                }
-                to {
-                    transform: scale(1);
-                    opacity: 1;
-                }
-            }
-
-            /* 🔥 FIX PENTING */
-            .splash.hide {
-                animation: fadeOut 0.8s ease forwards;
-                animation-delay: 1.5s;
-
-                pointer-events: none; /* 🔥 biar tombol bisa diklik */
-            }
-
-            /* loading bar tetap */
-            .loading-bar {
-                width: 200px;
-                height: 6px;
-                background: rgba(255, 255, 255, 0.15);
-                border-radius: 50px;
-                margin-top: 15px;
-                overflow: hidden;
-            }
-
-            .loading-progress {
-                height: 100%;
-                width: 0%;
-                background: linear-gradient(90deg, #6d28d9, #a78bfa);
-                border-radius: 50px;
-                transition: width 0.2s ease;
-            }
-
-            @keyframes fadeOut {
-                to {
-                    opacity: 0;
-                    visibility: hidden;
-                }
-            }
-            .download-btn,
-            .password-btn,
-            .icon-btn {
-                position: relative;
-                z-index: 10;
-                width: 40px;
-                height: 40px;
-
-                padding: 0;
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                border-radius: 50%;
-
-                font-size: 16px;
-
-                flex-shrink: 0;
-                cursor: pointer;
-
-                transition: 0.2s;
-            }
-
-            /* HOVER EFEK */
-            .download-btn:hover,
-            .password-btn:hover,
-            .icon-btn:hover {
-                transform: scale(1.05);
-            }
-            .btn-row {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                margin-top: 10px;
-            }
-
-            .left-btns {
-                display: flex;
-    gap: 8px;
-    align-items: center;
-    flex-wrap: nowrap;
-            }
-            #search {
-                flex: 1;
-
-                padding: 8px 12px;
-                border-radius: 10px;
-
-                border: 1px solid rgba(255, 255, 255, 0.08);
-                outline: none;
-
-                background: rgba(255, 255, 255, 0.06);
-                color: #fff;
-
-                font-size: 13px;
-
-                transition: 0.2s;
-            }
-
-            /* placeholder */
-            #search::placeholder {
-                color: rgba(255, 255, 255, 0.4);
-            }
-
-            /* saat fokus */
-            #search:focus {
-                background: rgba(255, 255, 255, 0.12);
-                border-color: rgba(168, 139, 250, 0.5);
-            }
-            .splash.hide {
-                animation: fadeOut 0.5s ease forwards;
-                pointer-events: none;
-            }
-            .badge {
-                font-size: 10px;
-                padding: 2px 6px;
-                border-radius: 6px;
-                margin-left: 6px;
-                font-weight: 600;
-            }
-
-            .badge.new {
-                position: relative;
-                display: inline-block;
-                padding: 2px 6px;
-                border-radius: 6px;
-                color: #22c55e;
-                background: #111; /* isi dalam */
-                overflow: hidden;
-                z-index: 1;
-            }
-
-            /* layer border muter */
-            .badge.new::before {
-                content: "";
-                position: absolute;
-                top: -2px;
-                left: -2px;
-                width: calc(100% + 4px);
-                height: calc(100% + 4px);
-                border-radius: 8px;
-
-                background: linear-gradient(
-                    0deg,
-                    #22c55e,
-                    transparent,
-                    #22c55e
-                );
-
-                animation: rotateBorder 2s linear infinite;
-                z-index: -1;
-            }
-
-            /* potong bagian tengah biar jadi border */
-            .badge.new::after {
-                content: "";
-                position: absolute;
-                inset: 2px;
-                background: #111;
-                border-radius: 6px;
-                z-index: -1;
-            }
-
-            /* animasi muter */
-            @keyframes rotateBorder {
-                0% {
-                    transform: rotate(0deg);
-                }
-                100% {
-                    transform: rotate(360deg);
-                }
-            }
-
-            .badge.update {
-                color: #000;
-                border: 2px solid #facc15;
-                background: linear-gradient(90deg, #facc15, #fbbf24, #facc15);
-                background-size: 200% 100%;
-                animation:
-                    gradientMove 2s linear infinite,
-                    borderBlink 1s infinite;
-            }
-
-            @keyframes borderBlink {
-                0% {
-                    border-color: #facc15;
-                }
-                50% {
-                    border-color: #fff;
-                }
-                100% {
-                    border-color: #facc15;
-                }
-            }
-            .emoji-bar {
-                display: flex;
-                align-items: center;
-                gap: 6px;
-
-                flex-wrap: wrap;
-                max-width: 100%;
-            }
-
-            /* 🔥 bikin emoji rapi 3 per baris */
-            .emoji-list {
-                display: grid;
-                grid-template-columns: repeat(3, auto);
-                gap: 3px;
-            }
-
-            /* emoji style */
-            .emoji-bar span {
-                background: rgba(255, 255, 255, 0.08);
-                padding: 4px 8px;
-                border-radius: 10px;
-                font-size: 12px;
-
-                cursor: pointer;
-                display: inline-flex;
-                align-items: center;
-                gap: 4px;
-
-                white-space: nowrap;
-                transition: 0.15s;
-            }
-
-            .emoji-bar span:hover {
-                transform: scale(1.05);
-            }
-
-            /* tombol + tetap di kanan */
-            .emoji-add {
-                width: 28px;
-                height: 28px;
-                border-radius: 50%;
-                border: none;
-
-                background: rgba(255, 255, 255, 0.1);
-                color: white;
-
-                cursor: pointer;
-                flex-shrink: 0;
-            }
-            .emoji-picker {
-                position: absolute;
-                background: #18181b;
-                padding: 8px;
-                border-radius: 10px;
-
-                display: grid;
-                grid-template-columns: repeat(6, 1fr);
-                gap: 6px;
-
-                z-index: 9999;
-                max-width: 220px;
-            }
-
-            .emoji-picker span {
-                font-size: 18px; /* 🔥 ini yang bikin tidak gede */
-                text-align: center;
-                cursor: pointer;
-                padding: 4px;
-                border-radius: 6px;
-                transition: 0.15s;
-            }
-
-            .emoji-picker span:hover {
-                background: rgba(255, 255, 255, 0.1);
-                transform: scale(1.2);
-            }
-            /* =========================
-   ICON BUTTON (GLASS MODERN)
-========================= */
-            .icon-btn {
-                width: 36px;
-                height: 36px;
-                border-radius: 50%;
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                cursor: pointer;
-
-                /* glass effect */
-                background: rgba(255, 255, 255, 0.08);
-                backdrop-filter: blur(8px);
-
-                border: 1px solid rgba(255, 255, 255, 0.12);
-
-                box-shadow:
-                    0 4px 12px rgba(0, 0, 0, 0.35),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-
-                transition: all 0.2s ease;
-            }
-
-            /* hover smooth */
-            .icon-btn:hover {
-                transform: translateY(-2px) scale(1.05);
-                background: rgba(255, 255, 255, 0.12);
-            }
-
-            /* klik feel */
-            .icon-btn:active {
-                transform: scale(0.95);
-            }
-
-            /* =========================
-   COMMENT MODAL (MODERN SHEET)
-========================= */
-            .comment-modal {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                height: 65%;
-
-                background: rgba(20, 20, 30, 0.85);
-                backdrop-filter: blur(14px);
-
-                border-top-left-radius: 18px;
-                border-top-right-radius: 18px;
-
-                border-top: 1px solid rgba(255, 255, 255, 0.08);
-
-                z-index: 9999;
-
-                display: flex;
-                flex-direction: column;
-
-                box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6);
-            }
-
-            /* =========================
-   PANEL
-========================= */
-            .comment-panel {
-                padding: 12px;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-            }
-
-            /* =========================
-   HEADER
-========================= */
-            .comment-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-
-                color: #fff;
-                font-weight: 600;
-
-                margin-bottom: 10px;
-            }
-
-            /* tombol close modern */
-            .comment-header button {
-                background: rgba(255, 255, 255, 0.08);
-                border: none;
-                color: #fff;
-
-                width: 28px;
-                height: 28px;
-
-                border-radius: 50%;
-                cursor: pointer;
-            }
-
-            /* =========================
-   LIST
-========================= */
-            .comment-list-box {
-                flex: 1;
-                overflow-y: auto;
-
-                padding: 6px;
-
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            /* tiap komentar */
-            .comment-list-box div {
-                background: rgba(255, 255, 255, 0.06);
-                border-radius: 10px;
-
-                padding: 8px;
-
-                font-size: 13px;
-
-                border: 1px solid rgba(255, 255, 255, 0.05);
-            }
-
-            /* =========================
-   INPUT
-========================= */
-            .comment-input-box {
-                position: sticky;
-                bottom: 0;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                padding: 10px 12px;
-                z-index: 50;
-            }
-
-            .comment-input-box input {
-                flex: 1;
-                height: 36px;
-                padding: 0 12px;
-                border: none;
-                outline: none;
-                border-radius: 18px;
-                background: #272727;
-                color: #fff;
-                font-size: 13px;
-            }
-
-            .comment-input-box button {
-                height: 36px;
-                padding: 0 12px;
-                border: none;
-                border-radius: 18px;
-                background: #272727;
-                color: #facc15;
-                font-size: 12px;
-                font-weight: 600;
-                white-space: nowrap;
-                cursor: pointer;
-            }
-
-            .comment-input-box button:hover {
-                transform: scale(1.05);
-            }
-
-            /* khusus tombol komentar */
-            .comment-btn {
-                background: none !important;
-                border: none;
-                box-shadow: none;
-
-                width: auto;
-                height: auto;
-
-                padding: 0;
-                border-radius: 0;
-
-                font-size: 16px;
-            }
-
-            /* hover biar tetap ada efek */
-            .comment-btn:hover {
-                transform: scale(1.1);
-            }
-
-            /* =========================
-   UTIL
-========================= */
-            .hidden {
-                display: none;
-            }
-            .delete-menu {
-                position: fixed;
-                inset: 0;
-                background: rgba(0, 0, 0, 0.35);
-                display: flex;
-                align-items: flex-end;
-                justify-content: center;
-                z-index: 99999;
-            }
-
-            .delete-box {
-                width: 100%;
-                background: #1a1a1a;
-                border-top-left-radius: 16px;
-                border-top-right-radius: 16px;
-                padding: 12px;
-
-                animation: slideUp 0.2s ease;
-            }
-
-            @keyframes slideUp {
-                from {
-                    transform: translateY(100%);
-                }
-                to {
-                    transform: translateY(0);
-                }
-            }
-
-            .delete-btn {
-                width: 100%;
-                padding: 10px;
-                background: red;
-                color: white;
-                border: none;
-                border-radius: 10px;
-                margin-bottom: 6px;
-            }
-
-            .cancel-btn {
-                width: 100%;
-                padding: 10px;
-                background: rgba(255, 255, 255, 0.08);
-                color: white;
-                border: none;
-                border-radius: 10px;
-            }
-            /* ====== TAMBAHAN UNTUK COMMENT FLOAT ====== */
-
-            .card {
-                position: relative;
-                overflow: visible; /* biar tombol bisa keluar dikit */
-            }
-
-            .icon
-/* tombol kanan (💬 di atas, > di bawah) */
-.right-btns {
-                display: flex;
-                flex-direction: column;
-                gap: 6px;
-                align-items: center;
-            }
-
-            /* biar spacing kiri-kanan seimbang */
-            .btn-row {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
-            #usernameInput {
-                width: 90px; /* kecil & pas */
-                padding: 6px 8px;
-                border-radius: 8px;
-                border: none;
-                outline: none;
-
-                background: rgba(255, 255, 255, 0.08);
-                color: white;
-
-                font-size: 12px;
-            }
-
-            .comment-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-            .comment-count {
-                font-size: 9px; /* 🔥 kecil banget */
-                color: #aaa;
-                margin-top: 2px;
-                pointer-events: none; /* biar klik tetap ke tombol */
-            }
-        </style>
-    </head>
-
-    <body>
-        <div class="splash">
-            <h1>SAMPxNot404 🜲</h1>
-
-            <div class="loading-bar">
-                <div class="loading-progress" id="loadingProgress"></div>
-            </div>
-
-            <div class="splash-loading">Loading<span id="dots"></span></div>
-        </div>
-
-        <div id="home" class="container">
-            <div class="header">
-                <h1>Client xNot404 🜲</h1>
-                <p>About-x</p>
-
-                <div class="social">
-                    <a href="https://discord.gg/mpqU5vqANx"
-                        ><img
-                            src="https://img.icons8.com/ios-filled/26/ffffff/discord-logo.png"
-                    /></a>
-                    <a href="https://www.youtube.com/@xNot404"
-                        ><img
-                            src="https://img.icons8.com/ios-filled/26/ffffff/youtube-play.png"
-                    /></a>
-                    <a
-                        href="https://www.tiktok.com/@.userfaka?_t=ZS-8xYkqhwim1q&_r=1"
-                        ><img
-                            src="https://img.icons8.com/ios-filled/26/ffffff/tiktok--v1.png"
-                            alt="TikTok"
-                    /></a>
-                    <a href="https://saweria.co/SupportxNot404"
-                        ><img
-                            src="https://img.icons8.com/ios-filled/26/ffffff/money--v1.png"
-                            alt="Donasi"
-                    /></a>
-                </div>
-            </div>
-
-            <div class="info">
-                Selamat datang di <b>SAMPxNot404</b> — client SAMP yang sudah
-                dimodifikasi agar lebih lancar dan stabil.<br /><br />
-                <span style="color: #22c55e">
-                    ⚡ Nggak perlu ragu atau takut — semua file di sini 100%
-                    aman, bebas virus, dan langsung siap kamu pakai tanpa ribet!
-                </span>
-            </div>
-
-            <div class="box">
-                <div class="title">APK X64</div>
-                <div class="desc">
-                    Untuk Android 64-bit<br />
-                    <b>SAMPxNot404 🜲</b>
-                </div>
-                <div class="btn" onclick="showDownload('x64')">Client-X 64</div>
-            </div>
-
-            <div class="box">
-                <div class="title">APK X32</div>
-                <div class="desc">
-                    Untuk Android 32-bit<br />
-                    <b>SAMPxNot404 🜲</b>
-                </div>
-                <div class="btn" onclick="showDownload('x32')">Client-X 32</div>
-            </div>
-        </div>
-
-        <!-- DOWNLOAD PAGE -->
-        <div id="download" class="container hidden">
-            <div class="topbar">
-                <div class="back-btn" onclick="showHome()">←</div>
-
-                <input type="text" id="search" placeholder="Search..." />
-            </div>
-
-            <!-- INI SATU-SATUNYA CONTAINER -->
-            <div id="downloadBox"></div>
-        </div>
-
-        <div id="commentModal" class="comment-modal hidden">
-            <div class="comment-panel">
-                <div class="comment-header">
-                    <span id="commentTitle">Komentar</span>
-
-                    <button
-                        id="backReplyBtn"
-                        onclick="exitReplyView()"
-                        style="display: none"
-                    >
-                        ←
-                    </button>
-
-                    <div style="display: flex; align-items: center; gap: 6px">
-                        <input id="usernameInput" placeholder="Nama..." />
-                        <button onclick="closeComments()">✕</button>
-                    </div>
-                </div>
-
-                <div id="commentList" class="comment-list-box"></div>
-
-                <div class="comment-input-box" style="flex-direction: column">
-                    <div style="display: flex; gap: 6px">
-                        <input
-                            id="commentInput"
-                            placeholder="Tulis komentar..."
-                        />
-                        <button onclick="sendModalComment()">Kirim</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <script>
-            window.onerror = function (msg, url, line) {
-                console.log("JS ERROR:", msg, line);
-                return false;
-            };
-            let replyTo = null;
-            let deleteTarget = null;
-            let pressTimer = null;
-            let currentView = null;
-            let apps = {};
-            let emojiSet = [];
-
-            async function loadApps() {
-                try {
-                    const res = await fetch(
-                        "https://raw.githubusercontent.com/Not404-X/Client-X/refs/heads/main/apps.json"
-                    );
-                    apps = await res.json();
-                    console.log("Apps loaded:", apps);
-                } catch (e) {
-                    console.log("Gagal load JSON:", e);
-                }
-            }
-
-            async function showDownload(type) {
-                document.getElementById("home").style.display = "none";
-                document.getElementById("download").style.display = "block";
-
-                if (!apps || !apps[type]) {
-                    await loadApps();
-                }
-
-                if (!apps || !apps[type]) {
-                    document.getElementById("downloadBox").innerHTML = `
-        <div class="box">
-            <div class="title">Error</div>
-            <div class="desc">Data tidak ditemukan / JSON gagal load</div>
-        </div>
-    `;
-                    return;
-                }
-
-                let html = "";
-
-                apps[type].forEach(app => {
-                    html += `
-<div class="box card" data-name="${app.name.toLowerCase()}">
-    <div class="title">
-    ${app.name}
-    ${
-        app.status === "new"
-            ? `<span class="badge new">NEW</span>`
-            : app.status === "update"
-              ? `<span class="badge update">UPDATE</span>`
-              : ``
-    }
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SA-MP xNot404</title>
+
+<!-- FIREBASE HARUS DI PALING ATAS (sebelum script utama) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg1:#0B0D18; --bg2:#13182B; --bg3:#1B2240;
+  --card1:#1C2033; --card2:#262B45;
+  --border:rgba(143,168,255,.14);
+  --accent:#8FA8FF;
+  --text:#E8EBFF;
+  --muted:#8A93B8;
+  --green:#22c55e; --yellow:#facc15;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0;min-height:100%}
+body{
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(160deg,var(--bg1),var(--bg2) 55%,var(--bg3));
+  background-attachment:fixed;
+  color:var(--text);
+  padding-bottom:50px;
+}
+.container{max-width:420px;margin:auto;padding:18px}
+.hidden{display:none!important}
+
+/* ============ SPLASH ============ */
+.splash{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:linear-gradient(160deg,var(--bg1),var(--bg2) 55%,var(--bg3));
+  display:flex;justify-content:center;align-items:center;flex-direction:column;
+  z-index:9999;
+}
+.splash-logo{
+  width:72px;height:72px;border-radius:22px;
+  background:linear-gradient(135deg,#242B45,#30395A);
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:34px;margin-bottom:16px;
+  animation:pop .5s ease;
+}
+.splash h1{font-size:18px;margin:0;letter-spacing:.5px}
+.splash-sub{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:2px}
+.loading-bar{
+  width:180px;height:5px;border-radius:50px;margin-top:22px;
+  background:rgba(255,255,255,.08);overflow:hidden;
+}
+.loading-progress{
+  height:100%;width:0%;border-radius:50px;
+  background:linear-gradient(90deg,#5B6DBF,#8FA8FF);
+  transition:width .2s ease;
+}
+@keyframes pop{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+.splash.hide{animation:fadeOut .5s ease forwards;pointer-events:none}
+@keyframes fadeOut{to{opacity:0;visibility:hidden}}
+
+/* ============ HEADER ============ */
+.header{text-align:center;padding:26px 0 10px}
+.logo-badge{
+  width:64px;height:64px;border-radius:20px;margin:0 auto 12px;
+  background:linear-gradient(135deg,#242B45,#30395A);
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:30px;
+}
+.header h1{font-size:20px;margin:0}
+.header h1 span{color:var(--accent)}
+.header p{color:var(--muted);font-size:12px;margin:4px 0 14px}
+.social{display:flex;justify-content:center;gap:10px}
+.social a{
+  width:38px;height:38px;border-radius:12px;
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  transition:.2s;
+}
+.social a:active{transform:scale(.92);background:rgba(255,255,255,.12)}
+.social img{width:18px;height:18px}
+
+/* ============ SECTION ============ */
+.section-label{
+  font-size:10px;font-weight:700;letter-spacing:2.5px;
+  color:var(--accent);margin:22px 0 10px 4px;
+}
+
+/* ============ INFO ============ */
+.info{
+  background:linear-gradient(180deg,var(--card1),var(--card2));
+  border:1px solid var(--border);
+  border-radius:16px;padding:16px;font-size:12.5px;
+  color:#c9d1f0;line-height:1.7;
+}
+.info b{color:#fff}
+
+/* ============ CATEGORY GRID ============ */
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cat-card{
+  background:linear-gradient(180deg,var(--card1),var(--card2));
+  border:1px solid var(--border);
+  border-radius:18px;padding:18px 14px;cursor:pointer;
+  transition:.15s;position:relative;
+}
+.cat-card:active{transform:scale(.96)}
+.cat-icon{
+  width:44px;height:44px;border-radius:14px;
+  background:rgba(143,168,255,.1);
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;margin-bottom:10px;
+}
+.cat-card h3{margin:0;font-size:13.5px}
+.cat-card p{margin:3px 0 0;font-size:10.5px;color:var(--muted)}
+.cat-count{
+  position:absolute;top:14px;right:14px;
+  font-size:9.5px;font-weight:700;color:var(--accent);
+  background:rgba(143,168,255,.12);
+  padding:3px 8px;border-radius:20px;
+}
+.cat-wide{grid-column:1 / -1;display:flex;align-items:center;gap:14px}
+.cat-wide .cat-icon{margin-bottom:0;flex-shrink:0}
+
+/* ============ CARD (DOWNLOAD) ============ */
+.box{
+  background:linear-gradient(180deg,var(--card1),var(--card2));
+  border:1px solid var(--border);
+  border-radius:18px;padding:16px;margin-bottom:14px;
+}
+.title{font-weight:600;font-size:14.5px;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.desc{font-size:12.5px;color:#c9d1f0;line-height:1.65;margin-top:6px}
+
+/* ============ BADGE ============ */
+.badge{font-size:9px;font-weight:700;padding:3px 8px;border-radius:7px}
+.badge.new{
+  color:var(--green);background:#0f1a12;
+  border:1px solid rgba(34,197,94,.4);
+}
+.badge.update{
+  color:#111;background:linear-gradient(90deg,var(--yellow),#fde047,var(--yellow));
+  background-size:200% 100%;animation:gradientMove 2s linear infinite;
+}
+@keyframes gradientMove{0%{background-position:0 0}100%{background-position:200% 0}}
+
+/* ============ BUTTON ROW ============ */
+.btn-row{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+.left-btns{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.right-btns{display:flex;gap:8px;align-items:center}
+.icon-btn{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;cursor:pointer;flex-shrink:0;
+  background:rgba(255,255,255,.07);
+  border:1px solid var(--border);
+  transition:.15s;text-decoration:none;
+}
+.icon-btn:active{transform:scale(.9)}
+.icon-btn.dl{background:rgba(143,168,255,.15);border-color:rgba(143,168,255,.4)}
+.icon-btn.review{background:rgba(0,217,255,.12);border-color:rgba(0,217,255,.35);color:#00d9ff}
+.comment-wrap{display:flex;flex-direction:column;align-items:center;line-height:1}
+.comment-count{font-size:8.5px;color:var(--muted);margin-top:2px}
+
+/* ============ EMOJI ============ */
+.emoji-bar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;max-width:100%}
+.emoji-list{display:flex;gap:5px;flex-wrap:wrap}
+.emoji-bar span{
+  background:rgba(255,255,255,.07);
+  border:1px solid transparent;
+  padding:4px 9px;border-radius:20px;font-size:12px;cursor:pointer;
+  display:inline-flex;align-items:center;gap:5px;transition:.15s;
+}
+.emoji-bar span.active{
+  background:rgba(143,168,255,.18);
+  border-color:rgba(143,168,255,.5);
+}
+.emoji-bar span img{width:15px;height:15px}
+.emoji-bar b{font-size:10.5px;color:var(--muted)}
+.emoji-add{
+  width:28px;height:28px;border-radius:50%;border:1px dashed var(--border);
+  background:transparent;color:var(--muted);cursor:pointer;font-size:14px;
+}
+.emoji-picker{
+  position:absolute;background:#181824;
+  border:1px solid var(--border);
+  padding:10px;border-radius:14px;
+  display:grid;grid-template-columns:repeat(6,1fr);gap:6px;
+  z-index:9999;max-width:230px;
+  box-shadow:0 10px 30px rgba(0,0,0,.5);
+}
+.emoji-picker span{font-size:18px;text-align:center;cursor:pointer;padding:4px;border-radius:8px}
+.emoji-picker span:active{background:rgba(255,255,255,.1)}
+
+/* ============ TOPBAR ============ */
+.topbar{
+  position:sticky;top:0;z-index:999;
+  display:flex;align-items:center;gap:10px;
+  padding:12px 0;
+  background:linear-gradient(160deg,var(--bg1),var(--bg2) 55%,var(--bg3));
+}
+.back-btn{
+  width:38px;height:38px;border-radius:12px;flex-shrink:0;
+  background:rgba(255,255,255,.07);
+  border:1px solid var(--border);
+  color:#fff;font-size:15px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+}
+.cat-title{font-size:13px;font-weight:600;white-space:nowrap}
+#search{
+  flex:1;min-width:0;padding:9px 14px;border-radius:12px;
+  border:1px solid var(--border);outline:none;
+  background:rgba(255,255,255,.06);color:#fff;font-size:12.5px;
+  font-family:'Poppins',sans-serif;
+}
+#search::placeholder{color:rgba(255,255,255,.35)}
+#search:focus{border-color:rgba(143,168,255,.5)}
+
+/* ============ FOOTER ============ */
+.footer{
+  text-align:center;color:#59618F;font-size:10px;
+  margin-top:26px;letter-spacing:.5px;
+}
+
+/* ============ COMMENT MODAL ============ */
+.comment-modal{
+  position:fixed;bottom:0;left:0;width:100%;height:65%;
+  background:rgba(19,24,43,.92);
+  backdrop-filter:blur(14px);
+  border-top-left-radius:20px;border-top-right-radius:20px;
+  border-top:1px solid var(--border);
+  z-index:9999;display:flex;flex-direction:column;
+  box-shadow:0 -10px 40px rgba(0,0,0,.6);
+  animation:slideUp .25s ease;
+}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.comment-panel{padding:14px;height:100%;display:flex;flex-direction:column}
+.comment-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;color:#fff;font-weight:600;font-size:13px}
+.comment-header button{
+  background:rgba(255,255,255,.08);border:none;color:#fff;
+  width:28px;height:28px;border-radius:50%;cursor:pointer;
+}
+#usernameInput{
+  width:90px;padding:6px 10px;border-radius:9px;border:none;outline:none;
+  background:rgba(255,255,255,.08);color:#fff;font-size:11px;
+  font-family:'Poppins',sans-serif;
+}
+.comment-list-box{flex:1;overflow-y:auto;padding:4px;display:flex;flex-direction:column;gap:10px}
+.comment-list-box>div{background:rgba(255,255,255,.05);border-radius:12px;padding:10px;font-size:12.5px}
+.comment-input-box{display:flex;gap:8px;padding-top:10px}
+.comment-input-box input{
+  flex:1;min-width:0;height:38px;padding:0 14px;border:none;outline:none;
+  border-radius:19px;background:rgba(255,255,255,.08);color:#fff;font-size:12.5px;
+  font-family:'Poppins',sans-serif;
+}
+.comment-input-box button{
+  height:38px;padding:0 16px;border:none;border-radius:19px;
+  background:linear-gradient(90deg,#5B6DBF,#8FA8FF);
+  color:#fff;font-size:12px;font-weight:600;cursor:pointer;
+  font-family:'Poppins',sans-serif;
+}
+.reply-hint{
+  font-size:10.5px;color:var(--accent);
+  background:rgba(143,168,255,.1);
+  padding:6px 12px;border-radius:10px;margin-bottom:6px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.reply-hint span{cursor:pointer;color:var(--muted)}
+
+/* ============ DELETE MENU ============ */
+.delete-menu{
+  position:fixed;inset:0;background:rgba(0,0,0,.5);
+  display:flex;align-items:flex-end;justify-content:center;z-index:99999;
+}
+.delete-box{
+  width:100%;background:#1a1f33;
+  border-top-left-radius:18px;border-top-right-radius:18px;
+  padding:14px 16px 20px;animation:slideUp .2s ease;
+}
+.delete-box p{margin:0 0 12px;font-size:12px;color:var(--muted);text-align:center}
+.delete-btn,.cancel-btn{
+  width:100%;padding:11px;border:none;border-radius:12px;
+  font-size:13px;font-weight:600;cursor:pointer;
+  font-family:'Poppins',sans-serif;
+}
+.delete-btn{background:#ef4444;color:#fff;margin-bottom:8px}
+.cancel-btn{background:rgba(255,255,255,.08);color:#fff}
+
+/* ============ TOAST ============ */
+.toast{
+  position:fixed;bottom:30px;left:50%;transform:translateX(-50%);
+  background:#242B45;border:1px solid var(--border);
+  color:#fff;font-size:12px;padding:10px 18px;border-radius:20px;
+  z-index:999999;animation:pop .2s ease;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============ SPLASH ============ -->
+<div class="splash" id="splash">
+  <div class="splash-logo">🜲</div>
+  <h1>SAMPxNot404</h1>
+  <div class="splash-sub">CLIENT &amp; SCRIPT</div>
+  <div class="loading-bar"><div class="loading-progress" id="loadingProgress"></div></div>
 </div>
-    <div class="desc">${app.desc}</div>
 
-    <div class="btn-row">
-    
-        <div class="left-btns">
-            ${app.file ? `<a href="${app.file}" class="btn download-btn">⬇</a>` : ``}
+<!-- ============ HOME ============ -->
+<div id="home" class="container">
+  <div class="header">
+    <div class="logo-badge">🜲</div>
+    <h1>SAMPx<span>Not404</span></h1>
+    <p>Client &amp; Script Hub</p>
+    <div class="social">
+      <a href="https://discord.gg/mpqU5vqANx"><img src="https://img.icons8.com/ios-filled/24/ffffff/discord-logo.png"/></a>
+      <a href="https://www.youtube.com/@xNot404"><img src="https://img.icons8.com/ios-filled/24/ffffff/youtube-play.png"/></a>
+      <a href="https://www.tiktok.com/@.userfaka?_t=ZS-8xYkqhwim1q&_r=1"><img src="https://img.icons8.com/ios-filled/24/ffffff/tiktok--v1.png"/></a>
+      <a href="https://saweria.co/SupportxNot404"><img src="https://img.icons8.com/ios-filled/24/ffffff/money--v1.png"/></a>
+    </div>
+  </div>
 
-            ${
-                app.password
-                    ? `
-            <div class="btn password-btn" onclick="openLink('${app.password}')">🔐</div>
-            `
-                    : ``
-            }
-     <div class="emoji-bar" data-id="${app.name.toLowerCase().replace(/[^a-z0-9]/g, "_")}">
-  <div class="emoji-list"></div>
+  <div class="info">
+    Selamat datang di <b>SAMPxNot404</b> — client SAMP modifikasi lebih lancar
+    &amp; stabil, plus kumpulan script Monet Loader.
+    <br><br>
+    <span style="color:var(--green)">⚡ 100% aman, bebas virus, langsung pakai tanpa ribet.</span>
+  </div>
 
-  <button class="emoji-add" onclick="openEmoji(this)">＋</button>
+  <div class="section-label">DOWNLOAD</div>
+  <div class="cat-grid" id="catGrid"></div>
+
+  <div class="footer">© xNot404 • All Rights Reserved</div>
 </div>
-        </div>
-         <!-- 🔥 KANAN -->
-    <div class="right-btns">
 
-<div class="icon-btn comment-btn" 
-     data-id="${app.name.toLowerCase().replace(/[^a-z0-9]/g, "_")}"
-     onclick="openComments(this.dataset.id)">  
+<!-- ============ DOWNLOAD PAGE ============ -->
+<div id="download" class="container hidden">
+  <div class="topbar">
+    <div class="back-btn" onclick="showHome()">←</div>
+    <div class="cat-title" id="catTitle"></div>
+    <input type="text" id="search" placeholder="Cari..."/>
+  </div>
+  <div id="downloadBox"></div>
+  <div class="footer">© xNot404 • All Rights Reserved</div>
+</div>
 
-    <div class="comment-wrap">
-        <span>💬</span>
-        <span class="comment-count">0</span>
+<!-- ============ COMMENT MODAL ============ -->
+<div id="commentModal" class="comment-modal hidden">
+  <div class="comment-panel">
+    <div class="comment-header">
+      <div style="display:flex;align-items:center;gap:8px">
+        <button id="backReplyBtn" onclick="exitReplyView()" style="display:none">←</button>
+        <span id="commentTitle">Komentar</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <input id="usernameInput" placeholder="Nama..."/>
+        <button onclick="closeComments()">✕</button>
+      </div>
     </div>
 
+    <div id="replyHint" class="reply-hint hidden">
+      <span id="replyHintText"></span>
+      <span onclick="cancelReply()">✕</span>
+    </div>
+
+    <div id="commentList" class="comment-list-box"></div>
+
+    <div class="comment-input-box">
+      <input id="commentInput" placeholder="Tulis komentar..."/>
+      <button onclick="sendModalComment()">Kirim</button>
+    </div>
+  </div>
 </div>
 
-        ${
-            app.review
-                ? `
-        <div class="review-btn icon-btn" onclick="openLink('${app.review}')">
-            >
-        </div>
-        `
-                : ``
-        }
-</div>
-</div>
-</div>
-`;
-                });
-                const search = document.getElementById("search");
-                search.oninput = null;
-                search.addEventListener("input", () => {
-                    let v = search.value.toLowerCase();
-                    let cards = document.querySelectorAll("#downloadBox .box");
-
-                    cards.forEach(c => {
-                        let name = c.dataset.name;
-
-                        c.style.display = name.includes(v) ? "block" : "none";
-                    });
-                });
-
-                document.getElementById("downloadBox").innerHTML = html;
-                setTimeout(initRealtime, 100);
-            }
-            async function loadEmoji() {
-                try {
-                    const res = await fetch(
-                        "https://raw.githubusercontent.com/Not404-X/Client-X/refs/heads/main/emoji.json"
-                    );
-
-                    const data = await res.json();
-
-                    emojiSet = data.emojiSet || [];
-
-                    console.log("Emoji loaded:", emojiSet);
-                } catch (e) {
-                    console.log("Emoji gagal load:", e);
-                }
-            }
-
-            function showHome() {
-                document.getElementById("download").style.display = "none";
-                document.getElementById("home").style.display = "block";
-            }
-
-            function openReview(link) {
-                window.open(link, "_blank");
-            }
-
-            let progress = 0;
-
-            const fakeAssets = [
-                "https://img.icons8.com/ios-filled/26/ffffff/discord-logo.png",
-                "https://img.icons8.com/ios-filled/26/ffffff/youtube-play.png",
-                "https://img.icons8.com/ios-filled/26/ffffff/tiktok--v1.png"
-            ];
-
-            let loaded = 0;
-
-            function updateBar() {
-                let percent = Math.floor((loaded / fakeAssets.length) * 100);
-                document.getElementById("loadingProgress").style.width =
-                    percent + "%";
-            }
-
-            window.openLink = function (url) {
-                if (!url) return;
-
-                // fallback aman untuk WebView + browser
-                try {
-                    if (window.Android && Android.openUrl) {
-                        Android.openUrl(url);
-                    } else {
-                        location.href = url;
-                    }
-                } catch (e) {
-                    location.href = url;
-                }
-            };
-
-            window.openEmoji = function (btn) {
-                let bar = btn.parentElement;
-
-                // hapus picker lama
-                let old = document.querySelector(".emoji-picker");
-                if (old) old.remove();
-
-                let picker = document.createElement("div");
-                picker.className = "emoji-picker";
-
-                // ======================
-                // isi emoji
-                // ======================
-                emojiSet.forEach(e => {
-                    let el = document.createElement("span");
-                    if (e.url) {
-                        let img = document.createElement("img");
-                        img.src = e.url;
-                        img.style.width = "20px";
-                        img.style.height = "20px";
-
-                        el.appendChild(img);
-                    } else {
-                        el.textContent = e.icon;
-                    }
-                    el.style.cursor = "pointer";
-
-                    el.onclick = () => {
-                        addEmoji(bar, e);
-                        picker.remove();
-                        removeOutsideListener();
-                    };
-
-                    picker.appendChild(el);
-                });
-
-                document.body.appendChild(picker);
-
-                // ======================
-                // POSITION SAFE
-                // ======================
-                let rect = btn.getBoundingClientRect();
-
-                let pickerWidth = 220;
-                let pickerHeight = 180;
-
-                // 🔥 posisi awal (ikut scroll)
-                let top = rect.bottom + window.scrollY;
-                let left = rect.left + window.scrollX;
-
-                // 🔥 kalau keluar kanan layar
-                if (left + pickerWidth > window.innerWidth) {
-                    left =
-                        window.innerWidth - pickerWidth - 10 + window.scrollX;
-                }
-
-                // 🔥 kalau keluar bawah layar → tampil ke atas tombol
-                if (rect.bottom + pickerHeight > window.innerHeight) {
-                    top = rect.top + window.scrollY - pickerHeight;
-                }
-
-                picker.style.position = "absolute";
-                picker.style.top = top + "px";
-                picker.style.left = left + "px";
-
-                // ======================
-                // AUTO CLOSE OUTSIDE CLICK
-                // ======================
-                function handleOutside(e) {
-                    if (!picker.contains(e.target) && e.target !== btn) {
-                        picker.remove();
-                        removeOutsideListener();
-                    }
-                }
-
-                function removeOutsideListener() {
-                    document.removeEventListener("click", handleOutside);
-                }
-
-                setTimeout(() => {
-                    document.addEventListener("click", handleOutside);
-                }, 10);
-            };
-
-            // ======================
-            // ADD EMOJI (FIX SAFE)
-            // ======================
-            function addEmoji(bar, emojiObj) {
-                let id = bar.dataset.id;
-
-                let span = bar.querySelector(`[data-type="${emojiObj.key}"]`);
-
-                if (!span) {
-                    span = document.createElement("span");
-                    span.dataset.type = emojiObj.key;
-                    if (emojiObj.url) {
-                        span.innerHTML = `<img src="${emojiObj.url}" style="width:16px;height:16px;"> <b>0</b>`;
-                    } else {
-                        span.innerHTML = `${emojiObj.icon} <b>0</b>`;
-                    }
-
-                    span.onclick = function () {
-                        react(this, emojiObj.key);
-                    };
-
-                    bar.querySelector(".emoji-list").appendChild(span);
-                }
-
-                react(span, emojiObj.key);
-
-                // optional: auto scroll ke emoji baru
-                setTimeout(() => {
-                    bar.scrollLeft = bar.scrollWidth;
-                }, 50);
-            }
-
-            function loadFake(src) {
-                return new Promise(res => {
-                    let img = new Image();
-                    img.src = src;
-                    img.onload = res;
-                    img.onerror = res;
-                });
-            }
-
-            async function startSplash() {
-                for (let i = 0; i < fakeAssets.length; i++) {
-                    await loadFake(fakeAssets[i]);
-                    loaded++;
-                    updateBar();
-
-                    await new Promise(r => setTimeout(r, 300)); // ⬅️ ini delay per step
-                }
-
-                setTimeout(() => {
-                    const splash = document.querySelector(".splash");
-                    if (splash) {
-                        splash.classList.add("hide"); // 🔥 jalanin animasi dulu
-
-                        setTimeout(() => {
-                            splash.style.display = "none"; // baru hilang total
-                        }, 800);
-                    }
-                }, 800);
-            }
-
-            loadApps();
-            loadEmoji();
-            startSplash();
-        </script>
-
-        <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-
-        <script>
-            const badWords = [
-                "anjing",
-                "anj",
-                "babi",
-                "kontol",
-                "kntl",
-                "memek",
-                "mmk",
-                "bangsat",
-                "bngst",
-                "tolol",
-                "tll",
-                "goblok",
-                "gblk",
-                "ngentot",
-                "ngntt"
-            ];
-
-            function filterBadWords(text) {
-                let result = text;
-
-                badWords.forEach(word => {
-                    let regex = new RegExp(word, "gi");
-                    result = result.replace(regex, "*".repeat(word.length));
-                });
-
-                return result;
-            }
-
-            const firebaseConfig = {
-                apiKey: "AIzaSyAxl9TLl8uNb5c463aTz_JPtOAKJpgJ5kE",
-                authDomain: "database-x-64b77.firebaseapp.com",
-                databaseURL:
-                    "https://database-x-64b77-default-rtdb.asia-southeast1.firebasedatabase.app",
-                projectId: "database-x-64b77",
-                storageBucket: "database-x-64b77.firebasestorage.app",
-                messagingSenderId: "1028544639743",
-                appId: "1:1028544639743:web:6e75bf0d63be58491192ca"
-            };
-
-            // =====================
-            // INIT (COMPAT FIX)
-            // =====================
-            firebase.initializeApp(firebaseConfig);
-            const db = firebase.database();
-
-            window.react = function (el, emojiKey) {
-                let box = el.closest(".emoji-bar");
-                let cardId = box.dataset.id;
-
-                // pakai ID sederhana (kalau belum login, fallback device)
-                let userId = localStorage.getItem("uid");
-                if (!userId) {
-                    userId = "u_" + Math.random().toString(36).substr(2, 9);
-                    localStorage.setItem("uid", userId);
-                }
-
-                let ref = db.ref(`reactions/${cardId}`);
-
-                ref.once("value").then(snap => {
-                    let data = snap.val() || {};
-
-                    let currentEmoji = null;
-
-                    // cari emoji yang sudah dipakai user ini
-                    Object.keys(data).forEach(e => {
-                        if (data[e] && data[e][userId]) {
-                            currentEmoji = e;
-                        }
-                    });
-
-                    // kalau klik emoji yang sama → REMOVE (toggle off)
-                    if (currentEmoji === emojiKey) {
-                        db.ref(
-                            `reactions/${cardId}/${emojiKey}/${userId}`
-                        ).remove();
-                        return;
-                    }
-
-                    // kalau sudah ada reaction → pindahkan (Discord behavior)
-                    if (currentEmoji) {
-                        db.ref(
-                            `reactions/${cardId}/${currentEmoji}/${userId}`
-                        ).remove();
-                    }
-
-                    // set reaction baru
-                    db.ref(`reactions/${cardId}/${emojiKey}/${userId}`).set(
-                        true
-                    );
-                });
-            };
-            let currentCardId = null;
-
-            window.openComments = function (id) {
-                currentCardId = id;
-
-                document
-                    .getElementById("commentModal")
-                    .classList.remove("hidden");
-
-                // 🔥 LOAD NAMA DI SINI (bukan cuma DOMContentLoaded)
-                let savedName = localStorage.getItem("username");
-                let input = document.getElementById("usernameInput");
-
-                if (savedName && input) {
-                    input.value = savedName;
-                }
-
-                loadComments(id);
-            };
-
-            window.closeComments = function () {
-                document.getElementById("commentModal").classList.add("hidden");
-            };
-
-            // =======================
-            // LOAD COMMENTS
-            // =======================
-            function loadComments(cardId) {
-                const list = document.getElementById("commentList");
-                const myId = localStorage.getItem("uid");
-                const inputBox = document.querySelector(".comment-input-box");
-
-                // 🔥 kondisi:
-                // - kalau lagi lihat balasan DAN belum klik tombol balas → hide
-                // - kalau lagi reply → tetap tampil
-
-                if (currentView && !replyTo) {
-                    inputBox.style.display = "none";
-                } else {
-                    inputBox.style.display = "flex";
-                }
-
-                db.ref(`comments/${cardId}`).off();
-
-                db.ref(`comments/${cardId}`).on("value", snap => {
-                    const data = snap.val() || {};
-                    list.innerHTML = "";
-
-                    const comments = [];
-                    const replies = {};
-                    const backBtn = document.getElementById("backReplyBtn");
-
-                    // tampilkan tombol kalau lagi di mode reply
-                    if (currentView) {
-                        backBtn.style.display = "inline-block";
-                    } else {
-                        backBtn.style.display = "none";
-                    }
-
-                    // pisah parent & reply (lebih hemat)
-                    Object.entries(data).forEach(([id, c]) => {
-                        if (c.parentId) {
-                            if (!replies[c.parentId]) replies[c.parentId] = [];
-                            replies[c.parentId].push({ id, ...c });
-                        } else {
-                            comments.push({ id, ...c });
-                        }
-                    });
-
-                    comments.sort((a, b) => {
-                        if (a.pinned && !b.pinned) return -1;
-                        if (!a.pinned && b.pinned) return 1;
-                        return b.time - a.time;
-                    });
-
-                    comments.forEach(c => {
-                        if (currentView && c.id !== currentView) {
-                            return;
-                        }
-
-                        const div = document.createElement("div");
-
-                        div.style.cssText = `
-                padding:10px;
-                border-radius:10px;
-                background:rgba(255,255,255,.06);
-                font-size:13px;
-                color:#fff;
-                word-break:break-word;
-                display:flex;
-                flex-direction:column;
-                gap:4px;
-            `;
-
-                        div.innerHTML = `
-<span style="color:#aaa;font-size:12px;font-weight:500;">
-@${c.name}
-${c.pinned ? `<span style="color:#facc15;font-size:11px;margin-left:6px;">📌 Pinned</span>` : ``}
-</span>
-
-<span>${c.text}</span>
-
-<button class="reply-btn"
-style="
-background:none;
-border:none;
-color:#00d9ff;
-font-size:11px;
-cursor:pointer;
-text-align:left;
-padding:0;
-">
-Balas
-</button>
-
-${
-    myId === "u_cmvewop"
-        ? `
-<button onclick="pinComment('${c.id}', ${c.pinned || false})"
-style="background:none;border:none;color:#facc15;font-size:11px;">
-📌 Pin
-</button>
-`
-        : ``
+<script>
+/* =====================================================
+   CONFIG
+===================================================== */
+const CATEGORIES = [
+  { key:"x64",   icon:"🎮", name:"Client 64-Bit",  desc:"Untuk Android 64-bit",  wide:false },
+  { key:"x32",   icon:"🎮", name:"Client 32-Bit",  desc:"Untuk Android 32-bit",  wide:false },
+  { key:"monet", icon:"🎨", name:"Monet Loader",   desc:"Kumpulan script monet", wide:true  }
+];
+const ADMIN_UID = "u_cmvewop";
+
+const URL_CLIENT_JSON = "https://raw.githubusercontent.com/Not404-X/Client-X/refs/heads/main/client.json";
+const URL_MONET_JSON  = "https://raw.githubusercontent.com/Not404-X/Client-X/refs/heads/main/monet.json";
+
+let apps = {}, emojiSet = [];
+let currentCat = null, currentCardId = null;
+let replyTo = null, currentView = null;
+let db = null;
+
+/* =====================================================
+   FIREBASE (AMAN — try/catch)
+===================================================== */
+try{
+  const firebaseConfig = {
+    apiKey: "AIzaSyAxl9TLl8uNb5c463aTz_JPtOAKJpgJ5kE",
+    authDomain: "database-x-64b77.firebaseapp.com",
+    databaseURL: "https://database-x-64b77-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "database-x-64b77",
+    storageBucket: "database-x-64b77.firebasestorage.app",
+    messagingSenderId: "1028544639743",
+    appId: "1:1028544639743:web:6e75bf0d63be58491192ca"
+  };
+  firebase.initializeApp(firebaseConfig);
+  db = firebase.database();
+}catch(e){
+  console.log("Firebase gagal init:", e);
+  db = null;
 }
-`;
 
-                        // tombol balas fix
-                        const replyBtn = div.querySelector(".reply-btn");
+/* =====================================================
+   DATA — client.json + monet.json TERPISAH
+===================================================== */
+async function loadApps(){
+  apps = {};
 
-                        replyBtn.onclick = e => {
-                            e.stopPropagation();
-                            setReply(c.id, c.name);
-                        };
+  try{
+    const res = await fetch(URL_CLIENT_JSON);
+    const data = await res.json();
+    apps = Object.assign(apps, data);
+  }catch(e){ console.log("client.json gagal:", e); }
 
-                        replyBtn.ontouchstart = e => {
-                            e.stopPropagation();
-                        };
+  try{
+    const res = await fetch(URL_MONET_JSON);
+    const data = await res.json();
+    apps = Object.assign(apps, data);
+  }catch(e){ console.log("monet.json gagal:", e); }
 
-                        // render replies
-                        const commentList =
-                            document.getElementById("commentList");
+  renderHome();
+}
 
-                        const childReplies = replies[c.id] || [];
+async function loadEmoji(){
+  try{
+    const res = await fetch("https://raw.githubusercontent.com/Not404-X/Client-X/refs/heads/main/emoji.json");
+    const data = await res.json();
+    emojiSet = data.emojiSet || [];
+  }catch(e){ console.log("emoji.json gagal:", e); }
+}
 
-                        if (childReplies.length) {
-                            let opened = false;
-
-                            const toggle = document.createElement("span");
-                            toggle.innerHTML = `Lihat balasan (${childReplies.length})`;
-
-                            toggle.style.cssText = `
-display:block;
-margin-top:6px;
-color:#00d9ff;
-font-size:11px;
-cursor:pointer;
-`;
-
-                            const replyWrap = document.createElement("div");
-                            replyWrap.style.cssText = `
-display:none;
-margin-top:10px;
-padding-left:10px;
-border-left:2px solid rgba(255,255,255,.1);
-`;
-
-                            childReplies.forEach(r => {
-                                const rep = document.createElement("div");
-
-                                rep.style.cssText = `
-        margin-top:10px;
-        padding:8px;
-        border-radius:8px;
-        background:rgba(255,255,255,.04);
-        display:flex;
-        flex-direction:column;
-        gap:4px;
+/* =====================================================
+   HOME
+===================================================== */
+function renderHome(){
+  const grid = document.getElementById("catGrid");
+  grid.innerHTML = "";
+  CATEGORIES.forEach(cat=>{
+    const count = apps[cat.key] ? apps[cat.key].length : 0;
+    const div = document.createElement("div");
+    div.className = "cat-card" + (cat.wide ? " cat-wide" : "");
+    div.innerHTML = `
+      <div class="cat-icon">${cat.icon}</div>
+      <div>
+        <h3>${cat.name}</h3>
+        <p>${cat.desc}</p>
+      </div>
+      <span class="cat-count">${count} item</span>
     `;
+    div.onclick = ()=> showDownload(cat.key);
+    grid.appendChild(div);
+  });
+}
 
-                                rep.innerHTML = `
-        <span style="color:#aaa;font-size:12px;font-weight:500;">
-            @${r.name}
+function showHome(){
+  document.getElementById("download").classList.add("hidden");
+  document.getElementById("home").classList.remove("hidden");
+  renderHome();
+}
+
+/* =====================================================
+   DOWNLOAD PAGE
+===================================================== */
+async function showDownload(type){
+  currentCat = type;
+  const cat = CATEGORIES.find(c=>c.key===type);
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("download").classList.remove("hidden");
+  document.getElementById("catTitle").textContent = (cat?cat.icon+" ":"")+(cat?cat.name:"");
+
+  if(!apps || !apps[type]) await loadApps();
+
+  const box = document.getElementById("downloadBox");
+  if(!apps || !apps[type] || !apps[type].length){
+    box.innerHTML = `<div class="box"><div class="title">Belum ada item</div>
+    <div class="desc">Data kategori ini belum tersedia / JSON gagal dimuat.</div></div>`;
+    return;
+  }
+
+  let html = "";
+  apps[type].forEach(app=>{
+    const id = app.name.toLowerCase().replace(/[^a-z0-9]/g,"_");
+    html += `
+<div class="box" data-name="${app.name.toLowerCase()}" data-id="${id}">
+  <div class="title">
+    ${app.name}
+    ${app.status==="new" ? `<span class="badge new">NEW</span>` :
+      app.status==="update" ? `<span class="badge update">UPDATE</span>` : ``}
+  </div>
+  <div class="desc">${app.desc}</div>
+  <div class="btn-row">
+    <div class="left-btns">
+      ${app.file ? `<a href="${app.file}" class="icon-btn dl">⬇</a>` : ``}
+      ${app.password ? `<div class="icon-btn" onclick="openLink('${app.password}')">🔐</div>` : ``}
+      <div class="icon-btn" onclick="shareApp('${app.name.replace(/'/g,"\\'")}','${app.file||""}')">⤴</div>
+      <div class="emoji-bar" data-id="${id}">
+        <div class="emoji-list"></div>
+        <button class="emoji-add" onclick="openEmoji(this)">＋</button>
+      </div>
+    </div>
+    <div class="right-btns">
+      <div class="icon-btn comment-btn" onclick="openComments('${id}')">
+        <div class="comment-wrap"><span>💬</span><span class="comment-count">0</span></div>
+      </div>
+      ${app.review ? `<div class="icon-btn review" onclick="openLink('${app.review}')">›</div>` : ``}
+    </div>
+  </div>
+</div>`;
+  });
+
+  box.innerHTML = html;
+  setTimeout(initRealtime, 100);
+
+  const search = document.getElementById("search");
+  search.value = "";
+  search.oninput = ()=>{
+    const v = search.value.toLowerCase();
+    document.querySelectorAll("#downloadBox .box").forEach(c=>{
+      c.style.display = c.dataset.name.includes(v) ? "block" : "none";
+    });
+  };
+}
+
+/* =====================================================
+   SHARE + LINK
+===================================================== */
+window.shareApp = async function(name, url){
+  if(!url){ toast("Link belum tersedia"); return; }
+  try{
+    if(navigator.share){
+      await navigator.share({ title:name, text:"Download "+name+" – xNot404", url:url });
+    }else if(navigator.clipboard){
+      await navigator.clipboard.writeText(url);
+      toast("Link disalin ✓");
+    }else{ openLink(url); }
+  }catch(e){}
+};
+
+window.openLink = function(url){
+  if(!url) return;
+  try{
+    if(window.Android && Android.openUrl) Android.openUrl(url);
+    else location.href = url;
+  }catch(e){ location.href = url; }
+};
+
+/* =====================================================
+   EMOJI PICKER
+===================================================== */
+window.openEmoji = function(btn){
+  const bar = btn.parentElement;
+  const old = document.querySelector(".emoji-picker");
+  if(old) old.remove();
+
+  const picker = document.createElement("div");
+  picker.className = "emoji-picker";
+
+  emojiSet.forEach(e=>{
+    const el = document.createElement("span");
+    if(e.url){
+      const img = document.createElement("img");
+      img.src = e.url; img.style.width="20px"; img.style.height="20px";
+      el.appendChild(img);
+    }else el.textContent = e.icon;
+    el.onclick = ()=>{ react(bar, e.key); picker.remove(); cleanup(); };
+    picker.appendChild(el);
+  });
+
+  document.body.appendChild(picker);
+
+  const rect = btn.getBoundingClientRect();
+  const pw = 230, ph = 180;
+  let top = rect.bottom + window.scrollY + 6;
+  let left = rect.left + window.scrollX;
+  if(left + pw > window.innerWidth) left = window.innerWidth - pw - 10;
+  if(rect.bottom + ph > window.innerHeight) top = rect.top + window.scrollY - ph - 6;
+  picker.style.top = top+"px"; picker.style.left = left+"px";
+
+  function handle(e){
+    if(!picker.contains(e.target) && e.target!==btn){ picker.remove(); cleanup(); }
+  }
+  function cleanup(){ document.removeEventListener("click", handle); }
+  setTimeout(()=>document.addEventListener("click", handle), 10);
+};
+
+/* =====================================================
+   REALTIME (REACTIONS + JUMLAH KOMENTAR)
+===================================================== */
+function initRealtime(){
+  if(!db) return;
+  document.querySelectorAll("#downloadBox .box").forEach(card=>{
+    const id = card.dataset.id;
+    const bar = card.querySelector(".emoji-bar");
+
+    db.ref("reactions/"+id).off();
+    db.ref("reactions/"+id).on("value", snap=>{
+      const data = snap.val() || {};
+      const uid = localStorage.getItem("uid");
+      const list = bar.querySelector(".emoji-list");
+      if(!list) return;
+      list.innerHTML = "";
+      Object.entries(data).forEach(([key, users])=>{
+        const count = users ? Object.keys(users).length : 0;
+        if(count < 1) return;
+        const e = emojiSet.find(x=>x.key===key) || {icon:"👍"};
+        const span = document.createElement("span");
+        if(users && uid && users[uid]) span.classList.add("active");
+        span.innerHTML = e.url
+          ? `<img src="${e.url}"><b>${count}</b>`
+          : `${e.icon} <b>${count}</b>`;
+        span.onclick = ()=> react(bar, key);
+        list.appendChild(span);
+      });
+    });
+
+    db.ref("comments/"+id).off();
+    db.ref("comments/"+id).on("value", snap=>{
+      const n = snap.val() ? Object.keys(snap.val()).length : 0;
+      const el = card.querySelector(".comment-count");
+      if(el) el.textContent = n;
+    });
+  });
+}
+
+window.react = function(bar, emojiKey){
+  if(!db) return;
+  const cardId = bar.dataset.id;
+  const uid = getUid();
+  const ref = db.ref("reactions/"+cardId);
+  ref.once("value").then(snap=>{
+    const data = snap.val() || {};
+    let current = null;
+    Object.keys(data).forEach(e=>{
+      if(data[e] && data[e][uid]) current = e;
+    });
+    if(current === emojiKey){ ref.child(emojiKey+"/"+uid).remove(); return; }
+    if(current) ref.child(current+"/"+uid).remove();
+    ref.child(emojiKey+"/"+uid).set(true);
+  });
+};
+
+function getUid(){
+  let uid = localStorage.getItem("uid");
+  if(!uid){ uid = "u_"+Math.random().toString(36).substr(2,9); localStorage.setItem("uid", uid); }
+  return uid;
+}
+
+/* =====================================================
+   COMMENTS
+===================================================== */
+const badWords = ["anjing","anj","babi","kontol","kntl","memek","mmk","bangsat","bngst","tolol","tll","goblok","gblk","ngentot","ngntt"];
+function filterBadWords(text){
+  let r = text;
+  badWords.forEach(w=>{ r = r.replace(new RegExp(w,"gi"), "*".repeat(w.length)); });
+  return r;
+}
+
+window.openComments = function(id){
+  currentCardId = id;
+  document.getElementById("commentModal").classList.remove("hidden");
+  const saved = localStorage.getItem("username");
+  if(saved) document.getElementById("usernameInput").value = saved;
+  loadComments(id);
+};
+window.closeComments = function(){
+  document.getElementById("commentModal").classList.add("hidden");
+};
+
+window.setReply = function(id, name){
+  replyTo = id;
+  const hint = document.getElementById("replyHint");
+  document.getElementById("replyHintText").textContent = "Membalas @"+name;
+  hint.classList.remove("hidden");
+};
+window.cancelReply = function(){
+  replyTo = null;
+  document.getElementById("replyHint").classList.add("hidden");
+};
+window.exitReplyView = function(){
+  if(replyTo){ cancelReply(); return; }
+  currentView = null;
+  document.getElementById("backReplyBtn").style.display = "none";
+  loadComments(currentCardId);
+};
+
+window.sendModalComment = function(){
+  if(!db){ toast("Database tidak tersambung"); return; }
+  const input = document.getElementById("commentInput");
+  let text = input.value.trim();
+  if(!text) return;
+  text = filterBadWords(text);
+
+  let name = document.getElementById("usernameInput").value.trim() || "Anon";
+  localStorage.setItem("username", name);
+
+  db.ref("comments/"+currentCardId).push({
+    name: name,
+    text: text,
+    uid: getUid(),
+    time: Date.now(),
+    parentId: replyTo || null
+  });
+
+  input.value = "";
+  cancelReply();
+};
+
+function loadComments(cardId){
+  const list = document.getElementById("commentList");
+  const myId = localStorage.getItem("uid");
+  const backBtn = document.getElementById("backReplyBtn");
+  backBtn.style.display = (currentView || replyTo) ? "inline-block" : "none";
+
+  if(!db){
+    list.innerHTML = `<div style="text-align:center;color:var(--muted);font-size:12px;padding:30px 0;">Database tidak tersambung.</div>`;
+    return;
+  }
+
+  db.ref("comments/"+cardId).off();
+  db.ref("comments/"+cardId).on("value", snap=>{
+    const data = snap.val() || {};
+    list.innerHTML = "";
+
+    const comments = [], replies = {};
+    Object.entries(data).forEach(([id,c])=>{
+      if(c.parentId){
+        if(!replies[c.parentId]) replies[c.parentId] = [];
+        replies[c.parentId].push({id, ...c});
+      }else comments.push({id, ...c});
+    });
+
+    comments.sort((a,b)=>{
+      if(a.pinned && !b.pinned) return -1;
+      if(!a.pinned && b.pinned) return 1;
+      return b.time - a.time;
+    });
+
+    comments.forEach(c=>{
+      if(currentView && c.id !== currentView) return;
+
+      const div = document.createElement("div");
+      div.innerHTML = `
+        <span style="color:var(--accent);font-size:11.5px;font-weight:600;">
+          @${c.name}
+          ${c.pinned ? `<span style="color:var(--yellow);font-size:10px;margin-left:6px;">📌 Pinned</span>` : ``}
         </span>
-
-        <span style="color:#ddd;font-size:13px;">
-            ${r.text}
-        </span>
-
-        <button class="reply-child-btn"
-        style="
-            background:none;
-            border:none;
-            color:#00d9ff;
-            font-size:11px;
-            cursor:pointer;
-            padding:0;
-            text-align:left;
-            width:max-content;
-        ">
-            Balas
-        </button>
-    `;
-
-                                // =========================
-                                // BALAS (NORMAL CLICK)
-                                // =========================
-                                rep.querySelector(
-                                    ".reply-child-btn"
-                                ).addEventListener("click", e => {
-                                    e.stopPropagation();
-                                    setReply(c.id, r.name);
-                                });
-
-                                // =========================
-                                // LONG PRESS DELETE
-                                // =========================
-                                let pressTimerReply;
-                                let isLongPress = false;
-
-                                const startPressReply = e => {
-                                    e.stopPropagation();
-                                    if (
-                                        e.target.classList.contains(
-                                            "reply-child-btn"
-                                        )
-                                    )
-                                        return;
-
-                                    isLongPress = false;
-
-                                    const myId = localStorage.getItem("uid");
-
-                                    pressTimerReply = setTimeout(() => {
-                                        isLongPress = true;
-
-                                        handleDelete(
-                                            {
-                                                id: r.id,
-                                                parentId: r.parentId,
-                                                userId: r.userId,
-                                                text: r.text
-                                            },
-                                            cardId,
-                                            r.id,
-                                            myId
-                                        );
-                                    }, 600);
-                                };
-
-                                const cancelPressReply = () => {
-                                    clearTimeout(pressTimerReply);
-                                };
-
-                                ["touchstart", "mousedown"].forEach(ev => {
-                                    rep.addEventListener(ev, e => {
-                                        e.stopPropagation(); // 🔥 cegah naik ke parent
-                                        startPressReply(e);
-                                    });
-                                });
-
-                                [
-                                    "touchend",
-                                    "touchmove",
-                                    "mouseup",
-                                    "mouseleave"
-                                ].forEach(ev => {
-                                    rep.addEventListener(ev, cancelPressReply);
-                                });
-
-                                replyWrap.appendChild(rep);
-                            });
-
-                            toggle.onclick = function (e) {
-                                e.stopPropagation();
-
-                                currentView = c.id;
-                                loadComments(currentCardId);
-                            };
-
-                            if (currentView === c.id) {
-                                // 🔥 mode lihat balasan
-                                replyWrap.style.display = "block";
-                                toggle.style.display = "none"; // sembunyikan tombol
-                            } else {
-                                // 🔥 mode normal
-                                replyWrap.style.display = "none";
-                                toggle.style.display = "block";
-                                toggle.innerHTML = `Lihat balasan (${childReplies.length})`;
-                            }
-
-                            div.appendChild(toggle);
-                            div.appendChild(replyWrap);
-                        }
-
-                        // ==================
-                        // LONG PRESS DELETE
-                        // ==================
-                        let pressTimer;
-
-                        const startPress = e => {
-                            if (
-                                e.target.classList.contains("reply-btn") ||
-                                e.target.innerText.includes("balasan")
-                            ) {
-                                return;
-                            }
-
-                            pressTimer = setTimeout(() => {
-                                handleDelete(c, cardId, c.id, myId);
-                            }, 600);
-                        };
-
-                        const cancelPress = () => {
-                            clearTimeout(pressTimer);
-                        };
-
-                        ["touchstart", "mousedown"].forEach(ev => {
-                            div.addEventListener("touchstart", startPress);
-                        });
-
-                        [
-                            "touchend",
-                            "touchmove",
-                            "mouseup",
-                            "mouseleave"
-                        ].forEach(ev => {
-                            div.addEventListener(ev, cancelPress);
-                        });
-
-                        list.appendChild(div);
-                    });
-                });
-            }
-
-            // =======================
-            // DELETE
-            // =======================
-            function handleDelete(comment, cardId, commentId, myId) {
-                if (comment.userId !== myId) return;
-
-                deleteTarget = { cardId, commentId };
-
-                document.getElementById("deleteMenu").style.display = "flex";
-            }
-
-            function confirmDelete() {
-                if (!deleteTarget) return;
-
-                const { cardId, commentId } = deleteTarget;
-
-                // 🔥 ambil semua komentar
-                db.ref(`comments/${cardId}`)
-                    .once("value")
-                    .then(snap => {
-                        const data = snap.val() || {};
-
-                        // 1. hapus parent
-                        db.ref(`comments/${cardId}/${commentId}`).remove();
-
-                        // 2. hapus semua reply yang punya parentId ini
-                        Object.entries(data).forEach(([id, c]) => {
-                            if (c.parentId === commentId) {
-                                db.ref(`comments/${cardId}/${id}`).remove();
-                            }
-                        });
-
-                        closeDeleteMenu();
-                    });
-            }
-
-            function closeDeleteMenu() {
-                deleteTarget = null;
-                document.getElementById("deleteMenu").style.display = "none";
-            }
-
-            // =======================
-            // SEND COMMENT
-            // =======================
-            window.sendModalComment = function () {
-                const input = document.getElementById("commentInput");
-                const nameInput = document.getElementById("usernameInput");
-
-                const text = input.value.trim();
-                const userName = nameInput.value.trim();
-
-                if (!userName) {
-                    nameInput.style.border = "1px solid red";
-                    nameInput.placeholder = "Nama wajib diisi!";
-                    nameInput.focus();
-                    return;
-                }
-
-                if (!text || !currentCardId) return;
-
-                let userId = localStorage.getItem("uid");
-
-                if (!userId) {
-                    userId = "u_" + Math.random().toString(36).slice(2, 9);
-                    localStorage.setItem("uid", userId);
-                }
-
-                localStorage.setItem("username", userName);
-
-                db.ref(`comments/${currentCardId}`).push({
-                    text: filterBadWords(text),
-                    userId,
-                    name: filterBadWords(userName),
-                    parentId: replyTo || null,
-                    time: Date.now(),
-                    pinned: false // 🔥 TAMBAHAN PIN
-                });
-
-                // 🔥 RESET UI (INI FIX UTAMA)
-                resetCommentView();
-
-                input.value = "";
-                replyTo = null;
-                input.placeholder = "Tulis komentar...";
-                loadComments(currentCardId); // 🔥 refresh ulang UI
-                setTimeout(() => {
-                    const list = document.getElementById("commentList");
-                    list.scrollTop = list.scrollHeight;
-                }, 100);
-            };
-
-            // =======================
-            // REPLY
-            // =======================
-            window.setReply = function (id, name) {
-                replyTo = id;
-
-                const input = document.getElementById("commentInput");
-                const inputBox = document.querySelector(".comment-input-box");
-
-                inputBox.style.display = "flex"; // 🔥 paksa muncul
-
-                input.placeholder = `Balas ke @${name}`;
-                input.focus();
-            };
-
-            function resetCommentView() {
-                const commentList = document.getElementById("commentList");
-
-                Array.from(commentList.children).forEach(el => {
-                    el.style.display = "";
-                });
-            }
-
-            // =======================
-            // REALTIME REACTION
-            // =======================
-            window.initRealtime = function () {
-                // =======================
-                // REALTIME REACTIONS
-                // =======================
-                document.querySelectorAll(".emoji-bar").forEach(bar => {
-                    const id = bar.dataset.id;
-                    const list = bar.querySelector(".emoji-list");
-
-                    db.ref(`reactions/${id}`).on("value", snap => {
-                        const data = snap.val() || {};
-                        list.innerHTML = "";
-
-                        Object.keys(data).forEach(type => {
-                            const count = Object.keys(data[type] || {}).length;
-                            if (!count) return;
-
-                            const emoji = emojiSet.find(e => e.key === type);
-                            if (!emoji) return;
-
-                            const span = document.createElement("span");
-                            span.dataset.type = type;
-
-                            span.innerHTML = `
-                    ${
-                        emoji.url
-                            ? `<img src="${emoji.url}" style="width:16px;height:16px">`
-                            : emoji.icon
-                    }
-                    <b>${count}</b>
-                `;
-
-                            span.onclick = () => react(span, type);
-
-                            list.appendChild(span);
-                        });
-                    });
-                });
-
-                // =======================
-                // 🔥 REALTIME COMMENT COUNT
-                // =======================
-                document.querySelectorAll(".comment-btn").forEach(btn => {
-                    const id = btn.dataset.id;
-                    const countEl = btn.querySelector(".comment-count");
-
-                    db.ref(`comments/${id}`).on("value", snap => {
-                        const data = snap.val() || {};
-                        const total = Object.keys(data).length;
-
-                        countEl.textContent = total;
-                    });
-                });
-            };
-        </script>
-
-        <script>
-            window.pinComment = function (commentId, isPinned) {
-                if (!currentCardId) return;
-
-                db.ref(`comments/${currentCardId}/${commentId}`).update({
-                    pinned: !isPinned
-                });
-            };
-
-            window.exitReplyView = function () {
-                currentView = null;
-                replyTo = null;
-
-                document.getElementById("backReplyBtn").style.display = "none";
-
-                loadComments(currentCardId);
-            };
-        </script>
-
-        <div id="deleteMenu" class="delete-menu" style="display: none">
-            <div class="delete-box">
-                <button onclick="confirmDelete()" class="delete-btn">
-                    Hapus
-                </button>
-                <button onclick="closeDeleteMenu()" class="cancel-btn">
-                    Batal
-                </button>
-            </div>
-        </div>
-    </body>
+        <div style="margin-top:4px;color:#e8ebff;word-break:break-word;">${c.text}</div>
+        <div style="margin-top:6px;display:flex;gap:14px;">
+          <button class="reply-btn" style="background:none;border:none;color:#00d9ff;font-size:11px;cursor:pointer;padding:0;">Balas</button>
+          ${myId===ADMIN_UID ? `<button class="pin-btn" style="background:none;border:none;color:var(--yellow);font-size:11px;cursor:pointer;padding:0;">📌 Pin</button>` : ``}
+        </div>`;
+
+      div.querySelector(".reply-btn").onclick = e=>{ e.stopPropagation(); setReply(c.id, c.name); };
+      const pinBtn = div.querySelector(".pin-btn");
+      if(pinBtn) pinBtn.onclick = e=>{
+        e.stopPropagation();
+        db.ref("comments/"+cardId+"/"+c.id).update({ pinned: !c.pinned });
+      };
+
+      let timer;
+      const start = e=>{
+        if(e.target.tagName==="BUTTON") return;
+        timer = setTimeout(()=> handleDelete(c, cardId, myId), 600);
+      };
+      const cancel = ()=> clearTimeout(timer);
+      ["touchstart","mousedown"].forEach(ev=> div.addEventListener(ev, start));
+      ["touchend","touchmove","mouseup","mouseleave"].forEach(ev=> div.addEventListener(ev, cancel));
+
+      const childs = replies[c.id] || [];
+      if(childs.length){
+        const toggle = document.createElement("span");
+        toggle.style.cssText = "display:block;margin-top:8px;color:#00d9ff;font-size:11px;cursor:pointer;";
+        const wrap = document.createElement("div");
+        wrap.style.cssText = "display:none;margin-top:8px;padding-left:10px;border-left:2px solid rgba(143,168,255,.15);";
+
+        childs.forEach(r=>{
+          const rep = document.createElement("div");
+          rep.style.cssText = "margin-top:8px;padding:8px;border-radius:10px;background:rgba(255,255,255,.04);";
+          rep.innerHTML = `
+            <span style="color:var(--accent);font-size:11px;font-weight:600;">@${r.name}</span>
+            <div style="margin-top:3px;font-size:12.5px;color:#ddd;word-break:break-word;">${r.text}</div>
+            <button class="r-reply" style="background:none;border:none;color:#00d9ff;font-size:10.5px;cursor:pointer;padding:0;margin-top:4px;">Balas</button>`;
+
+          rep.querySelector(".r-reply").onclick = e=>{ e.stopPropagation(); setReply(c.id, r.name); };
+
+          let rt;
+          const rStart = e=>{
+            if(e.target.tagName==="BUTTON") return;
+            rt = setTimeout(()=> handleDelete(r, cardId, myId), 600);
+          };
+          const rCancel = ()=> clearTimeout(rt);
+          ["touchstart","mousedown"].forEach(ev=> rep.addEventListener(ev, e=>{ e.stopPropagation(); rStart(e); }));
+          ["touchend","touchmove","mouseup","mouseleave"].forEach(ev=> rep.addEventListener(ev, rCancel));
+
+          wrap.appendChild(rep);
+        });
+
+        toggle.textContent = `Lihat balasan (${childs.length})`;
+        toggle.onclick = e=>{
+          e.stopPropagation();
+          currentView = c.id;
+          loadComments(currentCardId);
+        };
+        if(currentView === c.id){
+          wrap.style.display = "block";
+          toggle.style.display = "none";
+        }
+        div.appendChild(toggle);
+        div.appendChild(wrap);
+      }
+
+      list.appendChild(div);
+    });
+
+    if(!list.children.length){
+      list.innerHTML = `<div style="text-align:center;color:var(--muted);font-size:12px;padding:30px 0;">Belum ada komentar. Jadilah yang pertama! 💬</div>`;
+    }
+  });
+}
+
+function handleDelete(c, cardId, myId){
+  if(myId !== ADMIN_UID && myId !== c.uid){
+    toast("Hanya komentar sendiri yang bisa dihapus");
+    return;
+  }
+  showDeleteMenu(()=>{
+    db.ref("comments/"+cardId+"/"+c.id).remove();
+    toast("Komentar dihapus");
+  });
+}
+
+function showDeleteMenu(onYes){
+  const old = document.querySelector(".delete-menu");
+  if(old) old.remove();
+  const menu = document.createElement("div");
+  menu.className = "delete-menu";
+  menu.innerHTML = `
+    <div class="delete-box">
+      <p>Hapus komentar ini?</p>
+      <button class="delete-btn">Hapus</button>
+      <button class="cancel-btn">Batal</button>
+    </div>`;
+  menu.querySelector(".delete-btn").onclick = ()=>{ menu.remove(); onYes(); };
+  menu.querySelector(".cancel-btn").onclick = ()=> menu.remove();
+  document.body.appendChild(menu);
+}
+
+/* =====================================================
+   TOAST
+===================================================== */
+function toast(msg){
+  const t = document.createElement("div");
+  t.className = "toast"; t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(()=> t.remove(), 2000);
+}
+
+/* =====================================================
+   SPLASH (DENGAN JAMUR ANTI-MENTOK)
+===================================================== */
+let loaded = 0;
+const assets = [
+  "https://img.icons8.com/ios-filled/24/ffffff/discord-logo.png",
+  "https://img.icons8.com/ios-filled/24/ffffff/youtube-play.png"
+];
+function updateBar(){
+  const el = document.getElementById("loadingProgress");
+  if(el) el.style.width = Math.floor((loaded/assets.length)*100)+"%";
+}
+function loadFake(src){
+  return new Promise(res=>{
+    const img = new Image();
+    img.src = src; img.onload = res; img.onerror = res;
+  });
+}
+function hideSplash(){
+  const s = document.getElementById("splash");
+  if(!s || s.classList.contains("hide")) return;
+  s.classList.add("hide");
+  setTimeout(()=>{ if(s) s.style.display="none"; }, 600);
+}
+async function startSplash(){
+  for(let i=0;i<assets.length;i++){
+    await loadFake(assets[i]);
+    loaded++; updateBar();
+    await new Promise(r=>setTimeout(r,150));
+  }
+  setTimeout(hideSplash, 300);
+}
+/* JAMUR: apa pun yang terjadi, splash hilang maksimal 5 detik */
+setTimeout(hideSplash, 5000);
+
+/* INIT */
+loadApps();
+loadEmoji();
+startSplash();
+</script>
+
+</body>
 </html>
