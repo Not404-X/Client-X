@@ -1286,6 +1286,14 @@ window.deleteEmoji = function(idx){
   if(!item) return;
 
   showDeleteMenu(()=>{
+    // kumpulkan semua ID card dari semua kategori
+    const allIds = [];
+    Object.keys(apps).forEach(cat=>{
+      (apps[cat]||[]).forEach(a=>{
+        allIds.push(a.name.toLowerCase().replace(/[^a-z0-9]/g,"_"));
+      });
+    });
+
     ghGetFile(FILE_EMOJI).then(({sha, content})=>{
       const data = content || { emojiSet: [] };
       if(Array.isArray(data.emojiSet)){
@@ -1293,7 +1301,13 @@ window.deleteEmoji = function(idx){
       }
       return ghSaveFile(FILE_EMOJI, data, sha, "Hapus emoji "+item.key);
     }).then(()=>{
-      toast("🗑️ Emoji dihapus");
+      // ============ BERSIHKAN REAKSI EMOJI INI DARI SEMUA CARD ============
+      if(db){
+        allIds.forEach(id=>{
+          db.ref("reactions/"+id+"/"+item.key).remove();
+        });
+      }
+      toast("🗑️ Emoji + reaksinya dihapus");
       renderAdminList();
       loadEmoji();
     }).catch(e=> toast("❌ "+e.message));
