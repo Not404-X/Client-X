@@ -176,6 +176,7 @@ body{
 }
 .icon-btn:active{transform:scale(.9)}
 .icon-btn.review{background:rgba(0,217,255,.12);border-color:rgba(0,217,255,.35);color:#00d9ff}
+.icon-btn.dok{background:rgba(233,160,59,.12);border-color:rgba(233,160,59,.4)}
 .comment-wrap{display:flex;flex-direction:column;align-items:center;line-height:1}
 .comment-count{font-size:8.5px;color:var(--muted);margin-top:2px}
 
@@ -550,7 +551,7 @@ body{
         <span id="commentTitle">Komentar</span>
       </div>
       <div style="display:flex;align-items:center;gap:6px">
-        <input id="usernameInput" placeholder="Nama..."/>
+        <input id="usernameInput" placeholder="Nama..." onchange="onUsernameChange()"/>
         <button onclick="closeComments()">✕</button>
       </div>
     </div>
@@ -596,12 +597,10 @@ body{
     </div>
     <div class="admin-body">
 
-      <!-- token github -->
       <div id="tokenBox" class="token-box">
         <p>🔑 Masukkan <b>GitHub Token</b> (sekali saja).<br>
-        Buat di: GitHub → Settings → Developer settings →<br>
-        Personal access tokens (fine-grained) →<br>
-        pilih repo <b>Not404-X/Client-X</b> → Contents: <b>Read and write</b></p>
+        GitHub → Settings → Developer settings →<br>
+        Personal access tokens → repo <b>Not404-X/Client-X</b> → Contents: <b>Read and write</b></p>
         <input type="password" id="ghTokenInput" placeholder="ghp_... / github_pat_..."/>
         <button onclick="saveGhToken()">Simpan Token</button>
       </div>
@@ -611,13 +610,8 @@ body{
         <button onclick="removeGhToken()">Hapus</button>
       </div>
 
-      <!-- tabs -->
       <div class="admin-tabs" id="adminTabs"></div>
-
-      <!-- form tambah/edit -->
       <div id="adminFormArea"></div>
-
-      <!-- list -->
       <div id="adminList"></div>
 
     </div>
@@ -652,12 +646,11 @@ let currentCat = null, currentCardId = null;
 let replyTo = null, currentView = null;
 let db = null;
 
-/* admin panel state */
 let adminTab = "x64";
 let editIndex = null;
 
 /* =====================================================
-   FIREBASE (AMAN — try/catch)
+   FIREBASE
 ===================================================== */
 try{
   const firebaseConfig = {
@@ -677,7 +670,7 @@ try{
 }
 
 /* =====================================================
-   DATA — client.json + monet.json (dengan anti-cache)
+   DATA
 ===================================================== */
 async function loadApps(){
   apps = {};
@@ -706,7 +699,7 @@ async function loadEmoji(){
 }
 
 /* =====================================================
-   GITHUB API (baca & tulis file JSON)
+   GITHUB API
 ===================================================== */
 function ghHeaders(){
   return {
@@ -716,7 +709,6 @@ function ghHeaders(){
   };
 }
 
-/* baca file → { sha, content } */
 async function ghGetFile(path){
   const res = await fetch(
     "https://api.github.com/repos/"+GITHUB_OWNER+"/"+GITHUB_REPO+"/contents/"+path+"?ref="+GITHUB_BRANCH,
@@ -732,7 +724,6 @@ async function ghGetFile(path){
   return { sha: data.sha, content: content };
 }
 
-/* tulis file */
 async function ghSaveFile(path, obj, sha, message){
   const body = {
     message: message,
@@ -802,6 +793,7 @@ async function showDownload(type){
 
   let html = "";
   apps[type].forEach(app=>{
+    // ID permanen kalau ada, fallback ke nama (item lama)
     const id = app.id || app.name.toLowerCase().replace(/[^a-z0-9]/g,"_");
     html += `
 <div class="box" data-name="${app.name.toLowerCase()}" data-id="${id}">
@@ -815,6 +807,7 @@ async function showDownload(type){
     <div class="left-btns">
       ${app.file ? `<a href="${app.file}" class="dl-btn">⬇ Download</a>` : ``}
       ${app.password ? `<div class="icon-btn" onclick="openLink('${app.password}')">🔐</div>` : ``}
+      ${app.dok ? `<div class="icon-btn dok" onclick="openLink('${app.dok}')">📄</div>` : ``}
       <div class="emoji-bar" data-id="${id}">
         <div class="emoji-list"></div>
         <button class="emoji-add" onclick="openEmoji(this)">＋</button>
@@ -1042,7 +1035,6 @@ window.saveGhToken = function(){
   if(!val){ toast("Token kosong"); return; }
   toast("Memeriksa token...");
 
-  // PENTING: uji token dari INPUT (val), bukan dari localStorage!
   fetch("https://api.github.com/repos/"+GITHUB_OWNER+"/"+GITHUB_REPO, {
     headers: {
       "Authorization": "token " + val,
@@ -1099,7 +1091,7 @@ function renderAdminForm(){
   const area = document.getElementById("adminFormArea");
   if(editIndex !== null){
     area.innerHTML = `<div class="admin-form" id="itemForm"></div>`;
-    return; // form diisi oleh fillEditForm
+    return;
   }
 
   if(adminTab === "emoji"){
@@ -1118,6 +1110,7 @@ function renderAdminForm(){
       <input id="itName" placeholder="Nama (cth: Alyn V20.6)"/>
       <textarea id="itDesc" placeholder="Deskripsi..."></textarea>
       <input id="itFile" placeholder="Link download (APK/script)"/>
+      <input id="itDok" placeholder="Link Modpack (opsional)"/>
       <input id="itPassword" placeholder="Link password (opsional)"/>
       <input id="itReview" placeholder="Link review (opsional)"/>
       <select id="itStatus">
@@ -1145,6 +1138,7 @@ function fillEditForm(item, isEmoji){
       <input id="itName" value="${escAttr(item.name||"")}" placeholder="Nama"/>
       <textarea id="itDesc" placeholder="Deskripsi...">${escHtml(item.desc||"")}</textarea>
       <input id="itFile" value="${escAttr(item.file||"")}" placeholder="Link download"/>
+      <input id="itDok" value="${escAttr(item.dok||"")}" placeholder="Link Modpack (opsional)"/>
       <input id="itPassword" value="${escAttr(item.password||"")}" placeholder="Link password"/>
       <input id="itReview" value="${escAttr(item.review||"")}" placeholder="Link review"/>
       <select id="itStatus">
@@ -1164,6 +1158,7 @@ window.saveItem = function(){
   const name = document.getElementById("itName").value.trim();
   const desc = document.getElementById("itDesc").value.trim();
   const file = document.getElementById("itFile").value.trim();
+  const dok = document.getElementById("itDok").value.trim();
   const password = document.getElementById("itPassword").value.trim();
   const review = document.getElementById("itReview").value.trim();
   const status = document.getElementById("itStatus").value;
@@ -1171,11 +1166,11 @@ window.saveItem = function(){
   if(!name){ toast("Nama wajib diisi"); return; }
 
   const item = { name, desc, file, status };
+  if(dok) item.dok = dok;
   if(password) item.password = password;
   if(review) item.review = review;
 
   const filePath = (adminTab === "monet") ? FILE_MONET : FILE_CLIENT;
-  const btnLabel = "Menyimpan...";
 
   ghGetFile(filePath).then(({sha, content})=>{
     const data = content || {};
@@ -1183,14 +1178,14 @@ window.saveItem = function(){
 
     if(editIndex !== null){
       // EDIT: pertahankan ID lama → emoji & komentar gak hilang walau nama diganti
-      if(data[adminTab][editIndex].id){
+      if(data[adminTab][editIndex] && data[adminTab][editIndex].id){
         item.id = data[adminTab][editIndex].id;
       }
       data[adminTab][editIndex] = item;
     }else{
-      // TAMBAH: kasih ID permanen unik
+      // TAMBAH: ID permanen unik + masuk di ATAS
       item.id = "it_" + Date.now().toString(36) + Math.random().toString(36).substr(2,4);
-      data[adminTab].unshift(item);   // ← masuk di ATAS (paling baru)
+      data[adminTab].unshift(item);
     }
 
     return ghSaveFile(filePath, data, sha,
@@ -1200,7 +1195,7 @@ window.saveItem = function(){
     editIndex = null;
     renderAdminForm();
     renderAdminList();
-    loadApps(); // refresh tampilan
+    loadApps();
   }).catch(e=>{
     toast("❌ "+e.message);
   });
@@ -1224,8 +1219,6 @@ window.deleteItem = function(idx){
 
   showDeleteMenu(()=>{
     const filePath = (adminTab === "monet") ? FILE_MONET : FILE_CLIENT;
-
-    // ID permanen kalau ada, fallback ke nama (untuk item lama)
     const id = item.id || item.name.toLowerCase().replace(/[^a-z0-9]/g,"_");
 
     ghGetFile(filePath).then(({sha, content})=>{
@@ -1235,7 +1228,7 @@ window.deleteItem = function(idx){
       }
       return ghSaveFile(filePath, data, sha, "Hapus "+item.name+" ("+adminTab+")");
     }).then(()=>{
-      // ============ BERSIHKAN EMOJI + KOMENTAR DARI FIREBASE ============
+      // bersihkan emoji + komentar item dari Firebase
       if(db){
         db.ref("reactions/"+id).remove();
         db.ref("comments/"+id).remove();
@@ -1266,12 +1259,11 @@ window.saveEmojiItem = function(){
     if(editIndex !== null){
       data.emojiSet[editIndex] = item;
     }else{
-      // cek key duplikat
       if(data.emojiSet.find(x=>x.key===key)){
         toast("Key sudah dipakai!");
         return;
       }
-      data.emojiSet.unshift(item);   // ← masuk di ATAS
+      data.emojiSet.unshift(item);
     }
 
     return ghSaveFile(FILE_EMOJI, data, sha,
@@ -1301,11 +1293,11 @@ window.deleteEmoji = function(idx){
   if(!item) return;
 
   showDeleteMenu(()=>{
-    // kumpulkan semua ID card dari semua kategori
+    // kumpulkan semua ID card untuk bersih-bersih reaksi
     const allIds = [];
     Object.keys(apps).forEach(cat=>{
       (apps[cat]||[]).forEach(a=>{
-        allIds.push(a.name.toLowerCase().replace(/[^a-z0-9]/g,"_"));
+        allIds.push(a.id || a.name.toLowerCase().replace(/[^a-z0-9]/g,"_"));
       });
     });
 
@@ -1316,7 +1308,6 @@ window.deleteEmoji = function(idx){
       }
       return ghSaveFile(FILE_EMOJI, data, sha, "Hapus emoji "+item.key);
     }).then(()=>{
-      // ============ BERSIHKAN REAKSI EMOJI INI DARI SEMUA CARD ============
       if(db){
         allIds.forEach(id=>{
           db.ref("reactions/"+id+"/"+item.key).remove();
@@ -1377,7 +1368,7 @@ function renderAdminList(){
 }
 
 /* =====================================================
-   COMMENTS
+   COMMENTS + SINKRONISASI USERNAME
 ===================================================== */
 const badWords = ["anjing","anj","babi","kontol","kntl","memek","mmk","bangsat","bngst","tolol","tll","goblok","gblk","ngentot","ngntt"];
 function filterBadWords(text){
@@ -1385,6 +1376,36 @@ function filterBadWords(text){
   badWords.forEach(w=>{ r = r.replace(new RegExp(w,"gi"), "*".repeat(w.length)); });
   return r;
 }
+
+/* ============ SINKRON USERNAME KE SEMUA KOMENTAR ============ */
+function syncUsername(newName, uid){
+  if(!db || !uid || !newName) return;
+  db.ref("comments").once("value").then(snap=>{
+    const data = snap.val() || {};
+    Object.keys(data).forEach(cardId=>{
+      const card = data[cardId] || {};
+      Object.keys(card).forEach(cid=>{
+        const c = card[cid];
+        if(c && c.uid === uid && c.name !== newName){
+          db.ref("comments/"+cardId+"/"+cid+"/name").set(newName);
+        }
+      });
+    });
+  }).catch(e=> console.log("sync username gagal:", e));
+}
+
+/* dipanggil saat input nama diubah (event change) */
+window.onUsernameChange = function(){
+  const newName = document.getElementById("usernameInput").value.trim();
+  if(!newName) return;
+  const uid = getUid();
+  const old = localStorage.getItem("username");
+  localStorage.setItem("username", newName);
+  if(old !== newName){
+    syncUsername(newName, uid);
+    toast("Nama diperbarui — komentar lama ikut berubah ✓");
+  }
+};
 
 window.openComments = function(id){
   currentCardId = id;
@@ -1422,12 +1443,17 @@ window.sendModalComment = function(){
   text = filterBadWords(text);
 
   let name = document.getElementById("usernameInput").value.trim() || "Anon";
+  const uid = getUid();
+  const old = localStorage.getItem("username");
   localStorage.setItem("username", name);
+
+  // kalau nama berubah saat kirim komentar → sinkronkan komentar lama juga
+  if(old && old !== name) syncUsername(name, uid);
 
   db.ref("comments/"+currentCardId).push({
     name: name,
     text: text,
-    uid: getUid(),
+    uid: uid,
     time: Date.now(),
     parentId: replyTo || null
   });
