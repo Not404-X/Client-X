@@ -629,7 +629,7 @@ const GITHUB_OWNER = "Not404-X";
 const GITHUB_REPO = "Client-X";
 const GITHUB_BRANCH = "main";
 const FILE_CLIENT = "client.json";
-const FILE_MONET = "monet.json";
+const FILE_MONET = "script.json";
 const FILE_EMOJI = "emoji.json";
 
 const CATEGORIES = [
@@ -640,7 +640,7 @@ const CATEGORIES = [
 ];
 
 const URL_CLIENT_JSON = "https://raw.githubusercontent.com/Not404-X/Client-X/refs/heads/main/client.json";
-const URL_MONET_JSON  = "https://raw.githubusercontent.com/Not404-X/Client-X/refs/heads/main/monet.json";
+const URL_MONET_JSON  = "https://raw.githubusercontent.com/Not404-X/Client-X/refs/heads/main/script.json";
 
 let apps = {}, emojiSet = [];
 let currentCat = null, currentCardId = null;
@@ -686,7 +686,7 @@ async function loadApps(){
     const res = await fetch(URL_MONET_JSON + "?t=" + Date.now());
     const data = await res.json();
     apps = Object.assign(apps, data);
-  }catch(e){ console.log("monet.json gagal:", e); }
+  }catch(e){ console.log("script.json gagal:", e); }
 
   renderHome();
 }
