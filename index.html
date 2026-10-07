@@ -1184,7 +1184,7 @@ window.saveItem = function(){
     if(editIndex !== null){
       data[adminTab][editIndex] = item;
     }else{
-      data[adminTab].push(item);
+      data[adminTab].unshift(item);   // ← masuk di ATAS (paling baru)
     }
 
     return ghSaveFile(filePath, data, sha,
@@ -1256,7 +1256,7 @@ window.saveEmojiItem = function(){
         toast("Key sudah dipakai!");
         return;
       }
-      data.emojiSet.push(item);
+      data.emojiSet.unshift(item);   // ← masuk di ATAS
     }
 
     return ghSaveFile(FILE_EMOJI, data, sha,
