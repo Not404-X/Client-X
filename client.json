@@ -1,6 +1,14 @@
 {
   "x64": [
     {
+      "name": "Bapakmu",
+      "desc": "manajer JKT n muslim",
+      "file": "Serka",
+      "status": "",
+      "password": "seksggh",
+      "id": "it_muxskpadxjpl"
+    },
+    {
       "name": "Alyn V20.5(NoAds)",
       "desc": "Remove ads, Fix fps drop, Support modpack, monetloader, aml, & cleo, Fix crash, add performance code for rendering",
       "file": "https://sfl.gl/afHPQdB",
