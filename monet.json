@@ -7,21 +7,5 @@
       "review": "https://youtu.be/Nl9PFKQsJ7s?si=A7dKDEY6l84yK-SW",
       "status": "new"
     }
-  ],
-  "x32": [
-    {
-      "name": "Vehicle Jump (all client)",
-      "desc": "Script yang bisa membuat kendaraan melompat dan sudah komplite dengan bypass. Toggle on off /vjump",
-      "file": "https://sfl.gl/xCeWHYkU",
-      "review": "https://youtu.be/suga0kER6Qk?si=MWZlrj7bjNRedyu5",
-      "status": "new"
-    },
-    {
-      "name": "Neon kendaraan (all client)",
-      "desc": "Script ini berfungsi memasang neon di kendaraan roda dua maupun roda empat, script ini di lengkapai dengan menu untuk memudahkan penggunaanya. *Toggle* /xneon→ open menu",
-      "file": "https://sfl.gl/NzqwbkeG",
-      "review": "https://youtu.be/YGAZMgOmMoE?si=roUva-xbulc3C7qi",
-      "status": "new"
-    }
   ]
 }
