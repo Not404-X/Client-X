@@ -16,5 +16,14 @@
       "password": "https://www.mediafire.com/view/4uammtx32cbtnqg/password_alynV20.4%2528FixLoadingAd%2529.jpg/file"
     }
   ],
-  "x32": []
+  "x32": [
+    {
+      "name": "Alyn V20.5(NoAds)",
+      "desc": "Remove ads, Fix fps drop, Support modpack, monetloader, aml, & cleo, Fix crash, add performance code for rendering",
+      "file": "https://sfl.gl/afHPQdB",
+      "review": "https://youtu.be/b1_iBcJgtnM?si=ND6sLGKFGqYHoDSq",
+      "password": "https://sfl.gl/X9lTXvmT",
+      "status": "new"
+    }
+  ]
 }
