@@ -802,7 +802,7 @@ async function showDownload(type){
 
   let html = "";
   apps[type].forEach(app=>{
-    const id = app.name.toLowerCase().replace(/[^a-z0-9]/g,"_");
+    const id = app.id || app.name.toLowerCase().replace(/[^a-z0-9]/g,"_");
     html += `
 <div class="box" data-name="${app.name.toLowerCase()}" data-id="${id}">
   <div class="title">
@@ -1182,8 +1182,14 @@ window.saveItem = function(){
     if(!Array.isArray(data[adminTab])) data[adminTab] = [];
 
     if(editIndex !== null){
+      // EDIT: pertahankan ID lama → emoji & komentar gak hilang walau nama diganti
+      if(data[adminTab][editIndex].id){
+        item.id = data[adminTab][editIndex].id;
+      }
       data[adminTab][editIndex] = item;
     }else{
+      // TAMBAH: kasih ID permanen unik
+      item.id = "it_" + Date.now().toString(36) + Math.random().toString(36).substr(2,4);
       data[adminTab].unshift(item);   // ← masuk di ATAS (paling baru)
     }
 
@@ -1218,6 +1224,10 @@ window.deleteItem = function(idx){
 
   showDeleteMenu(()=>{
     const filePath = (adminTab === "monet") ? FILE_MONET : FILE_CLIENT;
+
+    // ID permanen kalau ada, fallback ke nama (untuk item lama)
+    const id = item.id || item.name.toLowerCase().replace(/[^a-z0-9]/g,"_");
+
     ghGetFile(filePath).then(({sha, content})=>{
       const data = content || {};
       if(Array.isArray(data[adminTab])){
@@ -1225,7 +1235,12 @@ window.deleteItem = function(idx){
       }
       return ghSaveFile(filePath, data, sha, "Hapus "+item.name+" ("+adminTab+")");
     }).then(()=>{
-      toast("🗑️ Item dihapus");
+      // ============ BERSIHKAN EMOJI + KOMENTAR DARI FIREBASE ============
+      if(db){
+        db.ref("reactions/"+id).remove();
+        db.ref("comments/"+id).remove();
+      }
+      toast("🗑️ Item + reaksi + komentar dihapus");
       renderAdminList();
       loadApps();
     }).catch(e=> toast("❌ "+e.message));
