@@ -635,7 +635,8 @@ const FILE_EMOJI = "emoji.json";
 const CATEGORIES = [
   { key:"x64",   icon:"🌐", name:"Client 64-Bit",  desc:"Untuk Android 64-bit",  wide:false },
   { key:"x32",   icon:"🌐", name:"Client 32-Bit",  desc:"Untuk Android 32-bit",  wide:false },
-  { key:"monet", icon:"🌐", name:"MonetLoader",   desc:"Kumpulan script monet", wide:true  }
+  { key:"monet", icon:"🌐", name:"MonetLoader",   desc:"Kumpulan script monet", wide:false },
+  { key:"aml",   icon:"🌐", name:"AML",           desc:"Kumpulan script AML",   wide:true  }
 ];
 
 const URL_CLIENT_JSON = "https://raw.githubusercontent.com/Not404-X/Client-X/refs/heads/main/client.json";
@@ -1075,6 +1076,7 @@ function renderAdminTabs(){
     { key:"x64", label:"🌐 64-Bit" },
     { key:"x32", label:"🌐 32-Bit" },
     { key:"monet", label:"🌐 Monet" },
+    { key:"aml", label:"🌐 AML" },
     { key:"emoji", label:"😀 Emoji" }
   ];
   tabs.innerHTML = "";
@@ -1218,7 +1220,7 @@ window.deleteItem = function(idx){
   if(!item) return;
 
   showDeleteMenu(()=>{
-    const filePath = (adminTab === "monet") ? FILE_MONET : FILE_CLIENT;
+    const filePath = (adminTab === "monet" || adminTab === "aml") ? FILE_MONET : FILE_CLIENT;
     const id = item.id || item.name.toLowerCase().replace(/[^a-z0-9]/g,"_");
 
     ghGetFile(filePath).then(({sha, content})=>{
