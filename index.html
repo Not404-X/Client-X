@@ -1040,18 +1040,35 @@ function refreshTokenUI(){
 window.saveGhToken = function(){
   const val = document.getElementById("ghTokenInput").value.trim();
   if(!val){ toast("Token kosong"); return; }
-  // tes token dengan request kecil
-  fetch("https://api.github.com/repos/"+GITHUB_OWNER+"/"+GITHUB_REPO, { headers: ghHeaders() })
-    .then(r=>{
-      if(r.ok){
-        localStorage.setItem("gh_token", val);
-        toast("✓ Token tersimpan");
-        refreshTokenUI();
-      }else{
-        toast("Token invalid / tidak akses repo");
-      }
-    })
-    .catch(()=> toast("Gagal cek token (offline?)"));
+  toast("Memeriksa token...");
+
+  // PENTING: uji token dari INPUT (val), bukan dari localStorage!
+  fetch("https://api.github.com/repos/"+GITHUB_OWNER+"/"+GITHUB_REPO, {
+    headers: {
+      "Authorization": "token " + val,
+      "Accept": "application/vnd.github.v3+json"
+    }
+  })
+  .then(r=>{
+    if(r.ok){
+      localStorage.setItem("gh_token", val);
+      toast("✓ Token valid & tersimpan");
+      refreshTokenUI();
+    }
+    else if(r.status === 401){
+      toast("❌ 401: Token salah/expired");
+    }
+    else if(r.status === 404){
+      toast("❌ 404: Token valid tapi tidak akses repo ini");
+    }
+    else if(r.status === 403){
+      toast("❌ 403: Permission kurang / rate limit");
+    }
+    else{
+      toast("❌ GitHub error: " + r.status);
+    }
+  })
+  .catch(()=> toast("Gagal cek token (cek internet)"));
 };
 
 window.removeGhToken = function(){
