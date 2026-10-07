@@ -18,12 +18,12 @@
   ],
   "x32": [
     {
-      "name": "Alyn V20.5(NoAds)",
-      "desc": "Remove ads, Fix fps drop, Support modpack, monetloader, aml, & cleo, Fix crash, add performance code for rendering",
-      "file": "https://sfl.gl/afHPQdB",
-      "review": "https://youtu.be/b1_iBcJgtnM?si=ND6sLGKFGqYHoDSq",
-      "password": "https://sfl.gl/X9lTXvmT",
-      "status": "new"
+      "name": "James 1.0.5(NoAds/NoDown)",
+      "desc": "Remove Ads, Remove Server Down Fix Fps Drop, Support Modpack, Monetloader, Aml, & Cleo, Handling",
+      "file": "https://sfl.gl/RCOkpvB",
+      "status": "update",
+      "password": "https://sfl.gl/WZyj0",
+      "review": "https://youtu.be/b1_iBcJgtnM?si=ND6sLGKFGqYHoDSq"
     }
   ]
 }
