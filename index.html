@@ -176,7 +176,7 @@ body{
 }
 .icon-btn:active{transform:scale(.9)}
 .icon-btn.review{background:rgba(0,217,255,.12);border-color:rgba(0,217,255,.35);color:#00d9ff}
-.icon-btn.dok{background:rgba(233,160,59,.12);border-color:rgba(233,160,59,.4)}
+.icon-btn.mp{background:rgba(233,160,59,.12);border-color:rgba(233,160,59,.4)}
 .comment-wrap{display:flex;flex-direction:column;align-items:center;line-height:1}
 .comment-count{font-size:8.5px;color:var(--muted);margin-top:2px}
 
@@ -807,7 +807,7 @@ async function showDownload(type){
     <div class="left-btns">
       ${app.file ? `<a href="${app.file}" class="dl-btn">⬇ Download</a>` : ``}
       ${app.password ? `<div class="icon-btn" onclick="openLink('${app.password}')">🔐</div>` : ``}
-      ${app.dok ? `<div class="icon-btn dok" onclick="openLink('${app.dok}')">📄</div>` : ``}
+      ${app.mp ? `<div class="icon-btn mp" onclick="openLink('${app.mp}')">📄</div>` : ``}
       <div class="emoji-bar" data-id="${id}">
         <div class="emoji-list"></div>
         <button class="emoji-add" onclick="openEmoji(this)">＋</button>
@@ -1110,7 +1110,7 @@ function renderAdminForm(){
       <input id="itName" placeholder="Nama (cth: Alyn V20.6)"/>
       <textarea id="itDesc" placeholder="Deskripsi..."></textarea>
       <input id="itFile" placeholder="Link download (APK/script)"/>
-      <input id="itDok" placeholder="Link Modpack (opsional)"/>
+      <input id="itMp" placeholder="Link Modpack (opsional)"/>
       <input id="itPassword" placeholder="Link password (opsional)"/>
       <input id="itReview" placeholder="Link review (opsional)"/>
       <select id="itStatus">
@@ -1138,7 +1138,7 @@ function fillEditForm(item, isEmoji){
       <input id="itName" value="${escAttr(item.name||"")}" placeholder="Nama"/>
       <textarea id="itDesc" placeholder="Deskripsi...">${escHtml(item.desc||"")}</textarea>
       <input id="itFile" value="${escAttr(item.file||"")}" placeholder="Link download"/>
-      <input id="itDok" value="${escAttr(item.dok||"")}" placeholder="Link Modpack (opsional)"/>
+      <input id="itMp" value="${escAttr(item.mp||"")}" placeholder="Link Modpack (opsional)"/>
       <input id="itPassword" value="${escAttr(item.password||"")}" placeholder="Link password"/>
       <input id="itReview" value="${escAttr(item.review||"")}" placeholder="Link review"/>
       <select id="itStatus">
@@ -1158,7 +1158,7 @@ window.saveItem = function(){
   const name = document.getElementById("itName").value.trim();
   const desc = document.getElementById("itDesc").value.trim();
   const file = document.getElementById("itFile").value.trim();
-  const dok = document.getElementById("itDok").value.trim();
+  const mp = document.getElementById("itMp").value.trim();
   const password = document.getElementById("itPassword").value.trim();
   const review = document.getElementById("itReview").value.trim();
   const status = document.getElementById("itStatus").value;
@@ -1166,7 +1166,7 @@ window.saveItem = function(){
   if(!name){ toast("Nama wajib diisi"); return; }
 
   const item = { name, desc, file, status };
-  if(dok) item.dok = dok;
+  if(mp) item.mp = mp;
   if(password) item.password = password;
   if(review) item.review = review;
 
