@@ -1444,15 +1444,15 @@ window.sendModalComment = function(){
   if(!text) return;
   text = filterBadWords(text);
 
-  // WAJIB NAMA: belum isi nama → minta dulu
+  // WAJIB NAMA: belum isi nama → toast + fokus ke kolom nama
   let name = document.getElementById("usernameInput").value.trim();
   if(!name){
-    name = prompt("Masukkan nama dulu untuk bisa komentar:");
-    if(name === null) return;               // user batal
-    name = name.trim();
-    if(!name){ toast("Nama wajib diisi"); return; }
-    if(name.length > 20) name = name.slice(0, 20);
-    document.getElementById("usernameInput").value = name;
+    toast("👤 Isi nama dulu di kolom atas");
+    const nameInput = document.getElementById("usernameInput");
+    nameInput.focus();
+    nameInput.style.borderColor = "rgba(250,204,21,.7)";
+    setTimeout(()=> nameInput.style.borderColor = "", 2000);
+    return;
   }
 
   const uid = getUid();
