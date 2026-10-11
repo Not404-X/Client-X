@@ -1444,12 +1444,22 @@ window.sendModalComment = function(){
   if(!text) return;
   text = filterBadWords(text);
 
-  let name = document.getElementById("usernameInput").value.trim() || "Anon";
+  // WAJIB NAMA: belum isi nama → minta dulu
+  let name = document.getElementById("usernameInput").value.trim();
+  if(!name){
+    name = prompt("Masukkan nama dulu untuk bisa komentar:");
+    if(name === null) return;               // user batal
+    name = name.trim();
+    if(!name){ toast("Nama wajib diisi"); return; }
+    if(name.length > 20) name = name.slice(0, 20);
+    document.getElementById("usernameInput").value = name;
+  }
+
   const uid = getUid();
   const old = localStorage.getItem("username");
   localStorage.setItem("username", name);
 
-  // kalau nama berubah saat kirim komentar → sinkronkan komentar lama juga
+  // kalau nama berubah → sinkronkan komentar lama juga
   if(old && old !== name) syncUsername(name, uid);
 
   db.ref("comments/"+currentCardId).push({
