@@ -68,6 +68,13 @@
   ],
   "aml": [
     {
+      "name": "AmlMapKotak Alyn",
+      "desc": "Aml ini akan mengubah map pada gta kalian menjadi kotak",
+      "file": "https://sfl.gl/0SvYsu",
+      "status": "",
+      "id": "it_mv3qgu4xglaj"
+    },
+    {
       "name": "AmlBoostFps Alyn",
       "desc": "Aml ini akan membuat gta kalian menjadi jauh lebih ringan",
       "file": "https://sfl.gl/auZc",
